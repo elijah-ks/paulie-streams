@@ -221,3 +221,57 @@ body {
 .video-row:nth-of-type(2) .video-card img {
     filter: brightness(75%);
 }
+
+.site-footer {
+    background-color: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 1em;
+    font-size: 0.9em;
+    margin-top: 2em;
+    border-top: 1px solid #333;
+}
+
+.banner-brand-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.2em;
+  }
+  
+  .brand-logo-inline {
+    height: 40px;
+  }
+  
+  .brand-text-inline {
+    font-size: 1.3em;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  
+
+  @media (max-width: 768px) {
+    .banner-title {
+        font-size: 2em;
+    }
+
+    .banner-description {
+        font-size: 1em;
+    }
+
+    .video-card {
+        width: 140px;
+        height: 210px;
+    }
+
+    .banner-content {
+        max-width: 100%;
+        padding-right: 10px;
+    }
+
+    .site-footer {
+        font-size: 0.8em;
+    }
+}
