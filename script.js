@@ -1,9 +1,4 @@
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-        document.getElementById("main-content").classList.remove("hidden");
-    }, 2200);
-});
+
 
 function openModal(title, description, videoURL) {
     document.getElementById("modalTitle").innerText = title;
@@ -51,41 +46,59 @@ const banners = [
   
   function updateBanner() {
     const banner = banners[currentBanner];
+    const bannerContent = document.getElementById("banner-content");
+    const bannerImage = document.getElementById("banner-image");
   
-    const content = `
-  <div class="banner-brand-inline">
-    <img src="assets/transparent.png" alt="Paulie Streams Logo" class="brand-logo-inline">
-    <span class="brand-text-inline">Originals</span>
-  </div>
-
-  <h1 class="banner-title">${banner.title}</h1>
-  <div class="banner-info">
-    <span class="badge">${banner.rating}</span>
-    <span class="badge red">${banner.age}</span>
-  </div>
-  <p class="banner-description">${banner.description}</p>
-  <div class="banner-buttons">
-    <button class="play-btn" onclick="playBannerTrailer('${banner.trailerLink || ''}')">▶ Play</button>
-    <button class="trailer-btn">Watch Trailer</button>
-  </div>
-`;
-
-
+    // Step 1: Fade out both
+    bannerContent.classList.add("fade-out");
+    bannerImage.classList.add("fade-out");
   
-    document.getElementById("banner-content").innerHTML = content;
-    document.querySelector(".banner").style.backgroundImage = `url('${banner.background}')`;
+    setTimeout(() => {
+      // Step 2: Replace content
+      const content = `
+        <div class="banner-brand-inline">
+          <img src="assets/transparent.png" alt="Paulie Streams Logo" class="brand-logo-inline">
+          <span class="brand-text-inline">Originals</span>
+        </div>
+        <h1 class="banner-title">${banner.title}</h1>
+        <div class="banner-info">
+          <span class="badge">${banner.rating}</span>
+          <span class="badge red">${banner.age}</span>
+        </div>
+        <p class="banner-description">${banner.description}</p>
+        <div class="banner-buttons">
+          <button class="play-btn" onclick="playBannerTrailer('${banner.trailerLink || ''}')">▶ Play</button>
+          <button class="trailer-btn">Watch Trailer</button>
+        </div>
+      `;
+  
+      bannerContent.innerHTML = content;
+      bannerImage.style.backgroundImage = `url('${banner.background}')`;
+  
+      // Step 3: Fade back in
+      bannerContent.classList.remove("fade-out");
+      bannerImage.classList.remove("fade-out");
+    }, 800); // Match CSS transition duration
   
     currentBanner = (currentBanner + 1) % banners.length;
   }
+  
+  
   function playBannerTrailer(link) {
     if (!link) return;
     openModal("Paulie Streams Trailer", "Official intro trailer to Paulie Streams.", link);
   }
   
   
-  // Start rotation after site loads
   window.addEventListener("load", () => {
-    updateBanner(); // Show first banner immediately
-    setInterval(updateBanner, 12000); // Rotate every 12 seconds
+    // Hide loading screen and show content
+    setTimeout(() => {
+      document.getElementById("loading-screen").style.display = "none";
+      document.getElementById("main-content").classList.remove("hidden");
+    }, 2200);
+  
+    // Start banner rotation after page loads
+    updateBanner(); // Show first banner
+    setInterval(updateBanner, 12000); // Rotate every 12 sec
   });
   
