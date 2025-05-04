@@ -3,8 +3,8 @@ const cells = document.querySelectorAll('.cell');
 const status = document.getElementById('status');
 const restartBtn = document.getElementById('restart');
 
-const PAULIE_IMG = '/paulie-streams/assets/logo.png';
-const VINNIE_IMG = '/paulie-streams/assets/vinnie.png';
+const PAULIE_IMG = '/paulie-streams/assets/transparent.png';
+const VINNIE_IMG = '/paulie-streams/assets/Vinnie.png';
 
 
 let gameOver = false;
