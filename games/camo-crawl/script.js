@@ -115,15 +115,41 @@ function rotateDirection(dir) {
 }
 
 function startCameraRotation() {
-  cameraTimer = setInterval(() => {
-    const cams = levels[currentLevel].cameras;
-    cams.forEach(cam => {
-      if (cam.rotate) {
-        cam.direction = rotateDirection(cam.direction);
-      }
+    cameraTimer = setInterval(() => {
+      const level = levels[currentLevel];
+      level.cameras.forEach(cam => {
+        if (cam.rotate) {
+          cam.direction = rotateDirection(cam.direction);
+        }
+      });
+  
+      updateCameraVision(); // 🔄 Refresh vision without reloading entire level
+    }, 2000);
+  }
+  
+  function updateCameraVision() {
+    // Clear previous vision
+    document.querySelectorAll('.cell').forEach(cell => {
+      cell.classList.remove('vision');
     });
-  }, 2000); // change direction every 2 seconds
-}
+  
+    const level = levels[currentLevel];
+    const visionMap = getCameraVision(level);
+  
+    visionMap.forEach((row, y) => {
+      row.forEach((hasVision, x) => {
+        if (hasVision) {
+          const selector = `.cell[data-x="${x}"][data-y="${y}"]`;
+          const cell = document.querySelector(selector);
+          if (cell) {
+            cell.classList.add('vision');
+          }
+        }
+      });
+    });
+  }
+  
+  
 
 function isCaught(newX, newY, level) {
   for (const cam of level.cameras) {
