@@ -691,6 +691,10 @@ body {
     gap: 16px;
   }
   
+  .row-posters img {
+    flex-shrink: 0;
+  }
+  
 
 .app-poster {
     width: 150px;
@@ -707,13 +711,23 @@ body {
   
 
 .app-poster {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    max-width: 150px; /* 👈 caps how big it can grow */
+    height: auto;
+    aspect-ratio: 2 / 3; /* Optional: keep nice shape */
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: transform 0.2s ease-in-out;
-}
+  }
+  
+  
 
 .app-poster:hover {
     transform: scale(1.05);
 }
+
+.row-app-style img {
+    max-width: 100%;
+    height: auto;
+  }
+  
