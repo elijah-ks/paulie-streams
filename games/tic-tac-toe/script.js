@@ -51,39 +51,54 @@ function computerMove() {
 
     const emptyIndexes = board.map((val, i) => val === null ? i : null).filter(i => i !== null);
 
-    // Check if Vinnie can win
+    // 1. Try to win
     for (let i of emptyIndexes) {
         board[i] = 'O';
         if (checkWin('O')) {
-            makeMove(i, 'O');
-            return endGame('Vinnie wins!');
+            finalizeMove(i, 'O', true); // Vinnie wins
+            return;
         }
         board[i] = null;
     }
 
-    // Check if Paulie is about to win, and block
+    // 2. Try to block Paulie
     for (let i of emptyIndexes) {
         board[i] = 'X';
         if (checkWin('X')) {
-            board[i] = 'O';
-            makeMove(i, 'O');
-            return;  // No win message! Just block
+            board[i] = null; // Undo fake Paulie move
+            finalizeMove(i, 'O', false); // Block him
+            return;
         }
         board[i] = null;
     }
 
-    // Pick a strategic move
+    // 3. Pick preferred cell (center, then corners, then sides)
     const preferred = [4, 0, 2, 6, 8, 1, 3, 5, 7];
     const move = preferred.find(i => board[i] === null);
     if (move !== undefined) {
-        makeMove(move, 'O');
-        if (checkWin('O')) return endGame('Vinnie wins!');
+        finalizeMove(move, 'O', checkWin('O'));
+        return;
     }
 
+    // 4. If no moves left, it's a draw
     if (board.every(cell => cell !== null)) {
         endGame('Draw!');
     }
 }
+
+function finalizeMove(index, player, won) {
+    board[index] = player;
+    const img = document.createElement('img');
+    img.src = player === 'X' ? PAULIE_IMG : VINNIE_IMG;
+    cells[index].appendChild(img);
+
+    if (won) {
+        endGame(player === 'X' ? 'Paulie wins!' : 'Vinnie wins!');
+    } else if (board.every(cell => cell !== null)) {
+        endGame('Draw!');
+    }
+}
+
 
 
 // Place image in cell
