@@ -696,14 +696,6 @@ body {
   }
   
 
-.app-poster {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 20px;
-    transition: transform 0.2s ease-in-out;
-}
-
 .app-poster:hover {
     transform: scale(1.05);
 }
@@ -712,13 +704,14 @@ body {
 
 .app-poster {
     width: 100%;
-    max-width: 150px; /* 👈 caps how big it can grow */
-    height: auto;
-    aspect-ratio: 2 / 3; /* Optional: keep nice shape */
+    max-width: 150px;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.2s ease-in-out;
-  }
+    display: block;
+}
+
   
   
 
