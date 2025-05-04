@@ -111,21 +111,21 @@ function updateStatus(msg) {
 }
 
 function rotateDirection(dir) {
-  return dir === 'down' ? 'left' : 'down';
-}
+    return dir === 'down' ? 'left' : 'down';
+  }  
 
 function startCameraRotation() {
     cameraTimer = setInterval(() => {
-      const level = levels[currentLevel];
-      level.cameras.forEach(cam => {
+      const cams = levels[currentLevel].cameras;
+      cams.forEach(cam => {
         if (cam.rotate) {
           cam.direction = rotateDirection(cam.direction);
         }
       });
-  
-      updateCameraVision(); // 🔄 Refresh vision without reloading entire level
+      loadLevel(currentLevel); // ← refresh vision zones after rotation
     }, 2000);
   }
+  
   
   function updateCameraVision() {
     // Clear previous vision
