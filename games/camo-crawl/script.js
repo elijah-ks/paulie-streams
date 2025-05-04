@@ -70,30 +70,41 @@ let playerPosition = { x: 0, y: 0 };
 let cameraTimer;
 
 function loadLevel(index) {
-  clearInterval(cameraTimer);
-  const container = document.getElementById('game-board');
-  container.innerHTML = '';
-
-  const level = levels[index];
-  level.grid.forEach((row, y) => {
-    const rowDiv = document.createElement('div');
-    rowDiv.classList.add('row');
-    row.forEach((cell, x) => {
-      const cellDiv = document.createElement('div');
-      cellDiv.classList.add('cell');
-
-      if (cell === 'P') {
-        playerPosition = { x, y };
-        const img = document.createElement('img');
-        img.src = PAULIE_IMG;
-        cellDiv.appendChild(img);
-      } else if (cell === 'E') {
-        cellDiv.classList.add('exit');
-      } else if (cell === 'C') {
-        cellDiv.classList.add('camera');
-      } else if (cell === 'B') {
-        cellDiv.classList.add('bush');
-      }
+    clearInterval(cameraTimer);
+    const container = document.getElementById('game-board');
+    container.innerHTML = '';
+  
+    const level = levels[index];
+    const visionMap = getCameraVision(level);
+  
+    level.grid.forEach((row, y) => {
+      const rowDiv = document.createElement('div');
+      rowDiv.classList.add('row');
+      row.forEach((cell, x) => {
+        const cellDiv = document.createElement('div');
+        cellDiv.classList.add('cell');
+  
+        if (visionMap[y] && visionMap[y][x]) {
+          cellDiv.classList.add('vision');
+        }
+  
+        if (cell === 'P') {
+          playerPosition = { x, y };
+          const img = document.createElement('img');
+          img.src = PAULIE_IMG;
+          cellDiv.appendChild(img);
+        } else if (cell === 'E') {
+          cellDiv.classList.add('exit');
+        } else if (cell === 'C') {
+          cellDiv.classList.add('camera');
+          const cam = level.cameras.find(c => c.x === x && c.y === y);
+          if (cam) {
+            const emoji = cam.direction === 'down' ? '📷⬇️' : '📷⬅️';
+            cellDiv.textContent = emoji;
+          }
+        } else if (cell === 'B') {
+          cellDiv.classList.add('bush');
+        }
 
       cellDiv.setAttribute('data-x', x);
       cellDiv.setAttribute('data-y', y);

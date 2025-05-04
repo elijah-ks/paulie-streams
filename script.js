@@ -15,7 +15,17 @@ function closeModal() {
 
 
 const banners = [
-    {
+  {
+    title: "Welcome to Paulie Streams",
+    description: "This is your personal streaming hub for everything Paulie-made — from legendary originals to wild cinematic experiments. Enjoy the ride.",
+    rating: "Version 1.0",
+    age: "All Access",
+    background: "assets/paulie-banner.jpg",
+    trailerLink: "https://drive.google.com/file/d/19li5eEKxTm7_fRFQnP4-mjomhhRwcUYs/preview"
+  },
+  
+
+  {
       title: "Matrix Attack 2",
       description: "COMING SOON: After being captured by President Eli, the Sabado Brothers plan their escape but run into problems...",
       rating: "IMDb 8.2",
@@ -28,18 +38,8 @@ const banners = [
       rating: "IMDb 7.6",
       age: "PG",
       background: "assets/sigma-banner.jpg"
-    },
-    {
-        title: "Welcome to Paulie Streams",
-        description: "This is your personal streaming hub for everything Paulie-made — from legendary originals to wild cinematic experiments. Enjoy the ride.",
-        rating: "Version 1.0",
-        age: "All Access",
-        background: "assets/welcome-banner.jpg",
-        trailerLink: "https://drive.google.com/file/d/19li5eEKxTm7_fRFQnP4-mjomhhRwcUYs/preview"
-      }
-      
-      
-      
+    }
+    
   ];
   
   let currentBanner = 0;
