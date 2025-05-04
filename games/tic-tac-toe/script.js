@@ -49,42 +49,21 @@ function handleCellClick(e) {
 function computerMove() {
     if (gameOver) return;
 
-    const emptyIndexes = board.map((val, i) => val === null ? i : null).filter(i => i !== null);
+    const emptyIndexes = board
+        .map((val, i) => val === null ? i : null)
+        .filter(i => i !== null);
 
-    // 1. Try to win
-    for (let i of emptyIndexes) {
-        board[i] = 'O';
-        if (checkWin('O')) {
-            finalizeMove(i, 'O', true); // Vinnie wins
-            return;
-        }
-        board[i] = null;
-    }
+    const randomIndex = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
 
-    // 2. Try to block Paulie
-    for (let i of emptyIndexes) {
-        board[i] = 'X';
-        if (checkWin('X')) {
-            board[i] = null; // Undo fake Paulie move
-            finalizeMove(i, 'O', false); // Block him
-            return;
-        }
-        board[i] = null;
-    }
+    makeMove(randomIndex, 'O');
 
-    // 3. Pick preferred cell (center, then corners, then sides)
-    const preferred = [4, 0, 2, 6, 8, 1, 3, 5, 7];
-    const move = preferred.find(i => board[i] === null);
-    if (move !== undefined) {
-        finalizeMove(move, 'O', checkWin('O'));
-        return;
-    }
-
-    // 4. If no moves left, it's a draw
-    if (board.every(cell => cell !== null)) {
+    if (checkWin('O')) {
+        endGame('Vinnie wins!');
+    } else if (board.every(cell => cell !== null)) {
         endGame('Draw!');
     }
 }
+
 
 function finalizeMove(index, player, won) {
     board[index] = player;
