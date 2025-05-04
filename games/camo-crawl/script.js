@@ -1,6 +1,13 @@
-// Camo Crawl - Level-based stealth game with 5 levels
+// Camo Crawl - Level-based stealth game with 5 levels, bush hiding, rotating cameras, timers, and quotes
 
 const PAULIE_IMG = '/paulie-streams/assets/transparent.png';
+const PAULIE_QUOTES = [
+  "Vinnie needs better security...",
+  "You didn't see anything!",
+  "I'm a shadow in the night.",
+  "One more level to freedom!",
+  "Cameras? Please."
+];
 
 const levels = [
   {
@@ -9,7 +16,7 @@ const levels = [
       ['', '', '', '', '', '', '', ''],
       ['', '', '', '', '', '', '', ''],
     ],
-    cameras: [{ x: 4, y: 0, direction: 'down' }]
+    cameras: [{ x: 4, y: 0, direction: 'down', rotate: true }]
   },
   {
     grid: [
@@ -18,8 +25,8 @@ const levels = [
       ['P', '', '', '', '', '', '', ''],
     ],
     cameras: [
-      { x: 4, y: 0, direction: 'down' },
-      { x: 3, y: 1, direction: 'left' }
+      { x: 4, y: 0, direction: 'down', rotate: true },
+      { x: 3, y: 1, direction: 'left', rotate: false }
     ]
   },
   {
@@ -29,8 +36,8 @@ const levels = [
       ['', '', '', '', '', 'B', '', 'E']
     ],
     cameras: [
-      { x: 1, y: 1, direction: 'down' },
-      { x: 6, y: 0, direction: 'down' }
+      { x: 1, y: 1, direction: 'down', rotate: true },
+      { x: 6, y: 0, direction: 'down', rotate: false }
     ]
   },
   {
@@ -40,8 +47,8 @@ const levels = [
       ['', '', '', '', '', '', '', '']
     ],
     cameras: [
-      { x: 2, y: 0, direction: 'down' },
-      { x: 4, y: 1, direction: 'left' }
+      { x: 2, y: 0, direction: 'down', rotate: true },
+      { x: 4, y: 1, direction: 'left', rotate: true }
     ]
   },
   {
@@ -51,17 +58,19 @@ const levels = [
       ['', '', '', '', '', '', '', 'E']
     ],
     cameras: [
-      { x: 2, y: 0, direction: 'down' },
-      { x: 3, y: 1, direction: 'left' },
-      { x: 6, y: 0, direction: 'down' }
+      { x: 2, y: 0, direction: 'down', rotate: true },
+      { x: 3, y: 1, direction: 'left', rotate: true },
+      { x: 6, y: 0, direction: 'down', rotate: true }
     ]
   }
 ];
 
 let currentLevel = 0;
 let playerPosition = { x: 0, y: 0 };
+let cameraTimer;
 
 function loadLevel(index) {
+  clearInterval(cameraTimer);
   const container = document.getElementById('game-board');
   container.innerHTML = '';
 
@@ -94,10 +103,44 @@ function loadLevel(index) {
   });
 
   updateStatus(`Level ${index + 1}`);
+  startCameraRotation();
 }
 
 function updateStatus(msg) {
   document.getElementById('status').textContent = msg;
+}
+
+function rotateDirection(dir) {
+  return dir === 'down' ? 'left' : 'down';
+}
+
+function startCameraRotation() {
+  cameraTimer = setInterval(() => {
+    const cams = levels[currentLevel].cameras;
+    cams.forEach(cam => {
+      if (cam.rotate) {
+        cam.direction = rotateDirection(cam.direction);
+      }
+    });
+  }, 2000); // change direction every 2 seconds
+}
+
+function isCaught(newX, newY, level) {
+  for (const cam of level.cameras) {
+    if (cam.direction === 'down' && newX === cam.x && newY > cam.y) {
+      for (let y = cam.y + 1; y <= newY; y++) {
+        if (level.grid[y][newX] === 'B') return false;
+      }
+      return true;
+    }
+    if (cam.direction === 'left' && newY === cam.y && newX < cam.x) {
+      for (let x = newX + 1; x < cam.x; x++) {
+        if (level.grid[newY][x] === 'B') return false;
+      }
+      return true;
+    }
+  }
+  return false;
 }
 
 function movePlayer(dx, dy) {
@@ -113,22 +156,23 @@ function movePlayer(dx, dy) {
     newX >= grid[0].length
   ) return;
 
-  if (grid[newY][newX] === 'C') {
-    updateStatus('Caught by a camera!');
-    return;
-  }
-
   if (grid[newY][newX] === 'E') {
+    const quote = PAULIE_QUOTES[currentLevel % PAULIE_QUOTES.length];
+    updateStatus(`✅ Level Complete: ${quote}`);
     currentLevel++;
     if (currentLevel >= levels.length) {
       updateStatus('🎉 You completed all levels!');
       return;
     }
-    loadLevel(currentLevel);
+    setTimeout(() => loadLevel(currentLevel), 1500);
     return;
   }
 
-  // Move player
+  if (isCaught(newX, newY, level)) {
+    updateStatus('❌ Caught by a camera!');
+    return;
+  }
+
   grid[playerPosition.y][playerPosition.x] = '';
   grid[newY][newX] = 'P';
   loadLevel(currentLevel);
