@@ -111,12 +111,16 @@ function makeMove(index, player) {
 
 // Check for win
 function checkWin(player) {
-    return winCombos.some(combo =>
-        combo.every(index => board[index] === player)
-    );
+    return winCombos.some(combo => {
+        return combo.every(i => board[i] === player);
+    });
 }
 
+
 function endGame(message) {
+    console.log('🧠 Final Board State:', board);
+    console.log('🏁 Game Over Message:', message);
+
     status.textContent = message;
     gameOver = true;
 
@@ -128,6 +132,8 @@ function endGame(message) {
         vinnieScoreDisplay.textContent = vinnieScore;
     }
 }
+
+
 
 
 
