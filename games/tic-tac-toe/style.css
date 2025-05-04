@@ -53,3 +53,9 @@ button#restart {
     border-radius: 5px;
     cursor: pointer;
 }
+
+#scoreboard {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #f0f0f0;
+}

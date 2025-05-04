@@ -1,3 +1,10 @@
+let paulieScore = 0;
+let vinnieScore = 0;
+
+const paulieScoreDisplay = document.getElementById('paulie-score');
+const vinnieScoreDisplay = document.getElementById('vinnie-score');
+
+
 const board = Array(9).fill(null);
 const cells = document.querySelectorAll('.cell');
 const status = document.getElementById('status');
@@ -39,22 +46,44 @@ function handleCellClick(e) {
     }, 400); // slight delay for realism
 }
 
-// Computer move (random)
 function computerMove() {
+    if (gameOver) return;
+
+    // Try to win or block
     const emptyIndexes = board.map((val, i) => val === null ? i : null).filter(i => i !== null);
-    if (emptyIndexes.length === 0 || gameOver) return;
 
-    const randomIndex = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
-    makeMove(randomIndex, 'O');
-
-    if (checkWin('O')) {
-        status.textContent = 'Vinnie wins!';
-        gameOver = true;
-    } else if (board.every(cell => cell)) {
-        status.textContent = 'Draw!';
-        gameOver = true;
+    // Check for winning move
+    for (let i of emptyIndexes) {
+        board[i] = 'O';
+        if (checkWin('O')) {
+            makeMove(i, 'O');
+            return endGame('Vinnie wins!');
+        }
+        board[i] = null;
     }
+
+    // Block Paulie from winning
+    for (let i of emptyIndexes) {
+        board[i] = 'X';
+        if (checkWin('X')) {
+            board[i] = 'O';
+            makeMove(i, 'O');
+            return endGame('Vinnie wins!');
+        }
+        board[i] = null;
+    }
+    
+    // Take center, then corners, then random
+    const preferred = [4, 0, 2, 6, 8, 1, 3, 5, 7];
+    const move = preferred.find(i => board[i] === null);
+    if (move !== undefined) {
+        makeMove(move, 'O');
+        if (checkWin('O')) return endGame('Vinnie wins!');
+    }
+
+    if (board.every(cell => cell)) endGame('Draw!');
 }
+
 
 // Place image in cell
 function makeMove(index, player) {
@@ -71,6 +100,21 @@ function checkWin(player) {
     );
 }
 
+function endGame(message) {
+    status.textContent = message;
+    gameOver = true;
+
+    if (message === 'Paulie wins!') {
+        paulieScore++;
+        paulieScoreDisplay.textContent = paulieScore;
+    } else if (message === 'Vinnie wins!') {
+        vinnieScore++;
+        vinnieScoreDisplay.textContent = vinnieScore;
+    }
+}
+
+
+
 // Reset game
 restartBtn.addEventListener('click', () => {
     board.fill(null);
@@ -81,3 +125,5 @@ restartBtn.addEventListener('click', () => {
 
 // Set up listeners
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+
+
