@@ -49,10 +49,9 @@ function handleCellClick(e) {
 function computerMove() {
     if (gameOver) return;
 
-    // Try to win or block
     const emptyIndexes = board.map((val, i) => val === null ? i : null).filter(i => i !== null);
 
-    // Check for winning move
+    // Check if Vinnie can win
     for (let i of emptyIndexes) {
         board[i] = 'O';
         if (checkWin('O')) {
@@ -62,18 +61,18 @@ function computerMove() {
         board[i] = null;
     }
 
-    // Block Paulie from winning
+    // Check if Paulie is about to win, and block
     for (let i of emptyIndexes) {
         board[i] = 'X';
         if (checkWin('X')) {
             board[i] = 'O';
             makeMove(i, 'O');
-            return endGame('Vinnie wins!');
+            return;  // No win message! Just block
         }
         board[i] = null;
     }
-    
-    // Take center, then corners, then random
+
+    // Pick a strategic move
     const preferred = [4, 0, 2, 6, 8, 1, 3, 5, 7];
     const move = preferred.find(i => board[i] === null);
     if (move !== undefined) {
@@ -81,7 +80,9 @@ function computerMove() {
         if (checkWin('O')) return endGame('Vinnie wins!');
     }
 
-    if (board.every(cell => cell)) endGame('Draw!');
+    if (board.every(cell => cell !== null)) {
+        endGame('Draw!');
+    }
 }
 
 
