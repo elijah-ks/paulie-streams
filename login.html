@@ -65,21 +65,21 @@
 </head>
 
 <body>
-
-    <div style="background:#222; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.4); width: 300px; text-align: center;"></div>
+    <div class="login-container" style="background:#222; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.4); width: 300px; text-align: center; margin: 50px auto;">
     
-    <img src="assets/logo.png" alt="Paulie Streams Logo" style="width: 160px; margin-bottom: 20px;" />
-
-    <h2>Login or Register</h2>
-
-  <input type="email" id="email" placeholder="Email" /><br />
-  <input type="password" id="password" placeholder="Password" /><br />
-
-  <button onclick="login()">Login</button>
-  <button onclick="register()">Register</button>
-
-  <p id="auth-status"></p>
-
+        <img src="assets/logo.png" alt="Paulie Streams Logo" style="width: 160px; margin-bottom: 20px;" />
+      
+        <h2 style="color: white;">Login or Register</h2>
+      
+        <input type="email" id="email" placeholder="Email" /><br />
+        <input type="password" id="password" placeholder="Password" /><br />
+      
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+      
+        <p id="auth-status" style="color: white;"></p>
+      </div>
+      
   <script>
     const auth = firebase.auth();
 

@@ -724,3 +724,19 @@ body {
     height: auto;
   }
   
+
+  .login-container {
+    background-color: #1c1c1c;
+    padding: 30px;
+    max-width: 400px;
+    margin: 50px auto;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  
+  .login-logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
