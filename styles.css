@@ -763,13 +763,33 @@ body {
     cursor: pointer;
   }
   
-  .login-container button:hover {
-    background-color: #ff3030;
+  
+  .login-container input,
+  .login-container button {
+    width: 100%;
+    box-sizing: border-box;
   }
+  
   
   #auth-status {
     color: white;
     margin-top: 10px;
     font-size: 0.9rem;
+  }
+  
+  @media (max-width: 600px) {
+    .login-container {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    .login-container input,
+    .login-container button {
+      font-size: 1.1em;
+    }
+  
+    .login-logo {
+      width: 120px;
+    }
   }
   
