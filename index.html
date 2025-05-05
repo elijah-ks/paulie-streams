@@ -140,9 +140,31 @@
     
     <script src="script.js"></script>
 
+
     <footer class="site-footer">
-        <p>Paulie Streams • Version 1.0</p>
+      <p>Paulie Streams • Version 1.0</p>
+      <button onclick="logoutUser()" style="
+        margin-top: 10px;
+        padding: 8px 16px;
+        border-radius: 5px;
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+      ">
+        Logout
+      </button>
     </footer>
     
+    <script>
+      function logoutUser() {
+        firebase.auth().signOut().then(() => {
+          window.location.href = "login.html";
+        });
+      }
+    </script>
+    
+
 </body>
 </html>
