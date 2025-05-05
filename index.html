@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paulie Streams</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+  
+    <!-- ✅ Firebase SDKs (NO analytics) -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  
+    <script>
+      // ✅ Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyAcOXNkPbKUsxxqgSpI1xhqkkVBGshG6lY",
+        authDomain: "pauliestreams-6bc7e.firebaseapp.com",
+        projectId: "pauliestreams-6bc7e",
+        storageBucket: "pauliestreams-6bc7e.firebasestorage.app",
+        messagingSenderId: "219819476189",
+        appId: "1:219819476189:web:fd77ed100f5efffa4d0734",
+        measurementId: "G-7SQEKRLWVD"
+      };
+      firebase.initializeApp(firebaseConfig);
+  
+      // ✅ Check login state after Firebase is ready
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          console.log("User is signed in:", user.email);
+        } else {
+          console.log("Not signed in. Redirecting...");
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+  </head>
+  
+
 <body>
 
     <!-- Loading Screen -->
