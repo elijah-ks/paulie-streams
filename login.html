@@ -4,37 +4,66 @@
   <meta charset="UTF-8">
   <title>Login – Paulie Streams</title>
 
-  <!-- Firebase SDKs (no analytics) -->
+  <!-- ✅ Firebase SDKs (no analytics) -->
   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
 
-<!-- Firebase App (core) -->
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-<!-- Firebase Auth (for login) -->
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script>
+    // ✅ Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAcOXNkPbKUsxxqgSpI1xhqkkVBGshG6lY",
+      authDomain: "pauliestreams-6bc7e.firebaseapp.com",
+      projectId: "pauliestreams-6bc7e",
+      storageBucket: "pauliestreams-6bc7e.firebasestorage.app",
+      messagingSenderId: "219819476189",
+      appId: "1:219819476189:web:fd77ed100f5efffa4d0734",
+      measurementId: "G-7SQEKRLWVD"
+    };
 
-<script>
-  // Your Firebase configuration (converted for browser use)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAcOXNkPbKUsxxqgSpI1xhqkkVBGshG6lY",
-    authDomain: "pauliestreams-6bc7e.firebaseapp.com",
-    projectId: "pauliestreams-6bc7e",
-    storageBucket: "pauliestreams-6bc7e.firebasestorage.app",
-    messagingSenderId: "219819476189",
-    appId: "1:219819476189:web:fd77ed100f5efffa4d0734",
-    measurementId: "G-7SQEKRLWVD"
-  };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #141414;
+      color: #fff;
+      text-align: center;
+      padding-top: 80px;
+    }
 
+    input {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1em;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+    }
+
+    #auth-status {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
   <h2>Login or Register</h2>
 
-  <input type="email" id="email" placeholder="Email"><br>
-  <input type="password" id="password" placeholder="Password"><br>
+  <input type="email" id="email" placeholder="Email" /><br />
+  <input type="password" id="password" placeholder="Password" /><br />
 
   <button onclick="login()">Login</button>
   <button onclick="register()">Register</button>
@@ -51,7 +80,7 @@
       auth.signInWithEmailAndPassword(email, pass)
         .then(() => {
           document.getElementById('auth-status').textContent = "Logged in!";
-          // Redirect or unlock content
+          window.location.href = "index.html"; // ✅ Redirect after login
         })
         .catch(err => alert(err.message));
     }
@@ -63,6 +92,7 @@
       auth.createUserWithEmailAndPassword(email, pass)
         .then(() => {
           document.getElementById('auth-status').textContent = "Registered and logged in!";
+          window.location.href = "index.html"; // ✅ Redirect after register
         })
         .catch(err => alert(err.message));
     }
