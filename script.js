@@ -37,7 +37,7 @@ function openModal(title, description, videoURL) {
             title,
             description,
             videoURL,
-            thumbnail: "assets/" + title.toLowerCase().replace(/[^a-z0-9]/g, "-") + ".jpg",
+            thumbnail: "assets/" + getThumbnailFile(title),
             userID: user.uid,
             likedAt: new Date()
           }).then(() => {
@@ -48,6 +48,18 @@ function openModal(title, description, videoURL) {
       };
     });
   });
+}
+
+
+function getThumbnailFile(title) {
+  const key = title.toLowerCase();
+
+  if (key.includes("matrix attack 2")) return "matrix-attack2.jpg";
+  if (key.includes("matrix attack")) return "matrix-attack.jpg";
+  if (key.includes("colin")) return "colin-backstory-cover.jpg";
+  if (key.includes("sigma")) return "the-sigma-male.jpg";
+
+  return "default-thumbnail.jpg"; // fallback in case of mismatch
 }
 
 
