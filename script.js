@@ -7,35 +7,48 @@ function openModal(title, description, videoURL) {
   document.getElementById("videoModal").classList.remove("hidden");
 
   const likeBtn = document.getElementById("likeBtn");
-  const docID = `${title}_${window.currentUserID}`;
-  const likeRef = db.collection("likes").doc(docID);
 
-  likeRef.get().then(doc => {
-    if (doc.exists) {
-      likeBtn.classList.add("liked");
-      likeBtn.innerText = "❤️";
-    } else {
-      likeBtn.classList.remove("liked");
-      likeBtn.innerText = "♡";
-    }
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) return;
 
-    // ✅ NEW LIKE FUNCTION
-    likeBtn.onclick = () => {
-      const user = firebase.auth().currentUser;
-      if (user) {
-        likeMovie({
-          title: title,
-          description: description,
-          videoURL: videoURL,
-          thumbnail: "assets/" + title.toLowerCase().replace(/ /g, "-") + "-cover.jpg"
-        }, user.uid);
+    const docID = `${title}_${user.uid}`;
+    const likeRef = firebase.firestore().collection("likes").doc(docID);
+
+    // 🔄 Check if the user already liked this movie
+    likeRef.get().then(doc => {
+      if (doc.exists) {
+        likeBtn.classList.add("liked");
+        likeBtn.innerText = "❤️";
       } else {
-        window.location.href = "login.html";
+        likeBtn.classList.remove("liked");
+        likeBtn.innerText = "♡";
       }
-    };
+
+      // ✅ Handle click toggle like
+      likeBtn.onclick = () => {
+        if (doc.exists) {
+          likeRef.delete().then(() => {
+            likeBtn.classList.remove("liked");
+            likeBtn.innerText = "♡";
+          });
+        } else {
+          likeRef.set({
+            movieID: title,
+            title,
+            description,
+            videoURL,
+            thumbnail: "assets/" + title.toLowerCase().replace(/ /g, "-") + "-cover.jpg",
+            userID: user.uid,
+            likedAt: new Date()
+          }).then(() => {
+            likeBtn.classList.add("liked");
+            likeBtn.innerText = "❤️";
+          });
+        }
+      };
+    });
   });
 }
-
 
 
 function closeModal() {

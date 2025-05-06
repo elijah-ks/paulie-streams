@@ -1,15 +1,8 @@
-// liked.js
-
-// ✅ Firebase already loaded via <script> tags in liked.html
-
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      const userID = user.uid;
       const db = firebase.firestore();
-  
-      // 🔄 Fetch all documents in "likes" where userID matches
       db.collection("likes")
-        .where("userID", "==", userID)
+        .where("userID", "==", user.uid)
         .get()
         .then(querySnapshot => {
           const movies = [];
@@ -23,12 +16,10 @@ firebase.auth().onAuthStateChanged(user => {
           displayLikedMovies([]);
         });
     } else {
-      window.location.href = "login.html"; // Redirect if not signed in
+      window.location.href = "login.html";
     }
   });
   
-  
-  // ✅ Renders each liked movie card
   function displayLikedMovies(movies) {
     const container = document.getElementById("likedMovies");
     container.innerHTML = "";
@@ -41,12 +32,20 @@ firebase.auth().onAuthStateChanged(user => {
     movies.forEach(movie => {
       const card = document.createElement("div");
       card.className = "video-card";
-      card.onclick = () => openModal(movie.title, movie.description, movie.videoURL);
   
       card.innerHTML = `
         <img src="${movie.thumbnail}" alt="${movie.title}">
         <p>${movie.title}</p>
       `;
+  
+      // ✅ Optional: support modal if available
+      card.onclick = () => {
+        if (typeof openModal === "function") {
+          openModal(movie.title, movie.description, movie.videoURL);
+        } else {
+          alert(`${movie.title}\n\n${movie.description}`);
+        }
+      };
   
       container.appendChild(card);
     });
