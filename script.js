@@ -37,7 +37,7 @@ function openModal(title, description, videoURL) {
             title,
             description,
             videoURL,
-            thumbnail: "assets/" + title.toLowerCase().replace(/ /g, "-") + "-cover.jpg",
+            thumbnail: "assets/" + title.toLowerCase().replace(/ /g, "-") + ".jpg",
             userID: user.uid,
             likedAt: new Date()
           }).then(() => {
