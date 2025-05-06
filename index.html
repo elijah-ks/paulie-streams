@@ -28,7 +28,7 @@
   
       // ✅ Check login state after Firebase is ready
       firebase.auth().onAuthStateChanged(user => {
-        //if (user) {
+        if (user) {
           console.log("User is signed in:", user.email);
           window.currentUserID = user.uid;
         } else {

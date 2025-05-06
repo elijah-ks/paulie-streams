@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liked Movies - Paulie Streams</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="nav-bar">
+    <div class="nav-left">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" class="nav-logo">
+      <span class="nav-title">Paulie Streams</span>
+    </div>
+    <nav class="nav-links">
+      <button onclick="window.location.href='index.html'">🏠</button>
+      <button onclick="goToSearch()">🔍</button>
+      <button onclick="goToExtras()">🎮</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1 style="padding: 20px;">❤️ Your Liked Movies</h1>
+    <div id="likedMovies" class="video-grid" style="padding: 0 20px;"></div>
+  </main>
+
+  <script src="liked.js"></script>
+</body>
+</html>
