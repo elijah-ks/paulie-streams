@@ -55,6 +55,8 @@ function getThumbnailForTitle(title) {
   switch (title.trim().toLowerCase()) {
     case "matrix attack":
       return "assets/matrix-attack.jpg";
+    case "matrix attack 1": // just in case this ever gets stored
+      return "assets/matrix-attack.jpg";
     case "matrix attack 2":
       return "assets/matrix-attack2.jpg";
     case "colin: the backstory":
@@ -65,6 +67,7 @@ function getThumbnailForTitle(title) {
       return "assets/default-thumbnail.jpg";
   }
 }
+
 
 
 function closeModal() {
