@@ -146,31 +146,6 @@ const banners = [
     alert("Extras page coming soon!");
   }
   
-
-  function toggleLike(movieID) {
-    const docID = `${movieID}_${window.currentUserID}`;
-    const likeRef = db.collection("likes").doc(docID);
-  
-    likeRef.get().then(doc => {
-      const likeBtn = document.getElementById("likeBtn");
-      
-      if (doc.exists) {
-        // Unlike: delete from Firestore
-        likeRef.delete();
-        likeBtn.classList.remove("liked");
-        likeBtn.innerText = "♡";
-      } else {
-        // Like: add to Firestore
-        likeRef.set({
-          movieID: movieID,
-          userID: window.currentUserID,
-          likedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        likeBtn.classList.add("liked");
-        likeBtn.innerText = "❤️";
-      }
-    });
-  }
   
   function likeMovie(movieData, userID) {
     const db = firebase.firestore();
@@ -190,6 +165,7 @@ const banners = [
       .then(() => {
         console.log("Movie liked and saved.");
         document.getElementById("likeBtn").classList.add("liked");
+        document.getElementById("likeBtn").innerText = "❤️";
       })
       .catch(error => {
         console.error("Error saving liked movie:", error);
