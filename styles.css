@@ -808,14 +808,13 @@ body {
     top: 0;
     z-index: 1000;
     display: flex;
+    flex-wrap: wrap; /* ✅ allow wrapping */
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)); /* fade */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
     padding: 20px;
     backdrop-filter: blur(4px);
-  }
-  
-
+  }  
   
   .nav-left {
     display: flex;
@@ -879,4 +878,70 @@ body {
     color: red;
   }
   
+  @media (max-width: 600px) {
+    .nav-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 15px;
+    }
+  
+    .nav-left {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+  
+    .nav-title {
+      font-size: 1.3rem;
+      text-align: center;
+    }
+  
+    .nav-links {
+      width: 100%;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+  
+    .nav-links button {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .banner {
+      flex-direction: column;
+      height: auto;
+      padding: 2em 1em;
+      text-align: center;
+    }
+  
+    .banner-title {
+      font-size: 1.8em;
+    }
+  
+    .banner-info {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5em;
+    }
+  
+    .banner-description {
+      font-size: 1em;
+      padding: 0 10px;
+    }
+  
+    .banner-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      align-items: center;
+    }
+  
+    .banner-buttons button {
+      width: 100%;
+      max-width: 240px;
+    }
+  }
   
