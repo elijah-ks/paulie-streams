@@ -24,6 +24,38 @@
     <div id="likedMovies" class="video-grid" style="padding: 0 20px;"></div>
   </main>
 
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+
+<!-- Firebase config and init -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCk_bu8NqznOfKnZ2wf3u_tccyW4wCKjjQ",
+    authDomain: "pauliestreams-6bc7e.firebaseapp.com",
+    projectId: "pauliestreams-6bc7e",
+    storageBucket: "pauliestreams-6bc7e.appspot.com",
+    messagingSenderId: "219819476189",
+    appId: "1:219819476189:web:fd77ed100f5efffa4d0734",
+    measurementId: "G-7SQEKRLWVD"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
   <script src="liked.js"></script>
+ 
+ <script>
+    function goToSearch() {
+      alert("Search feature coming soon!");
+    }
+  
+    function goToExtras() {
+      alert("Extras page coming soon!");
+    }
+  </script>
+  
+
 </body>
 </html>
