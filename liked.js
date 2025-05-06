@@ -7,25 +7,26 @@ firebase.auth().onAuthStateChanged(user => {
       const userID = user.uid;
       const db = firebase.firestore();
   
-      db.collection("likedMovies")
-        .doc(userID)
+      // 🔄 Fetch all documents in "likes" where userID matches
+      db.collection("likes")
+        .where("userID", "==", userID)
         .get()
-        .then(doc => {
-          if (doc.exists) {
-            const movies = doc.data().movies || [];
-            displayLikedMovies(movies);
-          } else {
-            console.log("No liked movies found.");
-            displayLikedMovies([]);
-          }
+        .then(querySnapshot => {
+          const movies = [];
+          querySnapshot.forEach(doc => {
+            movies.push(doc.data());
+          });
+          displayLikedMovies(movies);
         })
         .catch(error => {
           console.error("Error fetching liked movies:", error);
+          displayLikedMovies([]);
         });
     } else {
       window.location.href = "login.html"; // Redirect if not signed in
     }
   });
+  
   
   // ✅ Renders each liked movie card
   function displayLikedMovies(movies) {
