@@ -102,3 +102,16 @@ const banners = [
     setInterval(updateBanner, 12000); // Rotate every 12 sec
   });
   
+
+  function goToSearch() {
+    alert("Search feature coming soon!");
+  }
+  
+  function goToLiked() {
+    window.location.href = "liked.html"; // Or change when page is ready
+  }
+  
+  function goToExtras() {
+    alert("Extras page coming soon!");
+  }
+  
