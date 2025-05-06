@@ -19,10 +19,23 @@ function openModal(title, description, videoURL) {
       likeBtn.innerText = "♡";
     }
 
-    // Attach the click event
-    likeBtn.onclick = () => toggleLike(title);
+    // ✅ NEW LIKE FUNCTION
+    likeBtn.onclick = () => {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        likeMovie({
+          title: title,
+          description: description,
+          videoURL: videoURL,
+          thumbnail: "assets/" + title.toLowerCase().replace(/ /g, "-") + "-cover.jpg"
+        }, user.uid);
+      } else {
+        window.location.href = "login.html";
+      }
+    };
   });
 }
+
 
 
 function closeModal() {
@@ -157,5 +170,29 @@ const banners = [
         likeBtn.innerText = "❤️";
       }
     });
+  }
+  
+  function likeMovie(movieData, userID) {
+    const db = firebase.firestore();
+    const movieID = movieData.title.replace(/\s+/g, "_"); // Unique key
+  
+    db.collection("likes")
+      .doc(`${movieID}_${userID}`)
+      .set({
+        movieID: movieData.title,
+        title: movieData.title,
+        description: movieData.description,
+        videoURL: movieData.videoURL,
+        thumbnail: movieData.thumbnail,
+        userID: userID,
+        likedAt: new Date()
+      })
+      .then(() => {
+        console.log("Movie liked and saved.");
+        document.getElementById("likeBtn").classList.add("liked");
+      })
+      .catch(error => {
+        console.error("Error saving liked movie:", error);
+      });
   }
   
