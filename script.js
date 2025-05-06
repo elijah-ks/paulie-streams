@@ -1,11 +1,29 @@
 
 
 function openModal(title, description, videoURL) {
-    document.getElementById("modalTitle").innerText = title;
-    document.getElementById("modalDescription").innerText = description;
-    document.getElementById("modalVideo").src = videoURL;
-    document.getElementById("videoModal").classList.remove("hidden");
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDescription").innerText = description;
+  document.getElementById("modalVideo").src = videoURL;
+  document.getElementById("videoModal").classList.remove("hidden");
+
+  const likeBtn = document.getElementById("likeBtn");
+  const docID = `${title}_${window.currentUserID}`;
+  const likeRef = db.collection("likes").doc(docID);
+
+  likeRef.get().then(doc => {
+    if (doc.exists) {
+      likeBtn.classList.add("liked");
+      likeBtn.innerText = "❤️";
+    } else {
+      likeBtn.classList.remove("liked");
+      likeBtn.innerText = "♡";
+    }
+
+    // Attach the click event
+    likeBtn.onclick = () => toggleLike(title);
+  });
 }
+
 
 function closeModal() {
     document.getElementById("videoModal").classList.add("hidden");
@@ -113,5 +131,31 @@ const banners = [
   
   function goToExtras() {
     alert("Extras page coming soon!");
+  }
+  
+
+  function toggleLike(movieID) {
+    const docID = `${movieID}_${window.currentUserID}`;
+    const likeRef = db.collection("likes").doc(docID);
+  
+    likeRef.get().then(doc => {
+      const likeBtn = document.getElementById("likeBtn");
+      
+      if (doc.exists) {
+        // Unlike: delete from Firestore
+        likeRef.delete();
+        likeBtn.classList.remove("liked");
+        likeBtn.innerText = "♡";
+      } else {
+        // Like: add to Firestore
+        likeRef.set({
+          movieID: movieID,
+          userID: window.currentUserID,
+          likedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        likeBtn.classList.add("liked");
+        likeBtn.innerText = "❤️";
+      }
+    });
   }
   

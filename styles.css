@@ -226,12 +226,17 @@ body {
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
     font-size: 28px;
     cursor: pointer;
-}
+    color: white;
+    background: none;
+    border: none;
+    margin-left: 4px;  /* optional space between heart and X */
+    margin-right: 4px; /* shift X slightly left */
+  }
+  
+  
+  
 
 .modal iframe {
     margin-top: 1em;
@@ -577,14 +582,6 @@ body {
     position: relative;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    cursor: pointer;
-}
-
 .modal iframe {
     margin-top: 1em;
     border: none;
@@ -856,5 +853,30 @@ body {
     transform: scale(1.2);
   }
   
-
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px; /* adds spacing between heart and X */
+    margin-bottom: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  
+  #likeBtn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold; /* makes it wider-looking */
+    cursor: pointer;
+    color: white;
+  }
+  
+  
+  #likeBtn.liked {
+    color: red;
+  }
+  
   
