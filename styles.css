@@ -1022,15 +1022,14 @@ body {
 
 .search-results-row .video-card {
   width: 160px;
-  background: #222;
+  background: none;     /* no background box */
   border-radius: 12px;
-  padding: 10px;
+  padding: 0;
   flex-shrink: 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;       /* poster only */
+  cursor: pointer;
 }
+
 
 
 .search-results-row .video-card img {
@@ -1038,6 +1037,10 @@ body {
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.search-results-row .video-card p {
+  display: none;
 }
 
 .hidden-search-clone {
