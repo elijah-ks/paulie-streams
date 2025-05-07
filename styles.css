@@ -1021,12 +1021,24 @@ body {
 }
 
 .search-results-row .video-card {
-  min-width: 200px;
+  width: 160px;
+  background: #222;
+  border-radius: 12px;
+  padding: 10px;
+  flex-shrink: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #fff;
 }
 
+
 .search-results-row .video-card img {
-  width: 140px;
-  height: 140px;
+  width: 100%;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 10px;
 }
