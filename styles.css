@@ -988,16 +988,19 @@ body {
 /* 🔍 Overlay Search Results */
 .search-results-overlay {
   position: fixed;
-  top: 60px; /* right under nav */
+  top: 70px;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px); /* frosted glass effect */
-  z-index: 99;
+  width: 100%;
+  height: calc(100% - 70px); /* fill screen under nav */
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5); /* match nav-bar tone */
+  z-index: 1000;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
+
 
 .search-results-overlay h2 {
   color: white;

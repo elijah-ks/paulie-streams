@@ -201,7 +201,7 @@ const banners = [
     const seenTitles = new Set();
     container.innerHTML = "";
   
-    Array.from(allCards).forEach(card => {
+    allCards.forEach(card => {
       const titleElement = card.querySelector("p");
       if (!titleElement) return;
   
@@ -219,9 +219,6 @@ const banners = [
   
     overlay.classList.remove("hidden");
   }
-  
-  
-  
   
   
   function goToLiked() {
