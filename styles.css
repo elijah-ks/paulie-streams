@@ -987,9 +987,6 @@ body {
     margin-bottom: 10px;
   }
   
-  .search-results-row .video-card {
-    min-width: 200px;
-  }
   
 /* 🔍 Overlay Search Results */
 .search-results-overlay {
@@ -1025,6 +1022,13 @@ body {
 
 .search-results-row .video-card {
   min-width: 200px;
+}
+
+.search-results-row .video-card img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .hidden-search-clone {

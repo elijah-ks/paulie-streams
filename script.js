@@ -273,23 +273,26 @@ const banners = [
   });
   
   function injectGameSearchClones() {
-    const container = document.querySelector(".video-grid");
-    const gameCards = document.querySelectorAll(".game-card");
+    const searchArea = document.querySelector(".video-grid"); // Or wherever video cards live
+    const games = document.querySelectorAll(".game-card");
   
-    gameCards.forEach(card => {
+    games.forEach(card => {
       const title = card.dataset.title;
-      const imgSrc = card.querySelector("img").src;
-      const href = card.href;
+      const image = card.querySelector("img").src;
+      const link = card.href;
   
-      const fakeCard = document.createElement("div");
-      fakeCard.className = "video-card hidden-search-clone";
-      fakeCard.onclick = () => window.location.href = href;
-      fakeCard.innerHTML = `
-        <img src="${imgSrc}" alt="${title}">
-        <p>${title}</p>
-      `;
+      const clone = document.createElement("div");
+      clone.className = "video-card hidden-search-clone";
+      clone.onclick = () => window.location.href = link;
+      clone.innerHTML = `<img src="${image}" alt="${title}"><p>${title}</p>`;
   
-      container?.appendChild(fakeCard);
+      searchArea?.appendChild(clone);
     });
   }
+  
+  // 🧠 Run after page loads
+  window.addEventListener("load", () => {
+    injectGameSearchClones();
+  });
+  
   
