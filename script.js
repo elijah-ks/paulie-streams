@@ -201,13 +201,14 @@ const banners = [
   function filterMovies(query) {
     const overlay = document.getElementById("searchResultsOverlay");
     const container = document.getElementById("searchResults");
-    const allCards = document.querySelectorAll(".video-card");
   
     if (!query) {
       overlay.classList.add("hidden");
+      container.innerHTML = "";
       return;
     }
   
+    const allCards = document.querySelectorAll(".video-card");
     const seenTitles = new Set();
     container.innerHTML = "";
   
@@ -229,6 +230,7 @@ const banners = [
   
     overlay.classList.remove("hidden");
   }
+  
   
   
   function goToLiked() {
