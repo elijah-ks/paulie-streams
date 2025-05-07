@@ -267,3 +267,29 @@ const banners = [
       });
   }
   
+  window.addEventListener("load", () => {
+    // Other banner/setup logic...
+    injectGameSearchClones();
+  });
+  
+  function injectGameSearchClones() {
+    const container = document.querySelector(".video-grid");
+    const gameCards = document.querySelectorAll(".game-card");
+  
+    gameCards.forEach(card => {
+      const title = card.dataset.title;
+      const imgSrc = card.querySelector("img").src;
+      const href = card.href;
+  
+      const fakeCard = document.createElement("div");
+      fakeCard.className = "video-card hidden-search-clone";
+      fakeCard.onclick = () => window.location.href = href;
+      fakeCard.innerHTML = `
+        <img src="${imgSrc}" alt="${title}">
+        <p>${title}</p>
+      `;
+  
+      container?.appendChild(fakeCard);
+    });
+  }
+  

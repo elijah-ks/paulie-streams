@@ -1026,3 +1026,7 @@ body {
 .search-results-row .video-card {
   min-width: 200px;
 }
+
+.hidden-search-clone {
+  display: none; /* hidden on homepage */
+}
