@@ -141,36 +141,29 @@
     <section class="video-row">
         <h2>Coming Soon</h2>
         <div class="video-grid">
-            <div class="video-card" onclick="openModal('Matrix Attack 2', 'After being captured by President Eli, the Sabado Brothers attempt their escape...', 'https://drive.google.com/file/d/1COMINGSOONID/preview')">
-                <img src="assets/matrix-attack2.jpg" alt="Matrix Attack 2 Thumbnail">
-            </div>
+          <div class="video-card" onclick="openModal('Matrix Attack 2', 'After being captured by President Eli, the Sabado Brothers attempt their escape...', 'https://drive.google.com/file/d/1COMINGSOONID/preview')">
+            <img src="assets/matrix-attack2.jpg" alt="Matrix Attack 2 Thumbnail">
+            <p>Matrix Attack 2</p> <!-- ✅ Add this line -->
+          </div>          
         </div>
     </section>
     
-    <section class="row">
-        <h2 class="row-title">Games & Extras</h2>
-        <div class="row-posters row-app-style">
-            <a href="/paulie-streams/games/tic-tac-toe/index.html">
-                <img
-                  src="assets/tic-tac.jpg"
-                  alt="Paulie vs. Vinnie"
-                  style="width: 140px; height: auto; object-fit: cover; border-radius: 10px;"
-                />
-              </a>
-
-            <a href="/paulie-streams/games/camo-crawl/index.html">
-                <img
-                  src="assets/camo-crawl.jpg"
-                  alt="Camo-Crawl"
-                  style="width: 140px; height: auto; object-fit: cover; border-radius: 10px;"
-                />
-              </a>
-              
-              
+    <section class="video-row">
+      <h2>Games & Extras</h2>
+      <div class="video-grid">
+        <div class="video-card" data-type="game" onclick="window.location.href='/paulie-streams/games/tic-tac-toe/index.html'">
+          <img src="assets/tic-tac.jpg" alt="Paulie vs. Vinnie">
+          <p>Paulie vs. Vinnie</p>
         </div>
-      </section>
-      
     
+        <div class="video-card" data-type="game" onclick="window.location.href='/paulie-streams/games/camo-crawl/index.html'">
+          <img src="assets/camo-crawl.jpg" alt="Camo-Crawl">
+          <p>Camo-Crawl</p>
+        </div>
+      </div>
+    </section>
+    
+      
     <script src="script.js"></script>
 
 
