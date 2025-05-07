@@ -975,3 +975,35 @@ body {
     margin-right: 12px;
   }
   
+  /* 🔍 Overlay Search Results */
+  .search-results-overlay {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .search-results-overlay h2 {
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .search-results-row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .search-results-overlay.hidden {
+    display: none;
+  }
+  
+  .search-results-row .video-card {
+    min-width: 200px;
+  }
+  

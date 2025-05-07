@@ -189,11 +189,33 @@ const banners = [
   });
   
   function filterMovies(query) {
-    document.querySelectorAll(".video-card").forEach(card => {
-      const title = card.querySelector("p").innerText.toLowerCase();
-      card.style.display = title.includes(query) ? "block" : "none";
-    });
+    const overlay = document.getElementById("searchResultsOverlay");
+    const container = document.getElementById("searchResults");
+    const allCards = document.querySelectorAll(".video-card");
+  
+    if (!query) {
+      overlay.classList.add("hidden");
+      return;
+    }
+  
+    const matches = Array.from(allCards).filter(card =>
+      card.querySelector("p").innerText.toLowerCase().includes(query)
+    );
+  
+    container.innerHTML = "";
+  
+    if (matches.length === 0) {
+      container.innerHTML = "<p style='color: white;'>No matches found.</p>";
+    } else {
+      matches.forEach(match => {
+        const clone = match.cloneNode(true);
+        container.appendChild(clone);
+      });
+    }
+  
+    overlay.classList.remove("hidden");
   }
+  
   
   
   function goToLiked() {
