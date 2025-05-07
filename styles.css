@@ -636,10 +636,13 @@ body {
         font-size: 1em;
     }
 
-    .video-card {
-        width: 140px;
-        height: 210px;
-    }
+    .video-card,
+    .video-card img {
+      width: 140px;
+      height: 210px;
+      object-fit: cover;
+     margin-bottom: 10px;
+  }
 
     .banner-content {
         max-width: 100%;
@@ -1005,6 +1008,8 @@ body {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
   pointer-events: none;
+  padding-bottom: 60px; /* prevent overlap with mobile browser bar */
+  background-color: rgba(0, 0, 0, 0.85); /* make background darker on mobile */
 }
 
 
@@ -1080,4 +1085,42 @@ body.no-scroll {
 .search-results-overlay.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .search-wrapper {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-input {
+    width: 100% !important;
+    font-size: 1.1rem;
+  }
+
+  .search-results-overlay h2 {
+    font-size: 1.4rem;
+  }
+
+  .search-group h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .search-results-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .search-icon {
+    font-size: 1.2rem;
+  }
+  
+  .search-results-row .video-card {
+    width: 140px;
+    height: 210px;
+  }
 }
