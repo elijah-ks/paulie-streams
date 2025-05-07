@@ -1002,6 +1002,9 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
 }
 
 
@@ -1072,4 +1075,9 @@ body {
 
 body.no-scroll {
   overflow: hidden;
+}
+
+.search-results-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }

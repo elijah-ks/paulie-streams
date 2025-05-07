@@ -204,8 +204,9 @@ const banners = [
     const gameContainer = document.getElementById("searchResultsGames");
   
     if (!query) {
-      overlay.classList.add("hidden");
-      document.body.classList.remove("no-scroll"); // ✅ re-enable background scroll
+      overlay.classList.remove("visible");
+      setTimeout(() => overlay.classList.add("hidden"), 250); // match CSS fade time
+      document.body.classList.remove("no-scroll");
       movieContainer.innerHTML = "";
       gameContainer.innerHTML = "";
       return;
@@ -237,11 +238,18 @@ const banners = [
       movieContainer.innerHTML = "<p style='color: white;'>No matches found.</p>";
     }
   
-    overlay.classList.remove("hidden");
-    document.body.classList.add("no-scroll"); // ✅ disable background scroll
-
-  }
+    // ✅ Show/hide each section based on results
+    document.querySelector(".search-group:nth-of-type(1)").style.display =
+      movieContainer.children.length ? "block" : "none";
   
+    document.querySelector(".search-group:nth-of-type(2)").style.display =
+      gameContainer.children.length ? "block" : "none";
+  
+    // ✅ Fade in the search overlay
+    overlay.classList.remove("hidden");
+    setTimeout(() => overlay.classList.add("visible"), 10);
+    document.body.classList.add("no-scroll");
+  }
   
   
   function goToLiked() {
@@ -307,38 +315,32 @@ const banners = [
   });
   
   function organizeSearchResultsByCategory() {
-    const container = document.getElementById("searchResults");
-    const cards = Array.from(container.children);
-    container.innerHTML = "";
+    const movieContainer = document.getElementById("searchResultsMovies");
+    const gameContainer = document.getElementById("searchResultsGames");
+    const movieGroup = movieContainer.closest(".search-group");
+    const gameGroup = gameContainer.closest(".search-group");
   
-    const movieGroup = document.createElement("div");
-    const movieTitle = document.createElement("h3");
-    movieTitle.textContent = "Movies";
-    movieTitle.style.color = "white";
-    movieGroup.appendChild(movieTitle);
-    movieGroup.style.display = "flex";
-    movieGroup.style.gap = "16px";
-    movieGroup.style.flexWrap = "wrap";
+    // Clear both before filling
+    movieContainer.innerHTML = "";
+    gameContainer.innerHTML = "";
   
-    const gameGroup = document.createElement("div");
-    const gameTitle = document.createElement("h3");
-    gameTitle.textContent = "Games & Extras";
-    gameTitle.style.color = "white";
-    gameGroup.appendChild(gameTitle);
-    gameGroup.style.display = "flex";
-    gameGroup.style.gap = "16px";
-    gameGroup.style.flexWrap = "wrap";
+    // Reset visibility
+    movieGroup.style.display = "none";
+    gameGroup.style.display = "none";
   
-    cards.forEach(card => {
-      if (card.classList.contains("game-card") || card.classList.contains("hidden-search-clone")) {
-        gameGroup.appendChild(card);
+    const allResults = document.querySelectorAll("#searchResults .video-card");
+    allResults.forEach(card => {
+      const isGame = card.classList.contains("game-card") || card.classList.contains("hidden-search-clone");
+      if (isGame) {
+        gameContainer.appendChild(card);
       } else {
-        movieGroup.appendChild(card);
+        movieContainer.appendChild(card);
       }
     });
   
-    if (movieGroup.children.length > 1) container.appendChild(movieGroup);
-    if (gameGroup.children.length > 1) container.appendChild(gameGroup);
+    if (movieContainer.children.length > 0) movieGroup.style.display = "block";
+    if (gameContainer.children.length > 0) gameGroup.style.display = "block";
   }
+  
   
   
