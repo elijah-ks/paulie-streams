@@ -48,10 +48,19 @@
       <span class="nav-title">Paulie Streams</span>
     </div>
     <nav class="nav-links">
-      <button onclick="goToSearch()">🔍</button>
+      <div class="search-wrapper" id="searchWrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          class="search-input"
+        />
+      </div>
       <button onclick="goToLiked()">❤️</button>
       <button onclick="goToExtras()">🎮</button>
     </nav>
+    
   </header>
 
     <!-- Loading Screen -->

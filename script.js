@@ -166,9 +166,35 @@ const banners = [
   });
   
 
-  function goToSearch() {
-    alert("Search feature coming soon!");
+  const searchWrapper = document.getElementById("searchWrapper");
+  const searchInput = document.getElementById("searchInput");
+  const searchIcon = searchWrapper.querySelector(".search-icon");
+  
+  searchIcon.addEventListener("click", () => {
+    searchWrapper.classList.toggle("active");
+    searchInput.focus();
+  });
+  
+  document.addEventListener("click", (e) => {
+    if (!searchWrapper.contains(e.target)) {
+      searchWrapper.classList.remove("active");
+      searchInput.value = "";
+      filterMovies(""); // Reset movie filter
+    }
+  });
+  
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    filterMovies(query);
+  });
+  
+  function filterMovies(query) {
+    document.querySelectorAll(".video-card").forEach(card => {
+      const title = card.querySelector("p").innerText.toLowerCase();
+      card.style.display = title.includes(query) ? "block" : "none";
+    });
   }
+  
   
   function goToLiked() {
     window.location.href = "liked.html"; // Or change when page is ready
