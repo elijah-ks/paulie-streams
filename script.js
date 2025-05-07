@@ -208,7 +208,7 @@ const banners = [
       return;
     }
   
-    const allCards = document.querySelectorAll(".video-card");
+    const allCards = document.querySelectorAll(".video-card, .game-card");
     const seenTitles = new Set();
     container.innerHTML = "";
   
@@ -277,7 +277,7 @@ const banners = [
     const games = document.querySelectorAll(".game-card");
   
     games.forEach(card => {
-      const title = card.dataset.title;
+      const title = card.dataset.title?.toLowerCase() || card.querySelector("p")?.innerText?.toLowerCase();
       const image = card.querySelector("img").src;
       const link = card.href;
   

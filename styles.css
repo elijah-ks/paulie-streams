@@ -188,6 +188,15 @@ body {
     flex-shrink: 0;
 }
 
+.game-card img {
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
 
 .video-card:hover {
     transform: scale(1.05);
