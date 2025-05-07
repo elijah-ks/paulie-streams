@@ -205,6 +205,7 @@ const banners = [
   
     if (!query) {
       overlay.classList.add("hidden");
+      document.body.classList.remove("no-scroll"); // ✅ re-enable background scroll
       movieContainer.innerHTML = "";
       gameContainer.innerHTML = "";
       return;
@@ -237,6 +238,8 @@ const banners = [
     }
   
     overlay.classList.remove("hidden");
+    document.body.classList.add("no-scroll"); // ✅ disable background scroll
+
   }
   
   
