@@ -1021,12 +1021,12 @@ body {
 }
 
 .search-results-row .video-card {
-  width: 160px;
-  background: none;     /* no background box */
+  width: 200px;
+  background: none;
   border-radius: 12px;
   padding: 0;
   flex-shrink: 0;
-  display: block;       /* poster only */
+  display: block;
   cursor: pointer;
 }
 
@@ -1034,10 +1034,12 @@ body {
 
 .search-results-row .video-card img {
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 2 / 3; /* Makes the poster vertical like 200x300 */
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
+
 
 .search-results-row .video-card p {
   display: none;
