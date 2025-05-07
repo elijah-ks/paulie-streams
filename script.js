@@ -226,11 +226,12 @@ const banners = [
   
     if (container.children.length === 0) {
       container.innerHTML = "<p style='color: white;'>No matches found.</p>";
+    } else {
+      organizeSearchResultsByCategory(); // ✅ Group results by type
     }
-  
+    
     overlay.classList.remove("hidden");
-  }
-  
+    } // ← This closing brace was missing!
   
   
   function goToLiked() {
@@ -294,5 +295,40 @@ const banners = [
   window.addEventListener("load", () => {
     injectGameSearchClones();
   });
+  
+  function organizeSearchResultsByCategory() {
+    const container = document.getElementById("searchResults");
+    const cards = Array.from(container.children);
+    container.innerHTML = "";
+  
+    const movieGroup = document.createElement("div");
+    const movieTitle = document.createElement("h3");
+    movieTitle.textContent = "Movies";
+    movieTitle.style.color = "white";
+    movieGroup.appendChild(movieTitle);
+    movieGroup.style.display = "flex";
+    movieGroup.style.gap = "16px";
+    movieGroup.style.flexWrap = "wrap";
+  
+    const gameGroup = document.createElement("div");
+    const gameTitle = document.createElement("h3");
+    gameTitle.textContent = "Games & Extras";
+    gameTitle.style.color = "white";
+    gameGroup.appendChild(gameTitle);
+    gameGroup.style.display = "flex";
+    gameGroup.style.gap = "16px";
+    gameGroup.style.flexWrap = "wrap";
+  
+    cards.forEach(card => {
+      if (card.classList.contains("game-card") || card.classList.contains("hidden-search-clone")) {
+        gameGroup.appendChild(card);
+      } else {
+        movieGroup.appendChild(card);
+      }
+    });
+  
+    if (movieGroup.children.length > 1) container.appendChild(movieGroup);
+    if (gameGroup.children.length > 1) container.appendChild(gameGroup);
+  }
   
   
