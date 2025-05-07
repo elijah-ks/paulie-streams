@@ -808,13 +808,19 @@ body {
     top: 0;
     z-index: 1000;
     display: flex;
-    flex-wrap: wrap; /* ✅ allow wrapping */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
     padding: 20px;
     backdrop-filter: blur(4px);
-  }  
+    transition: background 0.3s ease; /* 👈 Add this line */
+  }
+  
+  .nav-bar.search-active {
+    background: rgba(0, 0, 0, 0.9); /* Solid black with opacity */
+  }
+  
   
   .nav-left {
     display: flex;

@@ -179,14 +179,24 @@ const banners = [
     if (!searchWrapper.contains(e.target)) {
       searchWrapper.classList.remove("active");
       searchInput.value = "";
-      filterMovies(""); // Reset movie filter
+      document.querySelector(".nav-bar").classList.remove("search-active");
+      filterMovies("");
     }
-  });
+  });  
   
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
+    const navBar = document.querySelector(".nav-bar");
+  
+    if (query.trim()) {
+      navBar.classList.add("search-active");
+    } else {
+      navBar.classList.remove("search-active");
+    }
+  
     filterMovies(query);
   });
+
   
   function filterMovies(query) {
     const overlay = document.getElementById("searchResultsOverlay");
