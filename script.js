@@ -198,9 +198,11 @@ const banners = [
       return;
     }
   
-    const matches = Array.from(allCards).filter(card =>
-      card.querySelector("p").innerText.toLowerCase().includes(query)
-    );
+    const matches = Array.from(allCards).filter(card => {
+      const titleElement = card.querySelector("p");
+      if (!titleElement) return false;
+      return titleElement.innerText.toLowerCase().includes(query);
+    });
   
     container.innerHTML = "";
   
@@ -215,6 +217,7 @@ const banners = [
   
     overlay.classList.remove("hidden");
   }
+  
   
   
   
