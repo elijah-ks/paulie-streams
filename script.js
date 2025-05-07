@@ -198,25 +198,28 @@ const banners = [
       return;
     }
   
-    const matches = Array.from(allCards).filter(card => {
-      const titleElement = card.querySelector("p");
-      if (!titleElement) return false;
-      return titleElement.innerText.toLowerCase().includes(query);
-    });
-  
+    const seenTitles = new Set();
     container.innerHTML = "";
   
-    if (matches.length === 0) {
-      container.innerHTML = "<p style='color: white;'>No matches found.</p>";
-    } else {
-      matches.forEach(match => {
-        const clone = match.cloneNode(true);
+    Array.from(allCards).forEach(card => {
+      const titleElement = card.querySelector("p");
+      if (!titleElement) return;
+  
+      const title = titleElement.innerText.toLowerCase();
+      if (title.includes(query) && !seenTitles.has(title)) {
+        seenTitles.add(title);
+        const clone = card.cloneNode(true);
         container.appendChild(clone);
-      });
+      }
+    });
+  
+    if (container.children.length === 0) {
+      container.innerHTML = "<p style='color: white;'>No matches found.</p>";
     }
   
     overlay.classList.remove("hidden");
   }
+  
   
   
   
