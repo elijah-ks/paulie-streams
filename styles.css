@@ -188,15 +188,6 @@ body {
     flex-shrink: 0;
 }
 
-.game-card img {
-  width: 100%;
-  max-width: 150px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-}
-
 
 .video-card:hover {
     transform: scale(1.05);
@@ -1048,9 +1039,20 @@ body {
   display: none;
 }
 
-
 .video-card.game-card {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   flex-shrink: 0;
+  background: none; /* optional: remove gray bg if not needed */
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
 }
+
+.video-card.game-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
