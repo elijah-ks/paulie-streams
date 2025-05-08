@@ -45,7 +45,7 @@
 <!-- Terms Modal -->
 <div id="termsModal" class="modal-overlay" style="display: none;">
   <div class="modal-content">
-    <img src="assets/transparent.png" alt="Paulie Icon" style="width: 100px; margin-bottom: 15px;" />
+    <img src="assets/transparent.png" alt="Paulie Icon" style="width: 150px; margin-bottom: 15px;" />
     <h2>Before You Register</h2>
     <p>
       By clicking “Accept,” you agree to our
@@ -107,9 +107,14 @@
         window.location.href = "index.html";
       })
       .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+         alert("That email is already registered. Try logging in instead.");
+       } else {
         alert("Registration error: " + error.message);
-        document.getElementById("termsModal").style.display = "none";
-      });
+     }
+      document.getElementById("termsModal").style.display = "none";
+    });
+
   });
 
   document.getElementById("declineTerms").addEventListener("click", () => {
