@@ -23,8 +23,8 @@ function openModal(title, description, videoURL) {
         likeBtn.classList.remove("liked");
         likeBtn.innerText = "♡";
       }
-
-      // ✅ Handle click toggle like
+    
+      // ✅ Always rebind — inside the get() block
       likeBtn.onclick = () => {
         if (doc.exists) {
           likeRef.delete().then(() => {
@@ -46,7 +46,7 @@ function openModal(title, description, videoURL) {
           });
         }
       };
-    });
+    });    
   });
 }
 
