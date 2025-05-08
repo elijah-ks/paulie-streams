@@ -32,6 +32,16 @@ function openModal(title, description, videoURL) {
             likeBtn.innerText = "♡";
           });
         } else {
+
+          console.log("Trying to add like with data:", {
+          userID: user.uid,
+           title,
+          description,
+           videoURL,
+          thumbnail: getThumbnailForTitle(title)
+        });
+
+          
           likeRef.set({
             movieID: title,
             title,
