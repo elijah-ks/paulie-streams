@@ -9,6 +9,7 @@
   <!-- ✅ Firebase SDKs (no analytics) -->
   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
 
   <script>
     // ✅ Your Firebase configuration
@@ -41,32 +42,80 @@
       </div>
       
       
-  <script>
-    const auth = firebase.auth();
+      <script>
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+      
+        let pendingEmail = "";
+        let pendingPassword = "";
+      
+        function login() {
+          const email = document.getElementById('email').value;
+          const pass = document.getElementById('password').value;
+      
+          auth.signInWithEmailAndPassword(email, pass)
+            .then(() => {
+              document.getElementById('auth-status').textContent = "Logged in!";
+              window.location.href = "index.html";
+            })
+            .catch(err => alert(err.message));
+        }
+      
+        function register() {
+          // Store values and show modal instead of registering yet
+          pendingEmail = document.getElementById('email').value;
+          pendingPassword = document.getElementById('password').value;
+      
+          if (!pendingEmail || !pendingPassword) {
+            alert("Please enter email and password.");
+            return;
+          }
+      
+          document.getElementById("termsModal").style.display = "flex";
+        }
+      
+        document.getElementById("acceptTerms").addEventListener("click", () => {
+          auth.createUserWithEmailAndPassword(pendingEmail, pendingPassword)
+            .then((userCredential) => {
+              const user = userCredential.user;
+      
+              return db.collection("users").doc(user.uid).set({
+                agreedToTerms: true,
+                termsAcceptedAt: new Date().toISOString()
+              });
+            })
+            .then(() => {
+              window.location.href = "index.html";
+            })
+            .catch((error) => {
+              alert("Registration error: " + error.message);
+              document.getElementById("termsModal").style.display = "none";
+            });
+        });
+      
+        document.getElementById("declineTerms").addEventListener("click", () => {
+          document.getElementById("termsModal").style.display = "none";
+          document.getElementById('auth-status').textContent = "Registration cancelled.";
+        });
+      </script>
+      
 
-    function login() {
-      const email = document.getElementById('email').value;
-      const pass = document.getElementById('password').value;
+<!-- Terms Modal -->
+<div id="termsModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h2>Before You Register</h2>
+    <p>
+      By clicking “Accept,” you agree to our
+      <a href="terms.html" target="_blank">Terms and Conditions</a> and
+      <a href="privacy.html" target="_blank">Privacy Policy</a>.
+    </p>
+    <div class="modal-buttons">
+      <button id="acceptTerms">Accept</button>
+      <button id="declineTerms">Decline</button>
+    </div>
+  </div>
+</div>
 
-      auth.signInWithEmailAndPassword(email, pass)
-        .then(() => {
-          document.getElementById('auth-status').textContent = "Logged in!";
-          window.location.href = "index.html"; // ✅ Redirect after login
-        })
-        .catch(err => alert(err.message));
-    }
 
-    function register() {
-      const email = document.getElementById('email').value;
-      const pass = document.getElementById('password').value;
-
-      auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => {
-          document.getElementById('auth-status').textContent = "Registered and logged in!";
-          window.location.href = "index.html"; // ✅ Redirect after register
-        })
-        .catch(err => alert(err.message));
-    }
-  </script>
 </body>
 </html>
