@@ -82,16 +82,29 @@
   }
 
   function register() {
-    pendingEmail = document.getElementById('email').value;
-    pendingPassword = document.getElementById('password').value;
+  pendingEmail = document.getElementById('email').value;
+  pendingPassword = document.getElementById('password').value;
 
-    if (!pendingEmail || !pendingPassword) {
-      alert("Please enter email and password.");
-      return;
-    }
-
-    document.getElementById("termsModal").style.display = "flex";
+  if (!pendingEmail || !pendingPassword) {
+    alert("Please enter email and password.");
+    return;
   }
+
+  // 🔍 Check if the email is already in use
+  auth.fetchSignInMethodsForEmail(pendingEmail)
+    .then((methods) => {
+      if (methods.length > 0) {
+        alert("That email is already registered. Try logging in instead.");
+      } else {
+        // Only show modal if email is available
+        document.getElementById("termsModal").style.display = "flex";
+      }
+    })
+    .catch((error) => {
+      alert("Error checking email: " + error.message);
+    });
+}
+
 
   document.getElementById("acceptTerms").addEventListener("click", () => {
     auth.createUserWithEmailAndPassword(pendingEmail, pendingPassword)
