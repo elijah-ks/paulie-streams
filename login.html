@@ -41,64 +41,6 @@
         <p id="auth-status"></p>
       </div>
       
-      
-      <script>
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-      
-        let pendingEmail = "";
-        let pendingPassword = "";
-      
-        function login() {
-          const email = document.getElementById('email').value;
-          const pass = document.getElementById('password').value;
-      
-          auth.signInWithEmailAndPassword(email, pass)
-            .then(() => {
-              document.getElementById('auth-status').textContent = "Logged in!";
-              window.location.href = "index.html";
-            })
-            .catch(err => alert(err.message));
-        }
-      
-        function register() {
-          // Store values and show modal instead of registering yet
-          pendingEmail = document.getElementById('email').value;
-          pendingPassword = document.getElementById('password').value;
-      
-          if (!pendingEmail || !pendingPassword) {
-            alert("Please enter email and password.");
-            return;
-          }
-      
-          document.getElementById("termsModal").style.display = "flex";
-        }
-      
-        document.getElementById("acceptTerms").addEventListener("click", () => {
-          auth.createUserWithEmailAndPassword(pendingEmail, pendingPassword)
-            .then((userCredential) => {
-              const user = userCredential.user;
-      
-              return db.collection("users").doc(user.uid).set({
-                agreedToTerms: true,
-                termsAcceptedAt: new Date().toISOString()
-              });
-            })
-            .then(() => {
-              window.location.href = "index.html";
-            })
-            .catch((error) => {
-              alert("Registration error: " + error.message);
-              document.getElementById("termsModal").style.display = "none";
-            });
-        });
-      
-        document.getElementById("declineTerms").addEventListener("click", () => {
-          document.getElementById("termsModal").style.display = "none";
-          document.getElementById('auth-status').textContent = "Registration cancelled.";
-        });
-      </script>
-      
 
 <!-- Terms Modal -->
 <div id="termsModal" class="modal-overlay" style="display: none;">
@@ -116,6 +58,61 @@
   </div>
 </div>
 
+<script>
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  let pendingEmail = "";
+  let pendingPassword = "";
+
+  function login() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        document.getElementById('auth-status').textContent = "Logged in!";
+        window.location.href = "index.html";
+      })
+      .catch(err => alert(err.message));
+  }
+
+  function register() {
+    pendingEmail = document.getElementById('email').value;
+    pendingPassword = document.getElementById('password').value;
+
+    if (!pendingEmail || !pendingPassword) {
+      alert("Please enter email and password.");
+      return;
+    }
+
+    document.getElementById("termsModal").style.display = "flex";
+  }
+
+  document.getElementById("acceptTerms").addEventListener("click", () => {
+    auth.createUserWithEmailAndPassword(pendingEmail, pendingPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        return db.collection("users").doc(user.uid).set({
+          agreedToTerms: true,
+          termsAcceptedAt: new Date().toISOString()
+        });
+      })
+      .then(() => {
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        alert("Registration error: " + error.message);
+        document.getElementById("termsModal").style.display = "none";
+      });
+  });
+
+  document.getElementById("declineTerms").addEventListener("click", () => {
+    document.getElementById("termsModal").style.display = "none";
+    document.getElementById('auth-status').textContent = "Registration cancelled.";
+  });
+</script>
 
 </body>
 </html>
