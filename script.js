@@ -14,7 +14,7 @@ firebase.auth().onAuthStateChanged(user => {
   const docID = `${title}_${user.uid}`;
   const likeRef = firebase.firestore().collection("likes").doc(docID);
 
-  // Reset like button state
+  // Get the initial like status
   likeRef.get().then(doc => {
     if (doc.exists) {
       likeBtn.classList.add("liked");
@@ -25,35 +25,50 @@ firebase.auth().onAuthStateChanged(user => {
     }
   });
 
-  // Remove previous listener (if any)
+  // Remove previous click listener
   const newLikeBtn = likeBtn.cloneNode(true);
   likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
 
   newLikeBtn.addEventListener("click", () => {
-    likeRef.get().then(doc => {
-      if (doc.exists) {
-        likeRef.delete().then(() => {
-          newLikeBtn.classList.remove("liked");
-          newLikeBtn.innerText = "♡";
-        });
-      } else {
-        likeRef.set({
-          movieID: title,
-          title,
-          description,
-          videoURL,
-          thumbnail: getThumbnailForTitle(title),
-          userID: user.uid,
-          likedAt: new Date()
-        }).then(() => {
-          newLikeBtn.classList.add("liked");
-          newLikeBtn.innerText = "❤️";
-        });
-      }
-    });
+    // Optimistically update the button instantly
+    const isLiked = newLikeBtn.classList.contains("liked");
+
+    if (isLiked) {
+      // Instant visual update
+      newLikeBtn.classList.remove("liked");
+      newLikeBtn.innerText = "♡";
+
+      // Background DB removal
+      likeRef.delete().catch((error) => {
+        console.error("Error unliking movie:", error);
+        // Revert if there's an error
+        newLikeBtn.classList.add("liked");
+        newLikeBtn.innerText = "❤️";
+      });
+
+    } else {
+      // Instant visual update
+      newLikeBtn.classList.add("liked");
+      newLikeBtn.innerText = "❤️";
+
+      // Background DB add
+      likeRef.set({
+        movieID: title,
+        title,
+        description,
+        videoURL,
+        thumbnail: getThumbnailForTitle(title),
+        userID: user.uid,
+        likedAt: new Date()
+      }).catch((error) => {
+        console.error("Error liking movie:", error);
+        // Revert if there's an error
+        newLikeBtn.classList.remove("liked");
+        newLikeBtn.innerText = "♡";
+      });
+    }
   });
 });
-
 }
 
 
