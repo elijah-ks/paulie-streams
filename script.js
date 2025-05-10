@@ -8,56 +8,52 @@ function openModal(title, description, videoURL) {
 
   const likeBtn = document.getElementById("likeBtn");
 
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) return;
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) return;
 
-    const docID = `${title}_${user.uid}`;
-    const likeRef = firebase.firestore().collection("likes").doc(docID);
+  const docID = `${title}_${user.uid}`;
+  const likeRef = firebase.firestore().collection("likes").doc(docID);
 
-    // 🔄 Check if the user already liked this movie
+  // Reset like button state
+  likeRef.get().then(doc => {
+    if (doc.exists) {
+      likeBtn.classList.add("liked");
+      likeBtn.innerText = "❤️";
+    } else {
+      likeBtn.classList.remove("liked");
+      likeBtn.innerText = "♡";
+    }
+  });
+
+  // Remove previous listener (if any)
+  const newLikeBtn = likeBtn.cloneNode(true);
+  likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+
+  newLikeBtn.addEventListener("click", () => {
     likeRef.get().then(doc => {
       if (doc.exists) {
-        likeBtn.classList.add("liked");
-        likeBtn.innerText = "❤️";
-      } else {
-        likeBtn.classList.remove("liked");
-        likeBtn.innerText = "♡";
-      }
-    
-      // ✅ Always rebind — inside the get() block
-      likeBtn.onclick = () => {
-        if (doc.exists) {
-          likeRef.delete().then(() => {
-            likeBtn.classList.remove("liked");
-            likeBtn.innerText = "♡";
-          });
-        } else {
-
-          console.log("Trying to add like with data:", {
-          userID: user.uid,
-           title,
-          description,
-           videoURL,
-          thumbnail: getThumbnailForTitle(title)
+        likeRef.delete().then(() => {
+          newLikeBtn.classList.remove("liked");
+          newLikeBtn.innerText = "♡";
         });
-
-          
-          likeRef.set({
-            movieID: title,
-            title,
-            description,
-            videoURL,
-            thumbnail: getThumbnailForTitle(title),
-            userID: user.uid,
-            likedAt: new Date()
-          }).then(() => {
-            likeBtn.classList.add("liked");
-            likeBtn.innerText = "❤️";
-          });
-        }
-      };
-    });    
+      } else {
+        likeRef.set({
+          movieID: title,
+          title,
+          description,
+          videoURL,
+          thumbnail: getThumbnailForTitle(title),
+          userID: user.uid,
+          likedAt: new Date()
+        }).then(() => {
+          newLikeBtn.classList.add("liked");
+          newLikeBtn.innerText = "❤️";
+        });
+      }
+    });
   });
+});
+
 }
 
 
