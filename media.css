@@ -100,22 +100,22 @@
   .nav-bar {
     flex-direction: column;
     align-items: center;
-    padding: 12px 10px;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.9); /* darker and consistent */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.9);
   }
 
   .nav-left {
-    justify-content: center;
-    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
   }
 
   .nav-title {
     font-size: 1.3rem;
+    margin-left: 10px;
+    flex-grow: 1;
     text-align: center;
   }
 
@@ -133,6 +133,22 @@
 
   .nav-links button {
     font-size: 1.2rem;
+  }
+
+  .nav-icons-right {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+    .nav-icons-right button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
   }
 
   /* Banner */
@@ -183,14 +199,17 @@
   border-radius: 8px;
 }
 
-.search-input {
-  width: 100%;
-  font-size: 1rem;
-  border: none;
-  background: transparent;
-  color: white;
-  padding: 6px;
-}
+  .search-input {
+    width: 90%;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: white;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.3s ease;
+  }
 
   .search-results-overlay h2 {
     font-size: 1.4rem;
@@ -210,14 +229,20 @@
   }
 
   .search-icon {
-  font-size: 1.2rem;
-  margin-left: 8px;
-  cursor: pointer;
-}
+    font-size: 1.5rem;
+    margin-right: 8px;
+    color: white;
+    cursor: pointer;
+  }
 
   .search-results-row .video-card {
     width: 140px;
     height: 210px;
+  }
+
+
+  .search-wrapper.active .search-input {
+    opacity: 1;
   }
 
     .modal-content,
