@@ -186,16 +186,27 @@ const banners = [
     setInterval(updateBanner, 12000); // Rotate every 12 sec
   });
   
+function toggleSearch() {
+  const wrapper = document.getElementById("searchWrapper");
+  wrapper.classList.toggle("active");
+  document.getElementById("searchInput").focus();
+}
 
+document.addEventListener("DOMContentLoaded", () => {
   const searchWrapper = document.getElementById("searchWrapper");
   const searchInput = document.getElementById("searchInput");
-  const searchIcon = searchWrapper.querySelector(".search-icon");
-  
+  const searchIcon = searchWrapper?.querySelector(".search-icon");
+
+  if (!searchWrapper || !searchInput || !searchIcon) {
+    console.warn("Search bar elements not found.");
+    return;
+  }
+
   searchIcon.addEventListener("click", () => {
     searchWrapper.classList.toggle("active");
     searchInput.focus();
   });
-  
+
   document.addEventListener("click", (e) => {
     if (!searchWrapper.contains(e.target)) {
       searchWrapper.classList.remove("active");
@@ -203,20 +214,22 @@ const banners = [
       document.querySelector(".nav-bar").classList.remove("search-active");
       filterMovies("");
     }
-  });  
-  
+  });
+
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
     const navBar = document.querySelector(".nav-bar");
-  
+
     if (query.trim()) {
       navBar.classList.add("search-active");
     } else {
       navBar.classList.remove("search-active");
     }
-  
+
     filterMovies(query);
   });
+});
+
 
   
   function filterMovies(query) {
@@ -363,10 +376,6 @@ const banners = [
     if (gameContainer.children.length > 0) gameGroup.style.display = "block";
   }
   
-  function toggleSearch() {
-  const wrapper = document.getElementById("searchWrapper");
-  wrapper.classList.toggle("active");
-  document.getElementById("searchInput").focus();
-}
+
 
   

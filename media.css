@@ -102,6 +102,7 @@
     align-items: center;
     padding: 10px;
     background: rgba(0, 0, 0, 0.9);
+    flex-wrap: wrap;
   }
 
 .nav-top {
@@ -129,9 +130,10 @@
   }
 
 .nav-links {
+  display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
   .nav-links button {
@@ -140,13 +142,14 @@
     border-radius: 10px;
   }
 
-  .nav-icons-right {
-    position: absolute;
-    right: 10px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
+.nav-icons-right {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
     .nav-icons-right button {
     background: none;

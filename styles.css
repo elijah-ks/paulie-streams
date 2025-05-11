@@ -744,11 +744,11 @@ body {
     color: red;
   }
   
-  .search-wrapper {
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-  }
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
   
   .search-icon {
     cursor: pointer;
@@ -768,12 +768,11 @@ body {
     color: black;
   }
   
-  .search-wrapper.active .search-input {
-    width: 180px;
-    opacity: 1;
-    margin-right: 12px;
-  }
-  
+.search-wrapper .search-input {
+  width: 180px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
   
   .search-results-overlay h2 {
     color: white;
