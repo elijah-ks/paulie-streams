@@ -188,9 +188,20 @@ const banners = [
   
 function toggleSearch() {
   const wrapper = document.getElementById("searchWrapper");
+  const input = document.getElementById("searchInput");
+  const navBar = document.querySelector(".nav-bar");
+
   wrapper.classList.toggle("active");
-  document.getElementById("searchInput").focus();
+
+  if (wrapper.classList.contains("active")) {
+    input.focus();
+    navBar.classList.add("search-active");
+  } else {
+    input.value = "";
+    navBar.classList.remove("search-active");
+  }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchWrapper = document.getElementById("searchWrapper");
@@ -201,11 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("Search bar elements not found.");
     return;
   }
-
-  searchIcon.addEventListener("click", () => {
-    searchWrapper.classList.toggle("active");
-    searchInput.focus();
-  });
 
   document.addEventListener("click", (e) => {
     if (!searchWrapper.contains(e.target)) {
