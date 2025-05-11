@@ -75,18 +75,25 @@
   }
 
   /* Login */
-  .login-container {
+ .login-container {
     width: 90%;
     padding: 20px;
+    margin-top: 40px;
+  }
+
+  .login-logo {
+    width: 100px;
+    margin-bottom: 10px;
   }
 
   .login-container input,
   .login-container button {
-    font-size: 1.1em;
+    font-size: 1rem;
+    padding: 10px;
   }
 
-  .login-logo {
-    width: 120px;
+  #auth-status {
+    font-size: 0.85rem;
   }
 
   /* Navbar */
@@ -95,27 +102,37 @@
     align-items: center;
     padding: 12px 10px;
     gap: 10px;
+    background: rgba(0, 0, 0, 0.9); /* darker and consistent */
   }
 
   .nav-left {
     justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
   }
 
+  .nav-logo {
+    height: 36px;
+  }
+
   .nav-links {
-    width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
   }
 
   .nav-links button {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   /* Banner */
@@ -195,4 +212,20 @@
     width: 140px;
     height: 210px;
   }
+
+    .modal-content,
+  .terms-modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .modal-content img {
+    width: 100px;
+  }
+
+  .modal-buttons button {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+
 }
