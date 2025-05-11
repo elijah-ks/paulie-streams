@@ -97,12 +97,19 @@
   }
 
   /* Navbar */
-  .nav-bar {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.9);
-  }
+.nav-bar {
+  padding: 10px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
   .nav-left {
     display: flex;
@@ -112,12 +119,11 @@
     position: relative;
   }
 
-  .nav-title {
-    font-size: 1.3rem;
-    margin-left: 10px;
-    flex-grow: 1;
-    text-align: center;
-  }
+.nav-title {
+  font-size: 1.3rem;
+  flex-grow: 1;
+  text-align: center;
+}
 
   .nav-logo {
     height: 36px;
@@ -150,6 +156,15 @@
     color: white;
     cursor: pointer;
   }
+
+
+.nav-icons button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: white;
+  margin-left: 10px;
+}
 
   /* Banner */
   .banner {
@@ -188,28 +203,29 @@
 
   /* Search */
 .search-wrapper {
-  width: 90%;
-  max-width: 300px;
-  margin: 12px auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 6px 10px;
+  justify-content: center;
+  position: relative;
   background: #222;
   border-radius: 8px;
+  padding: 6px 10px;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
-  .search-input {
-    width: 90%;
-    font-size: 1rem;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: none;
-    background: white;
-    color: black;
-    opacity: 0;
-    transition: opacity 0.3s ease, width 0.3s ease;
-  }
+.search-input {
+  width: 0;
+  opacity: 0;
+  border: none;
+  font-size: 1rem;
+  background: white;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+}
 
   .search-results-overlay h2 {
     font-size: 1.4rem;
@@ -229,8 +245,7 @@
   }
 
   .search-icon {
-    font-size: 1.5rem;
-    margin-right: 8px;
+    font-size: 1.3rem;
     color: white;
     cursor: pointer;
   }
@@ -241,9 +256,10 @@
   }
 
 
-  .search-wrapper.active .search-input {
-    opacity: 1;
-  }
+.search-wrapper.active .search-input {
+  width: 100%;
+  opacity: 1;
+}
 
     .modal-content,
   .terms-modal-content {
