@@ -363,5 +363,10 @@ const banners = [
     if (gameContainer.children.length > 0) gameGroup.style.display = "block";
   }
   
-  
+  function toggleSearch() {
+  const wrapper = document.getElementById("searchWrapper");
+  wrapper.classList.toggle("active");
+  document.getElementById("searchInput").focus();
+}
+
   

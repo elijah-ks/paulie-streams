@@ -97,13 +97,12 @@
   }
 
   /* Navbar */
-.nav-bar {
-  padding: 10px;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+  .nav-bar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.9);
+  }
 
 .nav-top {
   display: flex;
@@ -119,22 +118,21 @@
     position: relative;
   }
 
-.nav-title {
-  font-size: 1.3rem;
-  flex-grow: 1;
-  text-align: center;
-}
+  .nav-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.2rem;
+  }
 
   .nav-logo {
     height: 36px;
   }
 
   .nav-links {
+    margin-top: 8px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
-    width: 100%;
+    gap: 16px;
   }
 
   .nav-links button {
@@ -202,30 +200,27 @@
   }
 
   /* Search */
-.search-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: #222;
-  border-radius: 8px;
-  padding: 6px 10px;
-  max-width: 90%;
-  margin: 0 auto;
-}
 
-.search-input {
-  width: 0;
-  opacity: 0;
-  border: none;
-  font-size: 1rem;
-  background: white;
-  color: black;
-  padding: 6px 10px;
-  border-radius: 4px;
-  margin-left: 10px;
-  transition: all 0.3s ease;
-}
+  .search-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: white;
+    color: black;
+    margin-left: 10px;
+  }
 
   .search-results-overlay h2 {
     font-size: 1.4rem;
@@ -245,9 +240,9 @@
   }
 
   .search-icon {
-    font-size: 1.3rem;
-    color: white;
+    font-size: 1.4rem;
     cursor: pointer;
+    color: white;
   }
 
   .search-results-row .video-card {
@@ -256,10 +251,10 @@
   }
 
 
-.search-wrapper.active .search-input {
-  width: 100%;
-  opacity: 1;
-}
+  .search-wrapper.active .search-input {
+    width: 80%;
+    opacity: 1;
+  }
 
     .modal-content,
   .terms-modal-content {
