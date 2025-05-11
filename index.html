@@ -44,28 +44,26 @@
 
 <body>
 
-<header class="nav-bar">
-  <div class="nav-left">
-    <img src="assets/transparent.png" alt="Paulie Streams Logo" class="nav-logo">
-    <span class="nav-title">Paulie Streams</span>
-    
-    <div class="nav-icons-right">
+  <header class="nav-bar">
+    <div class="nav-left">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" class="nav-logo">
+      <span class="nav-title">Paulie Streams</span>
+    </div>
+    <nav class="nav-links">
+      <div class="search-wrapper" id="searchWrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          class="search-input"
+        />
+      </div>
       <button onclick="goToLiked()">❤️</button>
       <button onclick="goToExtras()">🎮</button>
-    </div>
-  </div>
-
-  <div class="search-wrapper" id="searchWrapper">
-    <span class="search-icon">🔍</span>
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search..."
-      class="search-input"
-    />
-  </div>
-</header>
-
+    </nav>
+    
+  </header>
 
     <!-- Loading Screen -->
     <div id="loading-screen">
