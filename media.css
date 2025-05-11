@@ -128,15 +128,16 @@
     height: 36px;
   }
 
-  .nav-links {
-    margin-top: 8px;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-  }
+.nav-links {
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
 
   .nav-links button {
-    font-size: 1.2rem;
+    background: #333;
+    padding: 6px 10px;
+    border-radius: 10px;
   }
 
   .nav-icons-right {
