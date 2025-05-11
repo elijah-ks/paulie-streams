@@ -779,10 +779,7 @@ body {
 .search-wrapper.active .search-input {
   width: 180px;
   opacity: 1;
-  margin-left: 8px;
-  transition: all 0.3s ease;
 }
-
   
   .search-results-overlay h2 {
     color: white;
