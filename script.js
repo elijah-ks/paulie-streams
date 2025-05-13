@@ -78,14 +78,24 @@ function toggleSettingsDropdown() {
 
 function toggleTheme() {
   const body = document.body;
-  const newTheme = body.classList.contains("light-theme") ? "dark" : "light";
+  const isLight = body.classList.contains("light-theme");
 
   body.classList.toggle("light-theme");
 
-  // Save preference in localStorage
+  const newTheme = isLight ? "dark" : "light";
   localStorage.setItem("theme", newTheme);
+
+  updateThemeLabel(); // Update the text
 }
 
+function updateThemeLabel() {
+  const label = document.getElementById("themeToggle");
+  const isLight = document.body.classList.contains("light-theme");
+
+  if (label) {
+    label.innerText = isLight ? "☀️ Theme: Light" : "🌙 Theme: Dark";
+  }
+}
 
 
 function getThumbnailForTitle(title) {
@@ -251,13 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
     filterMovies(query);
   });
 
-    window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") {
     document.body.classList.add("light-theme");
   }
+  updateThemeLabel(); // <-- Update the theme text
 });
-
 
 });
 
