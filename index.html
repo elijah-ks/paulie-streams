@@ -58,10 +58,34 @@
     </div>
     <div class="nav-links">
       <button onclick="goToLiked()">❤️</button>
-      <button onclick="goToExtras()">🎮</button>
+      <button onclick="toggleSettingsDropdown()">🎮</button>
     </div>
   </div>
 </header>
+
+  <!-- Settings Dropdown Modal -->
+<div id="settingsDropdown" class="settings-dropdown hidden">
+  <div class="settings-section">
+    <p class="settings-option">🌓 Theme: Dark</p>
+    <p class="settings-option">🔁 Autoplay: Off</p>
+    <p class="settings-option">👤 Account Options</p>
+    <p class="settings-option">📝 Version: 1.0</p>
+  </div>
+
+  <hr class="settings-divider" />
+
+  <div class="settings-section">
+    <a href="terms.html" class="settings-link">Terms & Conditions</a>
+    <a href="privacy.html" class="settings-link">Privacy Policy</a>
+  </div>
+
+  <hr class="settings-divider" />
+
+  <div class="settings-section">
+    <button class="settings-logout" onclick="logoutUser()">Logout</button>
+  </div>
+</div>
+
 
     <!-- Loading Screen -->
     <div id="loading-screen">

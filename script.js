@@ -71,6 +71,11 @@ firebase.auth().onAuthStateChanged(user => {
 });
 }
 
+function toggleSettingsDropdown() {
+  const dropdown = document.getElementById("settingsDropdown");
+  dropdown.classList.toggle("hidden");
+}
+
 
 function getThumbnailForTitle(title) {
   switch (title.trim().toLowerCase()) {
