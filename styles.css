@@ -1024,3 +1024,22 @@ body.no-scroll {
 .hidden {
   display: none;
 }
+
+
+body.light-theme {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.light-theme .nav-bar,
+body.light-theme .modal,
+body.light-theme .modal-content,
+body.light-theme .site-footer {
+  background-color: #ffffff;
+  color: #111;
+}
+
+body.light-theme .search-results-overlay {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #111;
+}

@@ -76,6 +76,17 @@ function toggleSettingsDropdown() {
   dropdown.classList.toggle("hidden");
 }
 
+function toggleTheme() {
+  const body = document.body;
+  const newTheme = body.classList.contains("light-theme") ? "dark" : "light";
+
+  body.classList.toggle("light-theme");
+
+  // Save preference in localStorage
+  localStorage.setItem("theme", newTheme);
+}
+
+
 
 function getThumbnailForTitle(title) {
   switch (title.trim().toLowerCase()) {
@@ -239,6 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filterMovies(query);
   });
+
+    window.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light-theme");
+  }
+});
+
+
 });
 
 
