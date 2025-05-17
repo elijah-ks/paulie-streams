@@ -15,19 +15,21 @@ firebase.auth().onAuthStateChanged(user => {
   const likeRef = firebase.firestore().collection("likes").doc(docID);
 
   // Get the initial like status
-  likeRef.get().then(doc => {
-    if (doc.exists) {
-      likeBtn.classList.add("liked");
-      likeBtn.innerText = "❤️";
-    } else {
-      likeBtn.classList.remove("liked");
-      likeBtn.innerText = "♡";
-    }
-  });
-
   // Remove previous click listener
   const newLikeBtn = likeBtn.cloneNode(true);
   likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+
+  // Get the initial like status and apply it to the cloned button
+  likeRef.get().then(doc => {
+    if (doc.exists) {
+      newLikeBtn.classList.add("liked");
+      newLikeBtn.innerText = "❤️";
+    } else {
+      newLikeBtn.classList.remove("liked");
+      newLikeBtn.innerText = "♡";
+    }
+  });
+
 
   newLikeBtn.addEventListener("click", () => {
     // Optimistically update the button instantly
