@@ -64,29 +64,43 @@
 </header>
 
   <!-- Settings Dropdown Modal -->
+<!-- Settings Dropdown Modal -->
 <div id="settingsDropdown" class="settings-dropdown hidden">
-  <div class="settings-section">
-    <div class="settings-option" id="themeToggle" onclick="toggleTheme()">🌙 Theme: Dark</div>
-    <p class="settings-option">🔁 Autoplay: Off</p>
-    <p class="settings-option">👤 Account Options</p>
-    <p class="settings-option">📝 Version: 1.0</p>
+  
+  <!-- Main Settings Page -->
+  <div id="settingsMain">
+    <div class="settings-section">
+      <div class="settings-option" id="themeToggle" onclick="toggleTheme()">🌙 Theme: Dark</div>
+      <p class="settings-option">🔁 Autoplay: Off</p>
+      <p class="settings-option" id="openAccountOptions">👤 Account Options</p>
+      <p class="settings-option">📝 Version: 1.0</p>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <a href="terms.html" class="settings-link">Terms & Conditions</a>
+      <a href="privacy.html" class="settings-link">Privacy Policy</a>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <button class="settings-logout" onclick="logoutUser()">Logout</button>
+    </div>
   </div>
 
-
-  <hr class="settings-divider" />
-
-  <div class="settings-section">
-    <a href="terms.html" class="settings-link">Terms & Conditions</a>
-    <a href="privacy.html" class="settings-link">Privacy Policy</a>
+  <!-- Account Options Sub-Page -->
+  <div id="accountOptionsView" class="hidden">
+    <div class="settings-section">
+      <p class="settings-option back-btn" id="backToMain">⬅ Back</p>
+      <p class="settings-option">🔒 Change Password</p>
+      <p class="settings-option">📧 Change Email</p>
+      <p class="settings-option" style="color: red;">🗑️ Delete Account</p>
+    </div>
   </div>
 
-  <hr class="settings-divider" />
-
-  <div class="settings-section">
-    <button class="settings-logout" onclick="logoutUser()">Logout</button>
-  </div>
 </div>
-
 
     <!-- Loading Screen -->
     <div id="loading-screen">

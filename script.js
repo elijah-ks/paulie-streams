@@ -417,6 +417,15 @@ window.addEventListener("DOMContentLoaded", () => {
     if (gameContainer.children.length > 0) gameGroup.style.display = "block";
   }
   
+  document.getElementById("openAccountOptions").addEventListener("click", () => {
+  document.getElementById("settingsMain").classList.add("hidden");
+  document.getElementById("accountOptionsView").classList.remove("hidden");
+});
+
+document.getElementById("backToMain").addEventListener("click", () => {
+  document.getElementById("accountOptionsView").classList.add("hidden");
+  document.getElementById("settingsMain").classList.remove("hidden");
+});
 
 
   

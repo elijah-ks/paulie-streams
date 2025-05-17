@@ -982,6 +982,19 @@ body.no-scroll {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.settings-section.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.back-btn {
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff; /* match your current text color */
+  margin-bottom: 10px;
 }
 
 .settings-option {
