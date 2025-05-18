@@ -434,7 +434,8 @@ function showOnlySettingsModal(modalId) {
     "accountOptionsView",
     "changePasswordModal",
     "changeEmailModal",
-    "deleteAccountModal"
+    "deleteAccountModal",
+    "accountDetailsModal" // ✅ Add this here!
   ];
   modals.forEach(id => {
     const el = document.getElementById(id);
