@@ -94,13 +94,47 @@
   <div id="accountOptionsView" class="hidden">
     <div class="settings-section">
       <p class="settings-option back-btn" id="backToMain">⬅ Back</p>
-      <p class="settings-option">🔒 Change Password</p>
-      <p class="settings-option">📧 Change Email</p>
-      <p class="settings-option" style="color: red;">🗑️ Delete Account</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('changePasswordModal')">🔒 Change Password</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('changeEmailModal')">📧 Change Email</p>
+      <p class="settings-option" style="color: red;" onclick="showOnlySettingsModal('deleteAccountModal')">🗑️ Delete Account</p>
     </div>
   </div>
 
 </div>
+
+<!-- 🔒 Change Password Modal -->
+<div id="changePasswordModal" class="hidden">
+  <div class="settings-section">
+    <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    <h3>Change Password</h3>
+    <input type="password" id="newPasswordInput" placeholder="New Password">
+    <button onclick="submitNewPassword()">Submit</button>
+    <p id="passwordMsg"></p>
+  </div>
+</div>
+
+<!-- 📧 Change Email Modal -->
+<div id="changeEmailModal" class="hidden">
+  <div class="settings-section">
+    <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    <h3>Change Email</h3>
+    <input type="email" id="newEmailInput" placeholder="New Email">
+    <button onclick="submitNewEmail()">Submit</button>
+    <p id="emailMsg"></p>
+  </div>
+</div>
+
+<!-- 🗑️ Delete Account Modal -->
+<div id="deleteAccountModal" class="hidden">
+  <div class="settings-section">
+    <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    <h3>Delete Account</h3>
+    <p>This action is permanent.</p>
+    <button style="color: red;" onclick="submitDeleteAccount()">Delete My Account</button>
+    <p id="deleteMsg"></p>
+  </div>
+</div>
+
 
     <!-- Loading Screen -->
     <div id="loading-screen">

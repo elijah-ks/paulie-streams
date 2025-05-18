@@ -429,5 +429,67 @@ document.getElementById("backToMain").addEventListener("click", () => {
   document.getElementById("settingsMain").classList.remove("hidden");
 });
 
+function showOnlySettingsModal(modalId) {
+  const modals = [
+    "accountOptionsView",
+    "changePasswordModal",
+    "changeEmailModal",
+    "deleteAccountModal"
+  ];
+  modals.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add("hidden");
+  });
+  document.getElementById(modalId).classList.remove("hidden");
+}
 
-  
+function goBackToAccountOptions() {
+  showOnlySettingsModal("accountOptionsView");
+}
+
+function submitNewPassword() {
+  const newPassword = document.getElementById("newPasswordInput").value;
+  const user = firebase.auth().currentUser;
+
+  if (!user) return;
+  if (newPassword.length < 6) {
+    document.getElementById("passwordMsg").innerText = "Password must be at least 6 characters.";
+    return;
+  }
+
+  user.updatePassword(newPassword).then(() => {
+    document.getElementById("passwordMsg").innerText = "Password updated successfully.";
+  }).catch(error => {
+    document.getElementById("passwordMsg").innerText = "Error: " + error.message;
+  });
+}
+
+function submitNewEmail() {
+  const newEmail = document.getElementById("newEmailInput").value;
+  const user = firebase.auth().currentUser;
+
+  if (!user) return;
+  if (!newEmail.includes("@")) {
+    document.getElementById("emailMsg").innerText = "Please enter a valid email.";
+    return;
+  }
+
+  user.updateEmail(newEmail).then(() => {
+    document.getElementById("emailMsg").innerText = "Email updated successfully.";
+  }).catch(error => {
+    document.getElementById("emailMsg").innerText = "Error: " + error.message;
+  });
+}
+
+function submitDeleteAccount() {
+  const user = firebase.auth().currentUser;
+
+  if (!user) return;
+
+  user.delete().then(() => {
+    alert("Your account has been deleted.");
+    window.location.href = "login.html";
+  }).catch(error => {
+    document.getElementById("deleteMsg").innerText = "Error: " + error.message;
+  });
+}
