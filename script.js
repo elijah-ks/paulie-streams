@@ -448,16 +448,20 @@ function goBackToAccountOptions() {
 }
 
 function submitNewPassword() {
+  const oldPassword = document.getElementById("oldPasswordInput").value;
   const newPassword = document.getElementById("newPasswordInput").value;
   const user = firebase.auth().currentUser;
 
-  if (!user) return;
-  if (newPassword.length < 6) {
-    document.getElementById("passwordMsg").innerText = "Password must be at least 6 characters.";
+  if (!user || newPassword.length < 6) {
+    document.getElementById("passwordMsg").innerText = "Invalid input.";
     return;
   }
 
-  user.updatePassword(newPassword).then(() => {
+  const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+
+  user.reauthenticateWithCredential(credential).then(() => {
+    return user.updatePassword(newPassword);
+  }).then(() => {
     document.getElementById("passwordMsg").innerText = "Password updated successfully.";
   }).catch(error => {
     document.getElementById("passwordMsg").innerText = "Error: " + error.message;
@@ -465,16 +469,20 @@ function submitNewPassword() {
 }
 
 function submitNewEmail() {
-  const newEmail = document.getElementById("newEmailInput").value;
   const user = firebase.auth().currentUser;
+  const newEmail = document.getElementById("newEmailInput").value;
+  const password = document.getElementById("currentEmailPassword").value;
 
-  if (!user) return;
-  if (!newEmail.includes("@")) {
-    document.getElementById("emailMsg").innerText = "Please enter a valid email.";
+  if (!user || !newEmail.includes("@")) {
+    document.getElementById("emailMsg").innerText = "Please enter a valid email and password.";
     return;
   }
 
-  user.updateEmail(newEmail).then(() => {
+  const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
+
+  user.reauthenticateWithCredential(credential).then(() => {
+    return user.updateEmail(newEmail);
+  }).then(() => {
     document.getElementById("emailMsg").innerText = "Email updated successfully.";
   }).catch(error => {
     document.getElementById("emailMsg").innerText = "Error: " + error.message;

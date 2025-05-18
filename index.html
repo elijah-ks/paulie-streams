@@ -108,13 +108,16 @@
     <div class="modal-header">
       <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
     </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
     <h3>Change Password</h3>
+    <input type="password" id="oldPasswordInput" placeholder="Current Password" class="settings-input">
     <input type="password" id="newPasswordInput" placeholder="New Password" class="settings-input">
-    <button onclick="submitNewPassword()">Submit</button>
+    <button class="settings-submit-btn" onclick="submitNewPassword()">Submit</button>
     <p id="passwordMsg"></p>
   </div>
 </div>
-
 
 <!-- 📧 Change Email Modal -->
 <div id="changeEmailModal" class="modal hidden">
@@ -122,9 +125,13 @@
     <div class="modal-header">
       <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
     </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
     <h3>Change Email</h3>
+    <input type="password" id="currentEmailPassword" placeholder="Current Password" class="settings-input">
     <input type="email" id="newEmailInput" placeholder="New Email" class="settings-input">
-    <button onclick="submitNewEmail()">Submit</button>
+    <button class="settings-submit-btn" onclick="submitNewEmail()">Submit</button>
     <p id="emailMsg"></p>
   </div>
 </div>
