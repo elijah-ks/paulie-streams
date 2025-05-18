@@ -501,3 +501,10 @@ function submitDeleteAccount() {
     document.getElementById("deleteMsg").innerText = "Error: " + error.message;
   });
 }
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const emailDisplay = document.getElementById("accountEmailDisplay");
+    if (emailDisplay) emailDisplay.innerText = user.email;
+  }
+});

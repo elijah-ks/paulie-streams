@@ -96,7 +96,7 @@
       <p class="settings-option back-btn" id="backToMain">⬅ Back</p>
       <p class="settings-option" onclick="showOnlySettingsModal('changePasswordModal')">🔒 Change Password</p>
       <p class="settings-option" onclick="showOnlySettingsModal('changeEmailModal')">📧 Change Email</p>
-      <p class="settings-option" style="color: red;" onclick="showOnlySettingsModal('deleteAccountModal')">🗑️ Delete Account</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('accountDetailsModal')">📄 Account Details</p>
     </div>
   </div>
 
@@ -135,6 +135,28 @@
     <p id="emailMsg"></p>
   </div>
 </div>
+
+<div id="accountDetailsModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h3>Account Details</h3>
+    <p>Email: <span id="accountEmailDisplay">Loading...</span></p>
+    <p>Account Type: Viewer</p>
+    <p>Created: N/A</p>
+
+    <hr style="width: 80%; margin: 30px auto; border: 1px solid #333;">
+
+    <button style="color: red;" class="settings-submit-btn" onclick="showOnlySettingsModal('deleteAccountModal')">
+      🗑️ Delete My Account
+    </button>
+  </div>
+</div>
+
 
 <!-- 🗑️ Delete Account Modal -->
 <div id="deleteAccountModal" class="hidden">
