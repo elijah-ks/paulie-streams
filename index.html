@@ -103,22 +103,27 @@
 </div>
 
 <!-- 🔒 Change Password Modal -->
-<div id="changePasswordModal" class="hidden">
-  <div class="settings-section">
-    <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+<div id="changePasswordModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    </div>
     <h3>Change Password</h3>
-    <input type="password" id="newPasswordInput" placeholder="New Password">
+    <input type="password" id="newPasswordInput" placeholder="New Password" class="settings-input">
     <button onclick="submitNewPassword()">Submit</button>
     <p id="passwordMsg"></p>
   </div>
 </div>
 
+
 <!-- 📧 Change Email Modal -->
-<div id="changeEmailModal" class="hidden">
-  <div class="settings-section">
-    <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+<div id="changeEmailModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    </div>
     <h3>Change Email</h3>
-    <input type="email" id="newEmailInput" placeholder="New Email">
+    <input type="email" id="newEmailInput" placeholder="New Email" class="settings-input">
     <button onclick="submitNewEmail()">Submit</button>
     <p id="emailMsg"></p>
   </div>
