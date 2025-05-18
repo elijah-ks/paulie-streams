@@ -105,8 +105,8 @@
 <!-- 🔒 Change Password Modal -->
 <div id="changePasswordModal" class="modal hidden">
   <div class="modal-content">
-    <div class="modal-header">
-      <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
     </div>
     <div class="modal-logo-centered">
       <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
@@ -122,14 +122,14 @@
 <!-- 📧 Change Email Modal -->
 <div id="changeEmailModal" class="modal hidden">
   <div class="modal-content">
-    <div class="modal-header">
-      <p class="settings-option back-btn" onclick="goBackToAccountOptions()">⬅ Back</p>
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
     </div>
     <div class="modal-logo-centered">
       <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
     </div>
     <h3>Change Email</h3>
-    <input type="password" id="currentEmailPassword" placeholder="Current Password" class="settings-input">
+    <input type="password" id="currentEmailPassword" placeholder="Current Email" class="settings-input">
     <input type="email" id="newEmailInput" placeholder="New Email" class="settings-input">
     <button class="settings-submit-btn" onclick="submitNewEmail()">Submit</button>
     <p id="emailMsg"></p>

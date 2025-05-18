@@ -1099,3 +1099,19 @@ body.light-theme .search-results-overlay {
   background-color: rgba(255, 255, 255, 0.95);
   color: #111;
 }
+
+.modal-back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.modal-back-btn:hover {
+  text-decoration: underline;
+}
+
