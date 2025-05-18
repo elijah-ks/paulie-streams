@@ -509,3 +509,33 @@ firebase.auth().onAuthStateChanged(user => {
     if (emailDisplay) emailDisplay.innerText = user.email;
   }
 });
+
+function confirmDeleteWithPassword() {
+  const user = firebase.auth().currentUser;
+  const password = document.getElementById("deletePasswordInput").value;
+
+  if (!user || !password) {
+    alert("Please enter your password.");
+    return;
+  }
+
+  const credential = firebase.auth.EmailAuthProvider.credential(
+    user.email,
+    password
+  );
+
+  // Re-authenticate before deletion
+  user.reauthenticateWithCredential(credential)
+    .then(() => {
+      // Now safe to delete
+      return user.delete();
+    })
+    .then(() => {
+      alert("Account deleted successfully.");
+      window.location.href = "login.html"; // or landing page
+    })
+    .catch((error) => {
+      console.error("Delete error:", error);
+      alert("Error deleting account: " + error.message);
+    });
+}
