@@ -159,17 +159,32 @@
 
 
 <!-- 🗑️ Delete Account Modal -->
+<!-- 🗑️ Delete Account Modal -->
 <div id="deleteAccountModal" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header" style="text-align: right;">
       <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
     </div>
-    <h2>Delete Account</h2>
-    <p style="color: white; margin-bottom: 10px;">
+
+    <h2 style="text-align: center; margin-bottom: 10px;">Delete Account</h2>
+    <p style="color: white; text-align: center; margin-bottom: 20px;">
       To permanently delete your account, enter your current password below.
     </p>
-    <input type="password" id="deletePasswordInput" placeholder="Enter your password" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-    <button onclick="confirmDeleteWithPassword()" style="width: 100%; padding: 10px; background-color: red; color: white; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">Delete Account</button>
+
+    <div style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+      <input
+        type="password"
+        id="deletePasswordInput"
+        placeholder="Enter your password"
+        style="padding: 12px; border-radius: 6px; border: none; width: 100%;"
+      >
+      <button
+        onclick="confirmDeleteWithPassword()"
+        style="padding: 12px; background-color: red; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; width: 100%;"
+      >
+        Delete Account
+      </button>
+    </div>
   </div>
 </div>
 
