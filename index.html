@@ -73,7 +73,7 @@
       <div class="settings-option" id="themeToggle" onclick="toggleTheme()">🌙 Theme: Dark</div>
       <p class="settings-option">🔁 Autoplay: Off</p>
       <p class="settings-option" id="openAccountOptions">👤 Account Options</p>
-      <p class="settings-option">📝 Version: 1.0</p>
+      <p class="settings-option" onclick="openVersionModal()">📝 Version: 1.0</p>
     </div>
 
     <hr class="settings-divider" />
@@ -89,6 +89,33 @@
       <button class="settings-logout" onclick="logoutUser()">Logout</button>
     </div>
   </div>
+
+
+  <!-- 📄 Version History Modal -->
+<div id="versionModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToSettings()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h2 style="text-align: center;">Version History</h2>
+    <div style="color: white; margin-top: 20px; padding: 0 20px;">
+      <p>🟢 <strong>Version 1.0 - Initial Launch</strong></p>
+      <ul style="padding-left: 20px;">
+        <li>✅ Added video modals with title, description, and Drive playback</li>
+        <li>❤️ Like button saves liked movies per user</li>
+        <li>📝 Liked Movies page pulls personalized likes</li>
+        <li>🎮 Settings modal and account options (change password, email)</li>
+        <li>📜 Terms & Conditions and Privacy Policy included</li>
+        <li>📱 Started work on mobile styling</li>
+      </ul>
+      <p style="margin-top: 20px;">More updates coming soon...</p>
+    </div>
+  </div>
+</div>
+
 
   <!-- Account Options Sub-Page -->
   <div id="accountOptionsView" class="hidden">
@@ -322,6 +349,16 @@
           window.location.href = "login.html";
         });
       }
+
+        function openVersionModal() {
+    document.getElementById("settingsDropdown").classList.add("hidden");
+    document.getElementById("versionModal").classList.remove("hidden");
+  }
+
+  function goBackToSettings() {
+    document.getElementById("versionModal").classList.add("hidden");
+    document.getElementById("settingsDropdown").classList.remove("hidden");
+  }
     </script>
     
 
