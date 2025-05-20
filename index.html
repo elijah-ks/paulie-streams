@@ -90,33 +90,6 @@
     </div>
   </div>
 
-
-  <!-- 📄 Version History Modal -->
-<div id="versionModal" class="modal hidden">
-  <div class="modal-content">
-    <div class="modal-header" style="text-align: right;">
-      <button class="modal-back-btn" onclick="goBackToSettings()">⬅ Back</button>
-    </div>
-    <div class="modal-logo-centered">
-      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
-    </div>
-    <h2 style="text-align: center;">Version History</h2>
-    <div style="color: white; margin-top: 20px; padding: 0 20px;">
-      <p>🟢 <strong>Version 1.0 - Initial Launch</strong></p>
-      <ul style="padding-left: 20px;">
-        <li>✅ Added video modals with title, description, and Drive playback</li>
-        <li>❤️ Like button saves liked movies per user</li>
-        <li>📝 Liked Movies page pulls personalized likes</li>
-        <li>🎮 Settings modal and account options (change password, email)</li>
-        <li>📜 Terms & Conditions and Privacy Policy included</li>
-        <li>📱 Started work on mobile styling</li>
-      </ul>
-      <p style="margin-top: 20px;">More updates coming soon...</p>
-    </div>
-  </div>
-</div>
-
-
   <!-- Account Options Sub-Page -->
   <div id="accountOptionsView" class="hidden">
     <div class="settings-section">
@@ -128,6 +101,35 @@
   </div>
 
 </div>
+
+<!-- End of Settings Dropdown Modal -->
+</div> <!-- this closes #settingsDropdown -->
+
+<!-- 📄 Version History Modal should go here -->
+<div id="versionModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToSettings()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h2 style="text-align: center;">Version History</h2>
+    <div style="color: white; margin-top: 20px; padding: 0 20px;">
+      <p>🟢 <strong>Version 1.0 - Initial Launch</strong></p>
+      <div style="padding-left: 20px;">
+        <p>✅ Added video modals with title, description, and Drive playback</p>
+        <p>❤️ Like button saves liked movies per user</p>
+        <p>📝 Liked Movies page pulls personalized likes</p>
+        <p>🎮 Settings modal and account options (change password, email)</p>
+        <p>📜 Terms & Conditions and Privacy Policy included</p>
+        <p>📱 Started work on mobile styling</p>
+      </div>
+      <p style="margin-top: 20px;">More updates coming soon...</p>
+    </div>
+  </div>
+</div>
+
 
 <!-- 🔒 Change Password Modal -->
 <div id="changePasswordModal" class="modal hidden">
