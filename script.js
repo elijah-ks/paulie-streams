@@ -256,14 +256,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  document.addEventListener("click", (e) => {
-    if (!searchWrapper.contains(e.target)) {
-      searchWrapper.classList.remove("active");
-      searchInput.value = "";
-      document.querySelector(".nav-bar").classList.remove("search-active");
-      filterMovies("");
-    }
-  });
+document.addEventListener("click", (e) => {
+  const isMobile = window.innerWidth <= 600;
+
+  // Skip this logic on mobile so mobile overlay isn't closed
+  if (isMobile) return;
+
+  if (!searchWrapper.contains(e.target)) {
+    searchWrapper.classList.remove("active");
+    searchInput.value = "";
+    document.querySelector(".nav-bar").classList.remove("search-active");
+    filterMovies("");
+  }
+});
+
 
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
