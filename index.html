@@ -57,7 +57,7 @@
       <input type="text" id="searchInput" placeholder="Search..." class="search-input" />
     </div>
     <div class="nav-links">
-    <button onclick="toggleSearch()">🔍</button>
+    <button class="mobile-search-button" onclick="toggleSearch()">🔍</button>
     <button onclick="goToLiked()">❤️</button>
     <button onclick="toggleSettingsDropdown()">🎮</button>
   </div>
@@ -250,6 +250,12 @@
   </header>
   
   <div id="searchResultsOverlay" class="search-results-overlay hidden">
+
+    <div class="mobile-search-bar">
+      <input type="text" id="mobileSearchInput" placeholder="Search..." />
+    </div>
+
+
     <h2>Search Results</h2>
   
     <div class="search-group">

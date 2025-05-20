@@ -272,6 +272,26 @@
     opacity: 1;
   }
 
+  .mobile-search-button {
+  display: inline-block;
+}
+
+  .mobile-search-bar {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.mobile-search-bar input {
+  width: 90%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+}
+
     .modal-content,
   .terms-modal-content {
     width: 90%;
@@ -301,4 +321,10 @@
 }
 
 
+}
+
+@media (min-width: 601px) {
+  .mobile-search-button {
+    display: none !important;
+  }
 }
