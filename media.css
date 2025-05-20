@@ -327,4 +327,9 @@
   .mobile-search-button {
     display: none !important;
   }
+
+  #mobileSearchWrapper {
+    display: none !important;
+  }
+
 }

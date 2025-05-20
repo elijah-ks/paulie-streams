@@ -278,6 +278,15 @@ document.addEventListener("DOMContentLoaded", () => {
     filterMovies(query);
   });
 
+  const mobileSearch = document.getElementById("mobileSearchInput");
+if (mobileSearch) {
+  mobileSearch.addEventListener("input", () => {
+    const query = mobileSearch.value.toLowerCase();
+    filterMovies(query);
+  });
+}
+
+
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") {
@@ -304,7 +313,8 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
   
-    const allCards = document.querySelectorAll(".video-card, .game-card");
+   const allCards = Array.from(document.querySelectorAll(".video-card, .game-card"))
+    .filter(card => !card.closest("#searchResultsOverlay"));
     const seenTitles = new Set();
     movieContainer.innerHTML = "";
     gameContainer.innerHTML = "";
