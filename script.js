@@ -539,3 +539,7 @@ function confirmDeleteWithPassword() {
       alert("Error deleting account: " + error.message);
     });
 }
+
+function openSettings() {
+  document.getElementById("settingsModal").classList.remove("hidden");
+}

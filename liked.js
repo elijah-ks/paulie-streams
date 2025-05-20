@@ -1,24 +1,29 @@
+let allLikedMovies = [];
+
+
 firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const db = firebase.firestore();
-      db.collection("likes")
-        .where("userID", "==", user.uid)
-        .get()
-        .then(querySnapshot => {
-          const movies = [];
-          querySnapshot.forEach(doc => {
-            movies.push(doc.data());
-          });
-          displayLikedMovies(movies);
-        })
-        .catch(error => {
-          console.error("Error fetching liked movies:", error);
-          displayLikedMovies([]);
+  if (user) {
+    const db = firebase.firestore();
+    db.collection("likes")
+      .where("userID", "==", user.uid)
+      .get()
+      .then(querySnapshot => {
+        const movies = [];
+        querySnapshot.forEach(doc => {
+          movies.push(doc.data());
         });
-    } else {
-      window.location.href = "login.html";
-    }
-  });
+        allLikedMovies = movies; // Save globally
+        displayLikedMovies(movies);
+      })
+      .catch(error => {
+        console.error("Error fetching liked movies:", error);
+        displayLikedMovies([]);
+      });
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
   
   function displayLikedMovies(movies) {
     const container = document.getElementById("likedMovies");
@@ -50,4 +55,12 @@ firebase.auth().onAuthStateChanged(user => {
       container.appendChild(card);
     });
   }
+
+  function searchLikedMovies(query) {
+  const filtered = allLikedMovies.filter(movie =>
+    movie.title.toLowerCase().includes(query.toLowerCase())
+  );
+  displayLikedMovies(filtered);
+}
+
   

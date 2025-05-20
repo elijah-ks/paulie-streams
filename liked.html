@@ -16,12 +16,22 @@
     <nav class="nav-links">
       <button onclick="window.location.href='index.html'">🏠</button>
       <button onclick="goToSearch()">🔍</button>
-      <button onclick="goToExtras()">🎮</button>
+      <button onclick="openSettings()">🎮</button>
     </nav>
   </header>
 
   <main>
     <h1 style="padding: 20px;">❤️ Your Liked Movies</h1>
+    <div style="padding: 0 20px 20px;">
+    <input
+      type="text"
+      id="likedSearchInput"
+      placeholder="Search liked movies..."
+      style="width: 100%; padding: 12px; border-radius: 8px; font-size: 16px;"
+      oninput="searchLikedMovies(this.value)"
+    >
+  </div>
+
     <div id="likedMovies" class="video-grid" style="padding: 0 20px;"></div>
   </main>
 
@@ -57,6 +67,16 @@
     }
   </script>
   
+  <!-- 🎮 Settings Modal -->
+<div id="settingsModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Controls / Settings</h2>
+    <p><button onclick="toggleTheme()" id="themeToggle">🌙 Theme: Dark</button></p>
+    <p><button onclick="window.location.href='account.html'">Account Options</button></p>
+    <p><button onclick="firebase.auth().signOut().then(() => window.location.href='login.html')">Logout</button></p>
+    <p><button onclick="document.getElementById('settingsModal').classList.add('hidden')">Close</button></p>
+  </div>
+</div>
 
 </body>
 </html>
