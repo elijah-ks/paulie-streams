@@ -98,12 +98,12 @@
 
   /* Navbar */
   .nav-bar {
-    flex-direction: column;
-    align-items: center;
-    padding: 16px 12px;
-    gap: 12px;
-    background: rgba(0, 0, 0, 0.95);
-  }
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.95);
+}
 
 
 .nav-top {
@@ -113,12 +113,11 @@
 }
 
   .nav-left {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 
   .nav-right {
     flex-direction: column;
@@ -130,32 +129,33 @@
 
 
   .nav-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: white;
-    white-space: nowrap;
-  }
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
 
   .nav-logo {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
-  }
+  height: 36px;
+  width: 36px;
+}
 
   .nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
 
   .nav-links button {
-    font-size: 1.4rem;
-    padding: 8px 14px;
-    border-radius: 10px;
-    background: #333;
-    border: none;
-    color: white;
-  }
+  background: #333;
+  color: white;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
 
 .nav-icons-right {
   position: absolute;
@@ -221,10 +221,9 @@
   /* Search */
 
   .search-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    display: none !important;
   }
+
 
   .search-input {
     width: 0;

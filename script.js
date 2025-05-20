@@ -215,18 +215,30 @@ const banners = [
   });
   
 function toggleSearch() {
-  const wrapper = document.getElementById("searchWrapper");
-  const input = document.getElementById("searchInput");
-  const navBar = document.querySelector(".nav-bar");
+  const isMobile = window.innerWidth <= 600;
 
-  wrapper.classList.toggle("active");
-
-  if (wrapper.classList.contains("active")) {
-    input.focus();
-    navBar.classList.add("search-active");
+  if (isMobile) {
+    // On mobile, show the search overlay modal directly
+    const overlay = document.getElementById("searchResultsOverlay");
+    overlay.classList.remove("hidden");
+    setTimeout(() => overlay.classList.add("visible"), 10);
+    document.body.classList.add("no-scroll");
   } else {
-    input.value = "";
-    navBar.classList.remove("search-active");
+    // On desktop, expand the search bar
+    const wrapper = document.getElementById("searchWrapper");
+    const input = document.getElementById("searchInput");
+    const navBar = document.querySelector(".nav-bar");
+
+    wrapper.classList.toggle("active");
+
+    if (wrapper.classList.contains("active")) {
+      input.focus();
+      navBar.classList.add("search-active");
+    } else {
+      input.value = "";
+      navBar.classList.remove("search-active");
+      filterMovies("");
+    }
   }
 }
 
