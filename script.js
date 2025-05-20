@@ -331,11 +331,17 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   
     // ✅ Show/hide each section based on results
-    document.querySelector(".search-group:nth-of-type(1)").style.display =
-      movieContainer.children.length ? "block" : "none";
-  
-    document.querySelector(".search-group:nth-of-type(2)").style.display =
-      gameContainer.children.length ? "block" : "none";
+    const movieGroup = document.querySelector(".search-group:nth-of-type(1)");
+    const gameGroup = document.querySelector(".search-group:nth-of-type(2)");
+
+    if (movieGroup) {
+      movieGroup.style.display = movieContainer.children.length ? "block" : "none";
+    }
+
+    if (gameGroup) {
+      gameGroup.style.display = gameContainer.children.length ? "block" : "none";
+    }
+
   
     // ✅ Fade in the search overlay
     overlay.classList.remove("hidden");
