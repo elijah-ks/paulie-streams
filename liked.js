@@ -56,11 +56,53 @@ firebase.auth().onAuthStateChanged(user => {
     });
   }
 
-  function searchLikedMovies(query) {
+  function filterLikedMovies(query) {
   const filtered = allLikedMovies.filter(movie =>
     movie.title.toLowerCase().includes(query.toLowerCase())
   );
   displayLikedMovies(filtered);
 }
+
+function toggleSearch() {
+  const wrapper = document.getElementById("searchWrapper");
+  const input = document.getElementById("searchInput");
+  const navBar = document.querySelector(".nav-bar");
+
+  wrapper.classList.toggle("active");
+
+  if (wrapper.classList.contains("active")) {
+    input.focus();
+    navBar.classList.add("search-active");
+  } else {
+    input.value = "";
+    navBar.classList.remove("search-active");
+    displayLikedMovies(allLikedMovies); // Reset view
+  }
+}
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById("searchWrapper");
+    const input = document.getElementById("searchInput");
+
+    input.addEventListener("input", () => {
+      const query = input.value.toLowerCase();
+      if (query.trim()) {
+        document.querySelector(".nav-bar").classList.add("search-active");
+      } else {
+        document.querySelector(".nav-bar").classList.remove("search-active");
+      }
+      filterLikedMovies(query);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!wrapper.contains(e.target)) {
+        wrapper.classList.remove("active");
+        input.value = "";
+        document.querySelector(".nav-bar").classList.remove("search-active");
+        displayLikedMovies(allLikedMovies); // Reset
+      }
+    });
+  });
+
 
   

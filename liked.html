@@ -13,12 +13,145 @@
       <img src="assets/transparent.png" alt="Paulie Streams Logo" class="nav-logo">
       <span class="nav-title">Paulie Streams</span>
     </div>
-    <nav class="nav-links">
-      <button onclick="window.location.href='index.html'">🏠</button>
-      <button onclick="goToSearch()">🔍</button>
-      <button onclick="openSettings()">🎮</button>
-    </nav>
+    <div class="nav-right">
+    <div class="search-wrapper" id="searchWrapper">
+      <span class="search-icon" onclick="toggleSearch()">🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search liked movies..."
+        class="search-input"
+      />
+    </div>
+  <div class="nav-links">
+    <button onclick="window.location.href='index.html'">🏠</button>
+    <button onclick="toggleSettingsDropdown()">🎮</button>
+  </div>
+</div>
+
   </header>
+
+  <!-- Settings Dropdown Modal -->
+<div id="settingsDropdown" class="settings-dropdown hidden">
+  
+  <!-- Main Settings Page -->
+  <div id="settingsMain">
+    <div class="settings-section">
+      <div class="settings-option" id="themeToggle" onclick="toggleTheme()">🌙 Theme: Dark</div>
+      <p class="settings-option">🔁 Autoplay: Off</p>
+      <p class="settings-option" id="openAccountOptions">👤 Account Options</p>
+      <p class="settings-option">📝 Version: 1.0</p>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <a href="terms.html" class="settings-link">Terms & Conditions</a>
+      <a href="privacy.html" class="settings-link">Privacy Policy</a>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <button class="settings-logout" onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Account Options Sub-Page -->
+  <div id="accountOptionsView" class="hidden">
+    <div class="settings-section">
+      <p class="settings-option back-btn" id="backToMain">⬅ Back</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('changePasswordModal')">🔒 Change Password</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('changeEmailModal')">📧 Change Email</p>
+      <p class="settings-option" onclick="showOnlySettingsModal('accountDetailsModal')">📄 Account Details</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 🔒 Change Password Modal -->
+<div id="changePasswordModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h3>Change Password</h3>
+    <input type="password" id="oldPasswordInput" placeholder="Current Password" class="settings-input">
+    <input type="password" id="newPasswordInput" placeholder="New Password" class="settings-input">
+    <button class="settings-submit-btn" onclick="submitNewPassword()">Submit</button>
+    <p id="passwordMsg"></p>
+  </div>
+</div>
+
+<!-- 📧 Change Email Modal -->
+<div id="changeEmailModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h3>Change Email</h3>
+    <input type="password" id="currentEmailPassword" placeholder="Current Email" class="settings-input">
+    <input type="email" id="newEmailInput" placeholder="New Email" class="settings-input">
+    <button class="settings-submit-btn" onclick="submitNewEmail()">Submit</button>
+    <p id="emailMsg"></p>
+  </div>
+</div>
+
+<div id="accountDetailsModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header" style="width: 100%; text-align: right;">
+      <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
+    </div>
+    <div class="modal-logo-centered">
+      <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 120px;">
+    </div>
+    <h3>Account Details</h3>
+    <p>Email: <span id="accountEmailDisplay">Loading...</span></p>
+    <p>Account Type: Viewer</p>
+    <p>Created: N/A</p>
+
+    <hr style="width: 80%; margin: 30px auto; border: 1px solid #333;">
+
+    <button style="color: red;" class="settings-submit-btn" onclick="showOnlySettingsModal('deleteAccountModal')">
+      🗑️ Delete My Account
+    </button>
+  </div>
+</div>
+
+<!-- 🗑️ Delete Account Modal -->
+  <div id="deleteAccountModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: right;">
+        <button class="modal-back-btn" onclick="goBackToAccountOptions()">⬅ Back</button>
+      </div>
+
+      <h2 style="text-align: center; margin-bottom: 10px;">Delete Account</h2>
+      <p style="color: white; text-align: center; margin-bottom: 20px;">
+        To permanently delete your account, enter your current password below.
+      </p>
+
+      <div style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+        <input
+          type="password"
+          id="deletePasswordInput"
+          placeholder="Enter your password"
+          style="padding: 12px; border-radius: 6px; border: none; width: 100%;"
+        >
+        <button
+          onclick="confirmDeleteWithPassword()"
+          style="padding: 12px; background-color: red; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; width: 100%;"
+        >
+          Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
 
   <main>
     <h1 style="padding: 20px;">❤️ Your Liked Movies</h1>
