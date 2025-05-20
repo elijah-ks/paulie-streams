@@ -116,7 +116,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px; /* ← add this if not already present */
 }
 
   .nav-right {
@@ -138,14 +138,16 @@
 
   .nav-logo {
   height: 36px;
-  width: 36px;
+  width: auto;
+  object-fit: contain;
 }
+
 
   .nav-links {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 14px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
   .nav-links button {
