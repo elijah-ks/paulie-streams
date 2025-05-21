@@ -796,23 +796,27 @@ body {
   
 /* 🔍 Overlay Search Results */
 .search-results-overlay {
-  position: absolute; /* ✅ below the navbar, not covering it */
-  top: 100%;           /* right below the nav bar */
+  position: fixed;
+  top: 60px; /* align below nav bar */
   left: 0;
   width: 100%;
-  max-height: calc(100vh - 70px); /* ensures it doesn't go off-screen */
-  overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.9); /* clean dark overlay */
-  z-index: 999; /* below nav (1000) but above rest */
-  padding: 20px;
-  display: none; /* hidden by default */
+  height: calc(100% - 60px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  padding: 20px 12px 60px;
+  display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease-in-out;
-  pointer-events: auto;
 }
 
+/* When active */
 .search-results-overlay.visible {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 
