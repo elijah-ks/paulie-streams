@@ -241,16 +241,16 @@
     margin-left: 10px;
   }
 
-  .search-results-overlay {
+.search-results-overlay {
   position: fixed;
-  top: 100px; /* Give it enough space for the mobile nav */
+  top: 100px; /* Allows for navbar space */
   left: 0;
-  width: 100vw;
-  height: calc(100dvh - 100px); /* subtract space taken by navbar */
+  width: 100%;
+  height: calc(100dvh - 100px); /* Full height minus nav */
   background-color: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(8px);
-  z-index: 999; /* lower than nav if nav has 1000+ */
-  padding: 20px 16px 60px 16px; /* bottom padding for safe zone */
+  z-index: 999;
+  padding: 20px 16px 80px 16px; /* extra bottom room for browser bars */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -259,6 +259,7 @@
   transition: opacity 0.2s ease-in-out;
   pointer-events: none;
 }
+
 
 
 .search-results-overlay.visible {
@@ -307,14 +308,15 @@
   display: inline-block;
 }
 
-    .mobile-search-bar {
-    width: 100vw; /* full width of viewport */
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.9);
-    position: relative;
-    z-index: 1001; /* higher than nav */
-  }
+.mobile-search-bar {
+  width: 100%;
+  padding: 0 16px 16px 16px; /* horizontal padding for space, bottom padding for gap */
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: relative;
+  z-index: 1001;
+}
+
 
 .mobile-search-bar input {
   width: 90%;
@@ -325,18 +327,19 @@
 }
 
 /* Make mobile search input visible and styled */
-  #mobileSearchInput {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 14px;
-    font-size: 1rem;
-    border: 2px solid #555;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    display: block;
-  }
+#mobileSearchInput {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: block;
+  box-sizing: border-box;
+}
+
 
 #searchInput {
   display: none !important;
