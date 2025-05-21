@@ -219,20 +219,33 @@ function toggleSearch() {
   const searchWrapper = document.getElementById("searchWrapper");
   const input = document.getElementById("searchInput");
   const navBar = document.querySelector(".nav-bar");
+  const overlay = document.getElementById("searchResultsOverlay");
 
   if (isMobile) {
-    // Mobile: open overlay only
-    const overlay = document.getElementById("searchResultsOverlay");
-    overlay.classList.remove("hidden");
-    setTimeout(() => overlay.classList.add("visible"), 10);
-    document.body.classList.add("no-scroll");
+    const isVisible = overlay.classList.contains("visible");
 
-    const newSearchInput = document.getElementById("mobileSearchInput");
-    if (newSearchInput) newSearchInput.focus();
+    if (isVisible) {
+      // Close mobile overlay
+      overlay.classList.remove("visible");
+      setTimeout(() => overlay.classList.add("hidden"), 200);
+      document.body.classList.remove("no-scroll");
+      filterMovies(""); // Clear results
+    } else {
+      // Open mobile overlay
+      overlay.classList.remove("hidden");
+      setTimeout(() => overlay.classList.add("visible"), 10);
+      document.body.classList.add("no-scroll");
+
+      const newSearchInput = document.getElementById("mobileSearchInput");
+      if (newSearchInput) {
+        newSearchInput.value = "";
+        newSearchInput.focus();
+      }
+    }
     return;
   }
 
-  // Desktop: toggle search bar
+  // Desktop behavior
   searchWrapper.classList.toggle("active");
 
   if (searchWrapper.classList.contains("active")) {
@@ -244,7 +257,6 @@ function toggleSearch() {
     filterMovies("");
   }
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchWrapper = document.getElementById("searchWrapper");

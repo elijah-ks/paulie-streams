@@ -280,13 +280,14 @@
   display: inline-block;
 }
 
-  .mobile-search-bar {
-  width: 100%;
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(0,0,0,0.8);
-}
+    .mobile-search-bar {
+    width: 100vw; /* full width of viewport */
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: relative;
+    z-index: 1001; /* higher than nav */
+  }
 
 .mobile-search-bar input {
   width: 90%;
@@ -297,19 +298,18 @@
 }
 
 /* Make mobile search input visible and styled */
-#mobileSearchInput,
-.mobile-search-input {
-  display: block;
-  width: 90%;
-  margin: 12px auto;
-  padding: 12px 14px;
-  font-size: 1.05rem;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: white;   /* ✅ Light background */
-  color: black;              /* ✅ Dark text for contrast */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
+  #mobileSearchInput {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: block;
+  }
 
 #searchInput {
   display: none !important;
