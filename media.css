@@ -292,6 +292,25 @@
   border: none;
 }
 
+/* Make mobile search input visible and styled */
+#mobileSearchInput,
+.mobile-search-input {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: white;
+  color: black;
+}
+
+#searchInput {
+  display: none !important;
+}
+
+
     .modal-content,
   .terms-modal-content {
     width: 90%;

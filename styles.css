@@ -1115,3 +1115,6 @@ body.light-theme .search-results-overlay {
   text-decoration: underline;
 }
 
+#mobileSearchInput {
+  display: none;
+}
