@@ -216,36 +216,36 @@ const banners = [
   
 function toggleSearch() {
   const isMobile = window.innerWidth <= 600;
-  const searchWrapper = document.getElementById("searchWrapper");
-  const input = document.getElementById("searchInput");
-  const navBar = document.querySelector(".nav-bar");
   const overlay = document.getElementById("searchResultsOverlay");
+  const navBar = document.querySelector(".nav-bar");
 
   if (isMobile) {
+    // Toggle mobile overlay
     const isVisible = overlay.classList.contains("visible");
 
     if (isVisible) {
-      // Close mobile overlay
+      // Hide overlay
       overlay.classList.remove("visible");
       setTimeout(() => overlay.classList.add("hidden"), 200);
       document.body.classList.remove("no-scroll");
-      filterMovies(""); // Clear results
     } else {
-      // Open mobile overlay
+      // Show overlay
       overlay.classList.remove("hidden");
       setTimeout(() => overlay.classList.add("visible"), 10);
       document.body.classList.add("no-scroll");
 
       const newSearchInput = document.getElementById("mobileSearchInput");
-      if (newSearchInput) {
-        newSearchInput.value = "";
-        newSearchInput.focus();
-      }
+      if (newSearchInput) newSearchInput.focus();
     }
     return;
   }
 
-  // Desktop behavior
+  // Desktop logic
+  const searchWrapper = document.getElementById("searchWrapper");
+  const input = document.getElementById("searchInput");
+
+  if (!searchWrapper || !input) return;
+
   searchWrapper.classList.toggle("active");
 
   if (searchWrapper.classList.contains("active")) {
@@ -257,6 +257,7 @@ function toggleSearch() {
     filterMovies("");
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchWrapper = document.getElementById("searchWrapper");
