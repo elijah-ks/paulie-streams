@@ -241,9 +241,28 @@
   }
 
   .search-results-overlay {
-  top: 56px; /* Adjust if your mobile nav is a different height */
-  height: calc(100dvh - 56px); /* Fit below navbar without overlap */
-  padding-top: 10px; /* Optional: add space before content */
+  position: fixed;
+  top: 56px; /* Height of the navbar */
+  left: 0;
+  width: 100vw;
+  height: calc(100dvh - 56px); /* Viewport height minus navbar */
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+
+.search-results-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 
