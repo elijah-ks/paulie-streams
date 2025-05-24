@@ -317,15 +317,6 @@
   z-index: 1001;
 }
 
-
-.mobile-search-bar input {
-  width: 90%;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: none;
-}
-
 /* Make mobile search input visible and styled */
 #mobileSearchInput {
   width: 100%;
@@ -337,7 +328,7 @@
   color: black;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   display: block;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Already good */
 }
 
 
