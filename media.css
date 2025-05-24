@@ -314,6 +314,9 @@
   justify-content: center;
   padding: 0;
   box-sizing: border-box;
+
+  position: relative;  /* required for z-index to take effect */
+  z-index: 1001;       /* ensure it's above the background or content */
 }
 
 /* Make mobile search input visible and styled */
