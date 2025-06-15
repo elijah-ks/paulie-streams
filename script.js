@@ -323,6 +323,7 @@ function filterMovies(query) {
   const movieContainer = document.getElementById("searchResultsMovies");
   const gameContainer = document.getElementById("searchResultsGames");
 
+  // If query is empty, clear everything and hide the overlay
   if (!query.trim()) {
     overlay.classList.remove("visible");
     setTimeout(() => overlay.classList.add("hidden"), 250);
@@ -340,15 +341,14 @@ function filterMovies(query) {
   gameContainer.innerHTML = "";
 
   allCards.forEach(card => {
-    // Try to get title from dataset, fallback to <p> tag
-    let title = card.dataset.title?.toLowerCase() || card.querySelector("p")?.innerText?.toLowerCase();
-    if (!title) return;
+    // Use data-title if available, otherwise fallback to text inside <p>
+    const rawTitle = card.dataset.title || card.querySelector("p")?.innerText || "";
+    const title = rawTitle.trim().toLowerCase();
+    const normalizedQuery = query.trim().toLowerCase();
 
-    if (title.includes(query.toLowerCase()) && !seenTitles.has(title)) {
+    if (title.includes(normalizedQuery) && !seenTitles.has(title)) {
       seenTitles.add(title);
       const clone = card.cloneNode(true);
-
-      // Add the same click behavior
       clone.addEventListener("click", () => card.click());
 
       if (card.classList.contains("game-card") || card.classList.contains("hidden-search-clone")) {
@@ -363,6 +363,7 @@ function filterMovies(query) {
     movieContainer.innerHTML = "<p style='color: white;'>No matches found.</p>";
   }
 
+  // Toggle display of category headers based on results
   const movieGroup = document.querySelector(".search-group:nth-of-type(1)");
   const gameGroup = document.querySelector(".search-group:nth-of-type(2)");
 
