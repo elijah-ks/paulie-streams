@@ -420,23 +420,32 @@ function filterMovies(query) {
     injectGameSearchClones();
   });
   
-  function injectGameSearchClones() {
-    const searchArea = document.querySelector(".video-grid"); // Or wherever video cards live
-    const games = document.querySelectorAll(".game-card");
-  
-    games.forEach(card => {
-      const title = card.dataset.title?.toLowerCase() || card.querySelector("p")?.innerText?.toLowerCase();
-      const image = card.querySelector("img").src;
-      const link = card.href;
-  
-      const clone = document.createElement("div");
-      clone.className = "video-card hidden-search-clone";
-      clone.onclick = () => window.location.href = link;
-      clone.innerHTML = `<img src="${image}" alt="${title}"><p>${title}</p>`;
-  
-      searchArea?.appendChild(clone);
-    });
-  }
+function injectGameSearchClones() {
+  const searchArea = document.querySelector(".video-grid"); // Or wherever your movie/game cards live
+  const games = document.querySelectorAll(".game-card");
+
+  games.forEach(card => {
+    const title = card.dataset.title || card.querySelector("p")?.innerText || "Untitled";
+    const image = card.querySelector("img").src;
+    const link = card.href;
+
+    const clone = document.createElement("div");
+    clone.className = "video-card hidden-search-clone";
+
+    // ✅ Add the proper title for search indexing
+    clone.setAttribute("data-title", title);
+    
+    // ✅ Display the proper title with original casing
+    clone.innerHTML = `<img src="${image}" alt="${title}"><p>${title}</p>`;
+
+    // ✅ Add click behavior
+    clone.onclick = () => window.location.href = link;
+
+    // ✅ Append to grid
+    searchArea?.appendChild(clone);
+  });
+}
+
   
   // 🧠 Run after page loads
   window.addEventListener("load", () => {
