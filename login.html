@@ -87,7 +87,7 @@
   pendingPassword = document.getElementById('password').value;
 
   if (!pendingEmail || !pendingPassword) {
-    alert("Please enter email and password.");
+    alert("Please enter email and password and then click Register.");
     return;
   }
 
@@ -134,6 +134,22 @@
   document.getElementById("declineTerms").addEventListener("click", () => {
     document.getElementById("termsModal").style.display = "none";
     document.getElementById('auth-status').textContent = "Registration cancelled.";
+  });
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.querySelector("button[onclick='login()']");
+
+    // Attach keydown listener to both inputs
+    [emailInput, passwordInput].forEach(input => {
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          loginBtn.click(); // Simulate login button click
+        }
+      });
+    });
   });
 </script>
 
