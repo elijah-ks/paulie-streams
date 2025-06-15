@@ -318,65 +318,66 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
   
-  function filterMovies(query) {
-    const overlay = document.getElementById("searchResultsOverlay");
-    const movieContainer = document.getElementById("searchResultsMovies");
-    const gameContainer = document.getElementById("searchResultsGames");
-  
-    if (!query) {
-      overlay.classList.remove("visible");
-      setTimeout(() => overlay.classList.add("hidden"), 250); // match CSS fade time
-      document.body.classList.remove("no-scroll");
-      movieContainer.innerHTML = "";
-      gameContainer.innerHTML = "";
-      return;
-    }
-  
-   const allCards = Array.from(document.querySelectorAll(".video-card, .game-card"))
-    .filter(card => !card.closest("#searchResultsOverlay"));
-    const seenTitles = new Set();
+function filterMovies(query) {
+  const overlay = document.getElementById("searchResultsOverlay");
+  const movieContainer = document.getElementById("searchResultsMovies");
+  const gameContainer = document.getElementById("searchResultsGames");
+
+  if (!query.trim()) {
+    overlay.classList.remove("visible");
+    setTimeout(() => overlay.classList.add("hidden"), 250);
+    document.body.classList.remove("no-scroll");
     movieContainer.innerHTML = "";
     gameContainer.innerHTML = "";
-  
-    allCards.forEach(card => {
-      const titleElement = card.querySelector("p");
-      if (!titleElement) return;
-  
-      const title = titleElement.innerText.toLowerCase();
-      if (title.includes(query) && !seenTitles.has(title)) {
-        seenTitles.add(title);
-        const clone = card.cloneNode(true);
-  
-        if (card.classList.contains("game-card") || card.classList.contains("hidden-search-clone")) {
-          gameContainer.appendChild(clone);
-        } else {
-          movieContainer.appendChild(clone);
-        }
-      }
-    });
-  
-    if (!movieContainer.children.length && !gameContainer.children.length) {
-      movieContainer.innerHTML = "<p style='color: white;'>No matches found.</p>";
-    }
-  
-    // ✅ Show/hide each section based on results
-    const movieGroup = document.querySelector(".search-group:nth-of-type(1)");
-    const gameGroup = document.querySelector(".search-group:nth-of-type(2)");
-
-    if (movieGroup) {
-      movieGroup.style.display = movieContainer.children.length ? "block" : "none";
-    }
-
-    if (gameGroup) {
-      gameGroup.style.display = gameContainer.children.length ? "block" : "none";
-    }
-
-  
-    // ✅ Fade in the search overlay
-    overlay.classList.remove("hidden");
-    setTimeout(() => overlay.classList.add("visible"), 10);
-    document.body.classList.add("no-scroll");
+    return;
   }
+
+  const allCards = Array.from(document.querySelectorAll(".video-card, .game-card"))
+    .filter(card => !card.closest("#searchResultsOverlay"));
+
+  const seenTitles = new Set();
+  movieContainer.innerHTML = "";
+  gameContainer.innerHTML = "";
+
+  allCards.forEach(card => {
+    // Try to get title from dataset, fallback to <p> tag
+    let title = card.dataset.title?.toLowerCase() || card.querySelector("p")?.innerText?.toLowerCase();
+    if (!title) return;
+
+    if (title.includes(query.toLowerCase()) && !seenTitles.has(title)) {
+      seenTitles.add(title);
+      const clone = card.cloneNode(true);
+
+      // Add the same click behavior
+      clone.addEventListener("click", () => card.click());
+
+      if (card.classList.contains("game-card") || card.classList.contains("hidden-search-clone")) {
+        gameContainer.appendChild(clone);
+      } else {
+        movieContainer.appendChild(clone);
+      }
+    }
+  });
+
+  if (!movieContainer.children.length && !gameContainer.children.length) {
+    movieContainer.innerHTML = "<p style='color: white;'>No matches found.</p>";
+  }
+
+  const movieGroup = document.querySelector(".search-group:nth-of-type(1)");
+  const gameGroup = document.querySelector(".search-group:nth-of-type(2)");
+
+  if (movieGroup) {
+    movieGroup.style.display = movieContainer.children.length ? "block" : "none";
+  }
+
+  if (gameGroup) {
+    gameGroup.style.display = gameContainer.children.length ? "block" : "none";
+  }
+
+  overlay.classList.remove("hidden");
+  setTimeout(() => overlay.classList.add("visible"), 10);
+  document.body.classList.add("no-scroll");
+}
   
   
   function goToLiked() {
