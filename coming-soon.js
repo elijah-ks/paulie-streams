@@ -8,16 +8,19 @@ function handleMatrixAttack2() {
   const videoURL = "https://drive.google.com/file/d/1O3bBy9Yi5-69pitWo8_dW-Cb7nDUEdXR/preview";
 
   if (now < matrixAttack2ReleaseDate) {
-    const countdownModal = `
-      <h2>Matrix Attack 2</h2>
+    // ⏳ Locked: show countdown and access prompt
+    document.getElementById("modalTitle").innerText = "Matrix Attack 2";
+    document.getElementById("modalDescription").innerHTML = `
       <p>This movie unlocks on July 27, 2025 @ 12:00 AM ET</p>
       <p id="countdownTimer"></p>
       <button onclick="showCodePrompt('${videoURL}')">Enter Access Code</button>
     `;
-    document.getElementById("modalContent").innerHTML = countdownModal;
+    document.getElementById("modalVideo").src = ""; // clear video
     document.getElementById("videoModal").classList.remove("hidden");
+
     updateCountdown(matrixAttack2ReleaseDate);
   } else {
+    // 🔓 Already released: show video
     showVideo(
       "Matrix Attack 2",
       "After being captured by President Eli, the Sabado Brothers attempt their escape...",
