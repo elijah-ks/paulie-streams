@@ -1166,10 +1166,14 @@ body.light-theme .search-results-overlay {
 .premiere-cover {
   width: 100%;
   max-width: 320px;
+  height: auto;
+  max-height: 45vh; /* 🧠 This scales the image based on screen height */
   border-radius: 12px;
   margin: 0 auto 20px auto;
   display: block;
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
+  object-fit: contain;
 }
+
 
 /* Delete after July 27 ^ */
