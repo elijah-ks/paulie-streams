@@ -1169,10 +1169,12 @@ body.light-theme .search-results-overlay {
   height: auto;
   max-height: 45vh;
   border-radius: 12px;
-  display: block;
   margin: 0 auto 20px auto;
+  display: block;
   object-fit: contain;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* 🔴 Red glow */
+
+  /* 💥 Tight red glow that hugs the image */
+  box-shadow: 0 0 18px 3px rgba(255, 0, 0, 0.35);
 }
 
 
