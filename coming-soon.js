@@ -1,6 +1,6 @@
 /// NOTE!!!! Delete after July 27TH!
 
-const matrixAttack2ReleaseDate = new Date("2025-07-27T00:00:00-04:00");
+const matrixAttack2ReleaseDate = new Date("2025-06-16T23:17:00-04:00");
 const earlyAccessCode = "PAULIEEARLYACCESS";
 
 function handleMatrixAttack2() {
