@@ -1123,6 +1123,8 @@ body.light-theme .search-results-overlay {
   display: none;
 }
 
+/* Delete After July 27 */
+
 #matrixModal .matrix-modal-content {
   max-width: 520px;
   margin: 80px auto;
@@ -1160,3 +1162,14 @@ body.light-theme .search-results-overlay {
   color: #aaa;
   margin-top: 10px;
 }
+
+.premiere-cover {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  margin: 0 auto 20px auto;
+  display: block;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
+}
+
+/* Delete after July 27 ^ */

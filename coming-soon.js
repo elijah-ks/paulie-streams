@@ -9,6 +9,7 @@ function handleMatrixAttack2() {
     // ⏳ Show countdown modal
     document.getElementById("matrixModalInner").innerHTML = `
       <div class="premiere-container">
+        <img src="assets/matrix-attack2.jpg" alt="Matrix Attack 2 Cover" class="premiere-cover">
         <p class="premiere-heading">🎬 PREMIERES IN…</p>
         <p id="countdownTimer" class="digital-timer"></p>
         <button onclick="showCodePrompt('${videoURL}')">🔓 Enter Access Code</button>
