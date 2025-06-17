@@ -1,6 +1,6 @@
 /// NOTE!!!! Delete after July 27TH!
 
-const matrixAttack2ReleaseDate = new Date("2025-06-16T23:17:00-04:00");
+const matrixAttack2ReleaseDate = new Date("2025-07-27T00:00:00-04:00");
 const earlyAccessCode = "PAULIEEARLYACCESS";
 
 function handleMatrixAttack2() {
@@ -21,11 +21,12 @@ function handleMatrixAttack2() {
     updateCountdown(matrixAttack2ReleaseDate);
   } else {
     // 🔓 Already released: show video
-    showVideo(
-      "Matrix Attack 2",
-      "After being captured by President Eli, the Sabado Brothers attempt their escape...",
-      videoURL
+    openModal(
+    "Matrix Attack 2",
+    "After being captured by President Eli, the Sabado Brothers attempt their escape...",
+     videoURL
     );
+
   }
 }
 
@@ -50,8 +51,13 @@ function updateCountdown(releaseDate) {
 function showCodePrompt(videoURL) {
   const code = prompt("Enter the early access code:");
   if (code === earlyAccessCode) {
-    showVideo("Matrix Attack 2 (Early Access)", "You're in!", videoURL);
+    openModal(
+      "Matrix Attack 2",
+      "After being captured by President Eli, the Sabado Brothers attempt their escape...",
+      videoURL
+    );
   } else {
     alert("Incorrect code.");
   }
 }
+
