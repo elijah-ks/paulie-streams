@@ -1166,15 +1166,15 @@ body.light-theme .search-results-overlay {
 .premiere-cover {
   width: 100%;
   max-width: 320px;
+  aspect-ratio: 2 / 3;
   height: auto;
-  max-height: 45vh;
   border-radius: 12px;
   margin: 0 auto 20px auto;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 
-  /* 💥 Tight red glow that hugs the image */
-  box-shadow: 0 0 18px 3px rgba(255, 0, 0, 0.35);
+  /* 🔥 Responsive red glow that always matches the image edges */
+  box-shadow: 0 0 18px 4px rgba(255, 0, 0, 0.35);
 }
 
 
