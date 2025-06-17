@@ -452,6 +452,14 @@ function injectGameSearchClones() {
     injectGameSearchClones();
   });
   
+  function showVideo(title, description, videoURL) {
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDescription").innerText = description;
+    document.getElementById("modalVideo").src = videoURL;
+    document.getElementById("videoModal").classList.remove("hidden");
+  }
+
+
   function organizeSearchResultsByCategory() {
     const movieContainer = document.getElementById("searchResultsMovies");
     const gameContainer = document.getElementById("searchResultsGames");
