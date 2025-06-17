@@ -1,7 +1,7 @@
 /// NOTE!!!! Delete after July 27TH!
 
 const matrixAttack2ReleaseDate = new Date("2025-07-27T00:00:00-04:00");
-const earlyAccessCode = "PAULIEEARLYACCESS";
+const earlyAccessCode = "ryan";
 
 function handleMatrixAttack2() {
   const now = new Date();
@@ -11,10 +11,14 @@ function handleMatrixAttack2() {
     // ⏳ Locked: show countdown and access prompt
     document.getElementById("modalTitle").innerText = "Matrix Attack 2";
     document.getElementById("modalDescription").innerHTML = `
-      <p>This movie unlocks on July 27, 2025 @ 12:00 AM ET</p>
-      <p id="countdownTimer"></p>
-      <button onclick="showCodePrompt('${videoURL}')">Enter Access Code</button>
+    <div class="premiere-container">
+        <p class="premiere-heading">🎬 PREMIERES IN…</p>
+        <p id="countdownTimer" class="digital-timer"></p>
+        <button onclick="showCodePrompt('${videoURL}')">🔓 Enter Access Code</button>
+        <p class="premiere-date">Unlocks July 27, 2025 @ 12:00 AM ET</p>
+    </div>
     `;
+
     document.getElementById("modalVideo").src = ""; // clear video
     document.getElementById("videoModal").classList.remove("hidden");
 

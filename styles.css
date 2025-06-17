@@ -1122,3 +1122,66 @@ body.light-theme .search-results-overlay {
 #mobileSearchInput {
   display: none;
 }
+
+#countdownTimer {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  color: red;
+  background-color: #111;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 10px 0;
+  text-shadow: 0 0 8px red;
+}
+
+#modalDescription p {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 12px;
+}
+
+#modalDescription button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#modalDescription button:hover {
+  background-color: #cc0000;
+}
+
+.premiere-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.premiere-heading {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.premiere-date {
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.digital-timer {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  color: red;
+  background-color: #111;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  text-shadow: 0 0 8px red;
+  margin-bottom: 10px;
+}
