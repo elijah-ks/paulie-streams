@@ -1,5 +1,3 @@
-/// NOTE!!!! Delete after July 27TH!
-
 const matrixAttack2ReleaseDate = new Date("2025-07-27T00:00:00-04:00");
 const earlyAccessCode = "ryan";
 
@@ -8,29 +6,23 @@ function handleMatrixAttack2() {
   const videoURL = "https://drive.google.com/file/d/1O3bBy9Yi5-69pitWo8_dW-Cb7nDUEdXR/preview";
 
   if (now < matrixAttack2ReleaseDate) {
-    // ⏳ Locked: show countdown and access prompt
-    document.getElementById("modalTitle").innerText = "Matrix Attack 2";
-    document.getElementById("modalDescription").innerHTML = `
-    <div class="premiere-container">
+    // ⏳ Show countdown modal
+    document.getElementById("matrixModalInner").innerHTML = `
+      <div class="premiere-container">
         <p class="premiere-heading">🎬 PREMIERES IN…</p>
         <p id="countdownTimer" class="digital-timer"></p>
         <button onclick="showCodePrompt('${videoURL}')">🔓 Enter Access Code</button>
         <p class="premiere-date">Unlocks July 27, 2025 @ 12:00 AM ET</p>
-    </div>
+      </div>
     `;
-
-    document.getElementById("modalVideo").src = ""; // clear video
-    document.getElementById("videoModal").classList.remove("hidden");
-
+    document.getElementById("matrixModal").classList.remove("hidden");
     updateCountdown(matrixAttack2ReleaseDate);
   } else {
-    // 🔓 Already released: show video
     openModal(
-    "Matrix Attack 2",
-    "After being captured by President Eli, the Sabado Brothers attempt their escape...",
-     videoURL
+      "Matrix Attack 2",
+      "After being captured by President Eli, the Sabado Brothers attempt their escape...",
+      videoURL
     );
-
   }
 }
 
@@ -47,7 +39,7 @@ function updateCountdown(releaseDate) {
       const hours = Math.floor(diff / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      timerEl.innerText = `Releases in ${hours}h ${minutes}m ${seconds}s`;
+      timerEl.innerText = `${hours}h ${minutes}m ${seconds}s`;
     }
   }, 1000);
 }
@@ -55,13 +47,13 @@ function updateCountdown(releaseDate) {
 function showCodePrompt(videoURL) {
   const code = prompt("Enter the early access code:");
   if (code === earlyAccessCode) {
+    document.getElementById("matrixModal").classList.add("hidden");
     openModal(
-      "Matrix Attack 2",
-      "After being captured by President Eli, the Sabado Brothers attempt their escape...",
+      "Matrix Attack 2 (Early Access)",
+      "You're in!",
       videoURL
     );
   } else {
     alert("Incorrect code.");
   }
 }
-
