@@ -21,7 +21,7 @@ function handleVideoClick(title, description, videoURL) {
   const clickedCard = document.querySelector(`[data-title="${title}"]`);
   const isRestricted = clickedCard?.dataset.subscriberOnly === "true";
 
-  if (isRestricted && window.userRole !== "subscriber" && window.userRole !== "admin") {
+  if(isRestricted && !["subscriber", "admin"].includes(window.userRole)) {
     showSubscriberLockModal(title);
   } else {
     openModal(title, description, videoURL);
