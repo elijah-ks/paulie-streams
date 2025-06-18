@@ -1179,3 +1179,17 @@ body.light-theme .search-results-overlay {
 
 
 /* Delete after July 27 ^ */
+
+
+
+.locked-overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: red;
+  font-size: 1.4rem;
+  padding: 60px 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.6;
+  pointer-events: none;
+}
