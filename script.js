@@ -73,58 +73,8 @@ firebase.auth().onAuthStateChanged(user => {
 });
 }
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    const rolesRef = firebase.firestore().collection("roles").doc(user.uid);
-
-    rolesRef.get().then(doc => {
-      const role = doc.exists ? doc.data().role : "viewer";
-      window.userRole = role; // 🌐 Global role access
-
-      console.log("Logged in role:", role);
-
-      // Example: Show content conditionally
-      if (role === "subscriber") {
-        document.querySelectorAll(".subscriber-only").forEach(el => el.classList.remove("hidden"));
-      }
-    });
-  }
-});
-
 function openModal(title, description, videoURL) {
   // ...existing openModal code...
-}
-
-// 🔒 Subscriber check before opening modal
-function handleVideoClick(title, description, videoURL) {
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) return;
-
-    const rolesRef = firebase.firestore().collection("roles").doc(user.uid);
-    rolesRef.get().then(doc => {
-      const isSubscriber = doc.exists && doc.data().role === "subscriber";
-      const clickedCard = document.querySelector(`[data-title="${title}"]`);
-      const isRestricted = clickedCard?.dataset.subscriberOnly === "true";
-
-      if (isRestricted && !isSubscriber) {
-        showSubscriberLockModal(title);
-      } else {
-        openModal(title, description, videoURL);
-      }
-    });
-  });
-}
-
-function showSubscriberLockModal(title) {
-  const modal = document.getElementById("videoModal");
-  modal.classList.remove("hidden");
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalDescription").innerHTML = `
-    <div class="locked-overlay">
-      🔒<br><span>Paulie Subscribers Only</span>
-    </div>
-  `;
-  document.getElementById("modalVideo").src = "";
 }
 
 
