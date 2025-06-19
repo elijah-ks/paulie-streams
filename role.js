@@ -10,8 +10,8 @@ firebase.auth().onAuthStateChanged(user => {
     console.log("User role:", role);
 
     // 🔓 Optional: Reveal subscriber-only elements if needed
-    if (role === "subscriber") {
-      document.querySelectorAll(".subscriber-only").forEach(el => el.classList.remove("hidden"));
+     if (["subscriber", "admin"].includes(role)) {
+     document.querySelectorAll(".subscriber-only").forEach(el => el.classList.remove("hidden"));
     }
   });
 });
