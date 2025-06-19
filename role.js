@@ -1,5 +1,3 @@
-
-// ✅ Check role once at login and store it globally
 firebase.auth().onAuthStateChanged(user => {
   if (!user) return;
 
@@ -14,11 +12,11 @@ firebase.auth().onAuthStateChanged(user => {
       document.querySelectorAll(".subscriber-only").forEach(el => el.classList.remove("hidden"));
     }
 
-    // ✅ Only assign video click handlers AFTER role is known
+    // ✅ Assign video click handlers based on role
     document.querySelectorAll(".video-card[data-title]").forEach(card => {
       const title = card.dataset.title;
-      const description = card.getAttribute("data-description");
-      const videoURL = card.getAttribute("data-video");
+      const description = card.dataset.description;
+      const videoURL = card.dataset.videourl;
 
       card.addEventListener("click", () => {
         const isRestricted = card.dataset.subscriberOnly === "true";
@@ -32,12 +30,12 @@ firebase.auth().onAuthStateChanged(user => {
   });
 });
 
-// 🎬 Fallback click logic, kept clean
+// 🎬 Centralized modal opening
 function handleVideoClick(title, description, videoURL) {
   openModal(title, description, videoURL);
 }
 
-// 🔒 Show modal lock
+// 🔒 Modal for locked videos
 function showSubscriberLockModal(title) {
   const modal = document.getElementById("videoModal");
   modal.classList.remove("hidden");
