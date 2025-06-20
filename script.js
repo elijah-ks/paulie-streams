@@ -73,11 +73,6 @@ firebase.auth().onAuthStateChanged(user => {
 });
 }
 
-function openModal(title, description, videoURL) {
-  // ...existing openModal code...
-}
-
-
 
 function toggleSettingsDropdown() {
   const dropdown = document.getElementById("settingsDropdown");
@@ -617,4 +612,53 @@ function confirmDeleteWithPassword() {
 
 function openSettings() {
   document.getElementById("settingsModal").classList.remove("hidden");
+}
+
+
+function handleVideoClick(title, description, videoURL) {
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDescription").innerText = description;
+  document.getElementById("modalVideo").src = videoURL;
+
+  document.getElementById("videoModal").classList.remove("hidden");
+
+  const likeBtn = document.getElementById("likeBtn");
+  const newLikeBtn = likeBtn.cloneNode(true);
+  likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) return;
+
+    const docID = `${title}_${user.uid}`;
+    const likeRef = firebase.firestore().collection("likes").doc(docID);
+
+    likeRef.get().then(doc => {
+      if (doc.exists) {
+        newLikeBtn.innerText = "♥";
+      } else {
+        newLikeBtn.innerText = "♡";
+      }
+    });
+
+    newLikeBtn.addEventListener("click", () => {
+      likeRef.get().then(doc => {
+        if (doc.exists) {
+          likeRef.delete().then(() => {
+            newLikeBtn.innerText = "♡";
+          });
+        } else {
+          likeRef.set({
+            movieID: docID,
+            title,
+            description,
+            videoURL,
+            userID: user.uid,
+            likedAt: firebase.firestore.FieldValue.serverTimestamp()
+          }).then(() => {
+            newLikeBtn.innerText = "♥";
+          });
+        }
+      });
+    });
+  });
 }
