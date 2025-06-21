@@ -522,8 +522,9 @@ function handleVideoClick(title, description, videoURL) {
   document.getElementById("videoModal").classList.remove("hidden");
 
   const likeBtn = document.getElementById("likeBtn");
-  likeBtn.outerHTML = likeBtn.outerHTML;
-  const newLikeBtn = document.getElementById("likeBtn");
+  const newLikeBtn = likeBtn.cloneNode(true);
+  likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+
 
   firebase.auth().onAuthStateChanged(user => {
     if (!user) return;
