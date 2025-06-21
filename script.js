@@ -1,79 +1,5 @@
 
 
-function openModal(title, description, videoURL) {
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalDescription").innerText = description;
-  document.getElementById("modalVideo").src = videoURL;
-  document.getElementById("videoModal").classList.remove("hidden");
-
-  const likeBtn = document.getElementById("likeBtn");
-
-firebase.auth().onAuthStateChanged(user => {
-  if (!user) return;
-
-  const docID = `${title}_${user.uid}`;
-  const likeRef = firebase.firestore().collection("likes").doc(docID);
-
-  // Get the initial like status
-  // Remove previous click listener
-  const newLikeBtn = likeBtn.cloneNode(true);
-  likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
-
-  // Get the initial like status and apply it to the cloned button
-  likeRef.get().then(doc => {
-    if (doc.exists) {
-      newLikeBtn.classList.add("liked");
-      newLikeBtn.innerText = "❤️";
-    } else {
-      newLikeBtn.classList.remove("liked");
-      newLikeBtn.innerText = "♡";
-    }
-  });
-
-
-  newLikeBtn.addEventListener("click", () => {
-    // Optimistically update the button instantly
-    const isLiked = newLikeBtn.classList.contains("liked");
-
-    if (isLiked) {
-      // Instant visual update
-      newLikeBtn.classList.remove("liked");
-      newLikeBtn.innerText = "♡";
-
-      // Background DB removal
-      likeRef.delete().catch((error) => {
-        console.error("Error unliking movie:", error);
-        // Revert if there's an error
-        newLikeBtn.classList.add("liked");
-        newLikeBtn.innerText = "❤️";
-      });
-
-    } else {
-      // Instant visual update
-      newLikeBtn.classList.add("liked");
-      newLikeBtn.innerText = "❤️";
-
-      // Background DB add
-      likeRef.set({
-        movieID: title,
-        title,
-        description,
-        videoURL,
-        thumbnail: getThumbnailForTitle(title),
-        userID: user.uid,
-        likedAt: new Date()
-      }).catch((error) => {
-        console.error("Error liking movie:", error);
-        // Revert if there's an error
-        newLikeBtn.classList.remove("liked");
-        newLikeBtn.innerText = "♡";
-      });
-    }
-  });
-});
-}
-
-
 function toggleSettingsDropdown() {
   const dropdown = document.getElementById("settingsDropdown");
   dropdown.classList.toggle("hidden");
@@ -390,32 +316,6 @@ function filterMovies(query) {
     alert("Extras page coming soon!");
   }
   
-  
-  function likeMovie(movieData, userID) {
-    const db = firebase.firestore();
-    const movieID = movieData.title.replace(/\s+/g, "_"); // Unique key
-  
-    db.collection("likes")
-      .doc(`${movieID}_${userID}`)
-      .set({
-        movieID: movieData.title,
-        title: movieData.title,
-        description: movieData.description,
-        videoURL: movieData.videoURL,
-        thumbnail: movieData.thumbnail,
-        userID: userID,
-        likedAt: new Date()
-      })
-      .then(() => {
-        console.log("Movie liked and saved.");
-        document.getElementById("likeBtn").classList.add("liked");
-        document.getElementById("likeBtn").innerText = "❤️";
-      })
-      .catch(error => {
-        console.error("Error saving liked movie:", error);
-      });
-  }
-  
   window.addEventListener("load", () => {
     // Other banner/setup logic...
     injectGameSearchClones();
@@ -622,9 +522,10 @@ function handleVideoClick(title, description, videoURL) {
 
   document.getElementById("videoModal").classList.remove("hidden");
 
+  // Get and reset the like button
   const likeBtn = document.getElementById("likeBtn");
-  const newLikeBtn = likeBtn.cloneNode(true);
-  likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+  likeBtn.outerHTML = likeBtn.outerHTML; // Replace it to remove old listeners
+  const newLikeBtn = document.getElementById("likeBtn"); // Get the fresh one (still has id)
 
   firebase.auth().onAuthStateChanged(user => {
     if (!user) return;
@@ -632,33 +533,45 @@ function handleVideoClick(title, description, videoURL) {
     const docID = `${title}_${user.uid}`;
     const likeRef = firebase.firestore().collection("likes").doc(docID);
 
+    // Get initial like status
     likeRef.get().then(doc => {
       if (doc.exists) {
-        newLikeBtn.innerText = "♥";
+        newLikeBtn.classList.add("liked");
+        newLikeBtn.innerText = "❤️";
       } else {
+        newLikeBtn.classList.remove("liked");
         newLikeBtn.innerText = "♡";
       }
     });
 
+    // Handle click
     newLikeBtn.addEventListener("click", () => {
-      likeRef.get().then(doc => {
-        if (doc.exists) {
-          likeRef.delete().then(() => {
-            newLikeBtn.innerText = "♡";
-          });
-        } else {
-          likeRef.set({
-            movieID: docID,
-            title,
-            description,
-            videoURL,
-            userID: user.uid,
-            likedAt: firebase.firestore.FieldValue.serverTimestamp()
-          }).then(() => {
-            newLikeBtn.innerText = "♥";
-          });
-        }
-      });
+      const isLiked = newLikeBtn.classList.contains("liked");
+
+      if (isLiked) {
+        newLikeBtn.classList.remove("liked");
+        newLikeBtn.innerText = "♡";
+        likeRef.delete().catch(err => {
+          console.error("Error unliking:", err);
+          newLikeBtn.classList.add("liked");
+          newLikeBtn.innerText = "❤️";
+        });
+      } else {
+        newLikeBtn.classList.add("liked");
+        newLikeBtn.innerText = "❤️";
+        likeRef.set({
+          movieID: title.replace(/\s+/g, "_"),
+          title,
+          description,
+          videoURL,
+          userID: user.uid,
+          likedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(err => {
+          console.error("Error liking:", err);
+          newLikeBtn.classList.remove("liked");
+          newLikeBtn.innerText = "♡";
+        });
+      }
     });
   });
 }
