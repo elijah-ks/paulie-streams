@@ -1127,7 +1127,9 @@ body.light-theme .search-results-overlay {
 
 #matrixModal .matrix-modal-content {
   max-width: 520px;
-  margin: 80px auto;
+  max-height: 80vh; /* Limit modal height to 80% of the viewport */
+  overflow: hidden; /* Completely prevent scrolling or overflow */
+  margin: 40px auto;
   padding: 30px 20px;
   border-radius: 12px;
   background-color: #1c1c1c;
