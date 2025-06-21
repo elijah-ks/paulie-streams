@@ -28,22 +28,8 @@ function updateThemeLabel() {
 
 
 function getThumbnailForTitle(title) {
-  switch (title.trim().toLowerCase()) {
-    case "matrix attack":
-      return "assets/matrix-attack.jpg";
-    case "matrix attack 1": // just in case this ever gets stored
-      return "assets/matrix-attack.jpg";
-    case "matrix attack 2":
-      return "assets/matrix-attack2.jpg";
-    case "colin: the backstory":
-      return "assets/colin-backstory-cover.jpg";
-    case "the sigma male":
-      return "assets/the-sigma-male.jpg";
-    case "deadly cousins 5":
-      return "assets/deadly-cousins5.jpg";
-    default:
-      return "assets/default-thumbnail.jpg";
-  }
+  const normalized = title.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return `assets/${normalized}.jpg`;
 }
 
 
