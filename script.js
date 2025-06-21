@@ -39,6 +39,8 @@ function getThumbnailForTitle(title) {
       return "assets/colin-backstory-cover.jpg";
     case "the sigma male":
       return "assets/the-sigma-male.jpg";
+    case "deadly cousins 5":
+      return "assets/deadly-cousins5.jpg";
     default:
       return "assets/default-thumbnail.jpg";
   }
