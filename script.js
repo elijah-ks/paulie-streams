@@ -509,6 +509,7 @@ function handleVideoClick(title, description, videoURL) {
   document.getElementById("modalVideo").src = videoURL;
   document.getElementById("videoModal").classList.remove("hidden");
 
+
   const likeBtn = document.getElementById("likeBtn");
   const newLikeBtn = likeBtn.cloneNode(true);
   likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);

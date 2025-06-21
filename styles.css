@@ -1127,14 +1127,20 @@ body.light-theme .search-results-overlay {
 
 #matrixModal .matrix-modal-content {
   max-width: 520px;
-  max-height: 80vh; /* Limit modal height to 80% of the viewport */
-  overflow: hidden; /* Completely prevent scrolling or overflow */
+  max-height: 80vh;
+  overflow: hidden;
   margin: 40px auto;
-  padding: 30px 20px;
+  padding: 20px;
   border-radius: 12px;
   background-color: #1c1c1c;
   text-align: center;
   box-shadow: 0 0 24px rgba(255, 0, 0, 0.25);
+  transform: scale(0.95); /* Makes it fit slightly smaller */
+}
+
+#matrixModalInner {
+  transform: scale(0.85); /* Shrinks actual inner content */
+  transform-origin: top center;
 }
 
 .premiere-container {
