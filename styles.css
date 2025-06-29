@@ -1195,6 +1195,26 @@ body.light-theme .search-results-overlay {
   pointer-events: none;
 }
 
+.locked-overlay span {
+  display: block;
+  margin-top: 10px;
+}
+
+.locked-overlay.subscriber-lock-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+  background-color: black;
+  color: red;
+  font-size: 1.2em;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+
 #videoModal .restricted-modal-content {
   max-height: 60vh;       /* 👈 Make modal background shorter */
   overflow-y: auto;
@@ -1202,3 +1222,34 @@ body.light-theme .search-results-overlay {
   padding: 20px 30px;
 }
 
+.restricted-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* <-- ADJUST THIS VALUE */
+}
+
+.subscriber-lock-box {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  margin: 0 auto;
+  background: black;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+
+#modalDescription {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

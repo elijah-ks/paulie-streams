@@ -17,15 +17,20 @@ firebase.auth().onAuthStateChanged(user => {
       const title = card.dataset.title;
       const description = card.dataset.description;
       const videoURL = card.dataset.videourl;
+      const isRestricted = card.dataset.subscriberOnly === "true";
+
 
       card.addEventListener("click", () => {
-        const isRestricted = card.dataset.subscriberOnly === "true";
+        const modalContent = document.querySelector("#videoModal .modal-content");
         if (isRestricted && !["subscriber", "admin"].includes(window.userRole)) {
-          showSubscriberLockModal(title);
+          modalContent.classList.add("restricted-modal-content");
+          showSubscriberLockModal(title, description);
         } else {
+          modalContent.classList.remove("restricted-modal-content");
           handleVideoClick(title, description, videoURL);
         }
       });
+
     });
   });
 });
@@ -36,14 +41,20 @@ function handleVideoClick(title, description, videoURL) {
 }
 
 // 🔒 Modal for locked videos
-function showSubscriberLockModal(title) {
+function showSubscriberLockModal(title, description) {
   const modal = document.getElementById("videoModal");
   modal.classList.remove("hidden");
+
+  // Set title + description
   document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalDescription").innerHTML = `
-    <div class="locked-overlay">
+  document.getElementById("modalDescription").innerHTML = description || "";
+
+  // Replace iframe with lock box
+  document.getElementById("modalVideo").outerHTML = `
+    <div id="modalVideo" class="locked-overlay subscriber-lock-box">
       🔒<br><span>Paulie Subscribers Only</span>
     </div>
   `;
-  document.getElementById("modalVideo").src = "";
 }
+
+

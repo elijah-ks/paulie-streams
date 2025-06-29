@@ -29,7 +29,7 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
-      firebase.auth().onAuthStateChanged(user => {
+      //firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log("User is signed in:", user.email);
           window.currentUserID = user.uid;
@@ -312,7 +312,7 @@
         <span class="close" onclick="closeModal()" role="button" tabindex="0">&times;</span>
       </div>
       <h3 id="modalTitle"></h3>
-      <p id="modalDescription"></p>
+      <div id="modalDescription"></div>
       <iframe id="modalVideo" width="100%" height="360" allowfullscreen></iframe>
     </div>
   </div>
