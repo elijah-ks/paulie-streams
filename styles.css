@@ -224,6 +224,9 @@ body {
     max-width: 700px;
     color: #fff;
     position: relative;
+    max-height: 80vh;     /* Limit total modal height */
+    overflow-y: auto;      /* Scroll if content is too tall */
+    margin: 5vh auto;      /* Center with vertical spacing */
 }
 
 .close {
@@ -505,16 +508,6 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-}
-
-.modal-content {
-    background: #111;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 700px;
-    color: #fff;
-    position: relative;
 }
 
 .modal iframe {
@@ -1201,3 +1194,11 @@ body.light-theme .search-results-overlay {
   line-height: 1.6;
   pointer-events: none;
 }
+
+#videoModal .restricted-modal-content {
+  max-height: 60vh;       /* 👈 Make modal background shorter */
+  overflow-y: auto;
+  margin: 10vh auto;      /* Vertically center it */
+  padding: 20px 30px;
+}
+
