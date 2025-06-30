@@ -33,12 +33,15 @@ function getThumbnailForTitle(title) {
 }
 
 
-
 function closeModal() {
-    document.getElementById("videoModal").classList.add("hidden");
-    document.getElementById("modalVideo").src = ""; // clears video
-}
+  document.getElementById("videoModal").classList.add("hidden");
+  document.getElementById("modalVideo").src = ""; // clears video
+  document.getElementById("modalVideo").style.display = "block"; // ensures it's visible next time
 
+  // 🧼 Clean up any lock box
+  const lockBox = document.getElementById("lockBox");
+  if (lockBox) lockBox.remove();
+}
 
 
 const banners = [
@@ -504,23 +507,33 @@ function openSettings() {
 
 
 function handleVideoClick(title, description, videoURL) {
+  const modal = document.getElementById("videoModal");
+  modal.classList.remove("hidden");
+
+  // Reset modal content
   document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalDescription").innerText = description;
-  document.getElementById("modalVideo").src = videoURL;
-  document.getElementById("videoModal").classList.remove("hidden");
+  document.getElementById("modalDescription").innerText = description || "";
 
+  const video = document.getElementById("modalVideo");
+  video.style.display = "block";
+  video.src = videoURL;
 
+  // ✅ Remove lockBox if it exists
+  const lockBox = document.getElementById("lockBox");
+  if (lockBox) lockBox.remove();
+
+  // ✅ Replace like button logic
   const likeBtn = document.getElementById("likeBtn");
   const newLikeBtn = likeBtn.cloneNode(true);
   likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
 
-
+  // ✅ Update like status
   firebase.auth().onAuthStateChanged(user => {
     if (!user) return;
 
     const docID = `${title}_${user.uid}`;
     const likeRef = firebase.firestore().collection("likes").doc(docID);
-    const thumbnail = getThumbnailForTitle(title); // ✅ Add this line
+    const thumbnail = getThumbnailForTitle(title);
 
     likeRef.get().then(doc => {
       if (doc.exists) {
@@ -550,7 +563,7 @@ function handleVideoClick(title, description, videoURL) {
             title,
             description,
             videoURL,
-            thumbnail, // ✅ now works!
+            thumbnail,
             userID: user.uid,
             likedAt: firebase.firestore.FieldValue.serverTimestamp()
           }).catch(err => {
@@ -563,3 +576,4 @@ function handleVideoClick(title, description, videoURL) {
     });
   });
 }
+

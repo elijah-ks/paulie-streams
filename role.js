@@ -35,26 +35,28 @@ firebase.auth().onAuthStateChanged(user => {
   });
 });
 
-// 🎬 Centralized modal opening
-function handleVideoClick(title, description, videoURL) {
-  openModal(title, description, videoURL);
-}
+
 
 // 🔒 Modal for locked videos
 function showSubscriberLockModal(title, description) {
   const modal = document.getElementById("videoModal");
   modal.classList.remove("hidden");
 
-  // Set title + description
   document.getElementById("modalTitle").innerText = title;
   document.getElementById("modalDescription").innerHTML = description || "";
 
-  // Replace iframe with lock box
-  document.getElementById("modalVideo").outerHTML = `
-    <div id="modalVideo" class="locked-overlay subscriber-lock-box">
-      🔒<br><span>Paulie Subscribers Only</span>
-    </div>
-  `;
-}
+  const video = document.getElementById("modalVideo");
+  video.style.display = "none";
 
+  // 🧼 PREVENT DUPLICATES
+  const existingLock = document.getElementById("lockBox");
+  if (existingLock) existingLock.remove();
+
+  const lockBox = document.createElement("div");
+  lockBox.className = "locked-overlay subscriber-lock-box";
+  lockBox.innerHTML = `🔒<br><span style="color: red;">Paulie Subscribers Only</span>`;
+  lockBox.id = "lockBox";
+
+  video.parentNode.insertBefore(lockBox, video.nextSibling);
+}
 
