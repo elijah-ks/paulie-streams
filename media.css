@@ -386,4 +386,21 @@
 
 }
 
+@media (max-width: 500px) {
+  #matrixModal .matrix-modal-content {
+    width: 90vw;
+    max-width: 90vw;
+    max-height: 85vh;
+    padding: 16px;
+  }
+
+  .premiere-cover {
+    max-width: 100%;
+  }
+
+  .digital-timer {
+    font-size: 22px;
+    padding: 8px 16px;
+  }
+}
 

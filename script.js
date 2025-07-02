@@ -507,6 +507,9 @@ function openSettings() {
 
 
 function handleVideoClick(title, description, videoURL) {
+
+  if (title === "Matrix Attack 2") return;
+
   const modal = document.getElementById("videoModal");
   modal.classList.remove("hidden");
 

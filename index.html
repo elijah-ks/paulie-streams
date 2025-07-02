@@ -29,7 +29,7 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
-      firebase.auth().onAuthStateChanged(user => {
+      //firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log("User is signed in:", user.email);
           window.currentUserID = user.uid;
@@ -334,11 +334,9 @@
 
               <!-- Matrix Attack 2 Countdown Modal -->
     <div id="matrixModal" class="modal hidden">
-     <div class="modal-content matrix-modal-content">
-       <div id="matrixModalInner"></div>
-        <span class="close" onclick="document.getElementById('matrixModal').classList.add('hidden')" role="button">&times;</span>
-      </div>
+      <div id="matrixModalInner"></div>
     </div>
+
 
     </section>
     

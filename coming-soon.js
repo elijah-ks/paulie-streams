@@ -7,15 +7,20 @@ function handleMatrixAttack2() {
 
   if (now < matrixAttack2ReleaseDate) {
     // ⏳ Show countdown modal
-    document.getElementById("matrixModalInner").innerHTML = `
-      <div class="premiere-container">
-        <img src="assets/matrix-attack2.jpg" alt="Matrix Attack 2 Cover" class="premiere-cover">
-        <p class="premiere-heading">🎬 PREMIERES IN…</p>
-        <p id="countdownTimer" class="digital-timer"></p>
-        <button onclick="showCodePrompt('${videoURL}')">🔓 Enter Access Code</button>
-        <p class="premiere-date">Unlocks July 27, 2025 @ 12:00 AM ET</p>
-      </div>
-    `;
+document.getElementById("matrixModalInner").innerHTML = `
+  <div class="matrix-modal-content">
+    <button class="close-matrix" onclick="document.getElementById('matrixModal').classList.add('hidden')">&times;</button>
+    <div class="premiere-container">
+      <img src="assets/matrix-attack2.jpg" alt="Matrix Attack 2 Cover" class="premiere-cover">
+      <p class="premiere-heading">🎬 PREMIERES IN…</p>
+      <p id="countdownTimer" class="digital-timer"></p>
+      <button onclick="showCodePrompt('${videoURL}')">🔓 Enter Access Code</button>
+      <p class="premiere-date">Unlocks July 27, 2025 @ 12:00 AM ET</p>
+    </div>
+  </div>
+`;
+
+
     document.getElementById("matrixModal").classList.remove("hidden");
     updateCountdown(matrixAttack2ReleaseDate);
   } else {
