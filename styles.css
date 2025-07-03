@@ -1120,18 +1120,19 @@ body.light-theme .search-results-overlay {
 
 #matrixModal .matrix-modal-content {
   position: relative;
-  width: 90%;
-  max-width: 640px; /* Slightly wider */
-  max-height: 90vh;
+  width: min(65vw, 500px);
+  height: 90vh; /* 🚨 full viewport height minus padding */
   margin: 5vh auto;
-  padding: 24px 20px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 14px;
   background-color: #1c1c1c;
   text-align: center;
   box-shadow: 0 0 24px rgba(255, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden; /* ✅ prevent internal scrolling */
 }
 
 
@@ -1164,7 +1165,13 @@ body.light-theme .search-results-overlay {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-height: 100%;
+  flex-grow: 1;
+  justify-content: space-between;
 }
+
 
 .premiere-heading {
   color: #ff4b4b;
@@ -1189,18 +1196,41 @@ body.light-theme .search-results-overlay {
 }
 
 .premiere-cover {
-  width: 100%;
-  max-width: 320px;
-  aspect-ratio: 2 / 3;
+  max-height: 50vh; /* ✅ Keep image within half of the viewport height */
+  width: auto;
   height: auto;
-  border-radius: 12px;
-  margin: 0 auto 20px auto;
+  border-radius: 8px;
+  margin: 0 auto 12px auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 
   /* 🔥 Responsive red glow that always matches the image edges */
   box-shadow: 0 0 18px 4px rgba(255, 0, 0, 0.35);
 }
+
+/* Countdown starts invisible */
+.digital-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  font-family: monospace;
+  font-size: 28px;
+  color: red;
+  background-color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+
+/* When ready, fade it in */
+.digital-timer.visible {
+  opacity: 1;
+}
+
 
 
 /* Delete after July 27 ^ */

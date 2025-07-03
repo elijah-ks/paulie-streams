@@ -46,9 +46,15 @@ function updateCountdown(releaseDate) {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
       timerEl.innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+      // ✅ Add this line once the timer has content
+      if (!timerEl.classList.contains("visible")) {
+        timerEl.classList.add("visible");
+      }
     }
   }, 1000);
 }
+
 
 function showCodePrompt(videoURL) {
   const code = prompt("Enter the early access code:");
