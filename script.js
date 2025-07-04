@@ -580,3 +580,17 @@ function handleVideoClick(title, description, videoURL) {
   });
 }
 
+function openModal(title, description, videoURL) {
+  const modal = document.getElementById("videoModal");
+  modal.classList.remove("hidden");
+
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDescription").innerText = description;
+  document.getElementById("modalVideo").src = videoURL;
+  document.getElementById("modalVideo").style.display = "block";
+
+  // 🧼 Remove lockBox if present
+  const lockBox = document.getElementById("lockBox");
+  if (lockBox) lockBox.remove();
+}
+

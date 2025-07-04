@@ -39,17 +39,31 @@ function updateCountdown(releaseDate) {
     const diff = releaseDate - now;
 
     if (diff <= 0) {
-      timerEl.innerText = "Unlocked!";
       clearInterval(interval);
-    } else {
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      timerEl.innerText = `${hours}h ${minutes}m ${seconds}s`;
+      if (timerEl) {
+        timerEl.textContent = "🎬 Now Available!";
+        timerEl.classList.add("visible"); // Still show box with message
+      }
 
-      // ✅ Add this line once the timer has content
-      if (!timerEl.classList.contains("visible")) {
-        timerEl.classList.add("visible");
+      const unlockButton = document.querySelector(".premiere-container button");
+      if (unlockButton) {
+        unlockButton.textContent = "▶️ Watch Now";
+        unlockButton.onclick = () => {
+          openModal(
+            "Matrix Attack 2",
+            "After being captured by President Eli, the Sabado Brothers attempt their escape...",
+            "https://drive.google.com/file/d/1O3bBy9Yi5-69pitWo8_dW-Cb7nDUEdXR/preview"
+          );
+          document.getElementById("matrixModal").classList.add("hidden");
+        };
+      }
+    } else {
+      const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      if (timerEl) {
+        timerEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+        timerEl.classList.add("visible"); // ✅ Fade in when countdown begins
       }
     }
   }, 1000);
