@@ -29,7 +29,7 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
-      firebase.auth().onAuthStateChanged(user => {
+      //firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log("User is signed in:", user.email);
           window.currentUserID = user.uid;
@@ -65,7 +65,7 @@
   </div>
 </header>
 
-  <!-- Settings Dropdown Modal -->
+
 <!-- Settings Dropdown Modal -->
 <div id="settingsDropdown" class="settings-dropdown hidden">
   
@@ -74,6 +74,7 @@
     <div class="settings-section">
       <div class="settings-option" id="themeToggle" onclick="toggleTheme()">🌙 Theme: Dark</div>
       <p class="settings-option">🔁 Autoplay: Off</p>
+      <p class="settings-option" onclick="openSubscriberApplication()">📬 Apply for Paulie Subscriber</p>
       <p class="settings-option" id="openAccountOptions">👤 Account Options</p>
       <p class="settings-option" onclick="openVersionModal()">📝 Version: 1.0</p>
     </div>
@@ -190,7 +191,6 @@
 
 
 <!-- 🗑️ Delete Account Modal -->
-<!-- 🗑️ Delete Account Modal -->
 <div id="deleteAccountModal" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header" style="text-align: right;">
@@ -218,6 +218,55 @@
     </div>
   </div>
 </div>
+
+
+<!-- 📬 Multi-Step Subscriber Modal -->
+<div id="subscriberModal" class="modal hidden">
+  <div class="modal-content" style="max-width: 500px;" id="subscriberModalContent">
+    <button class="close" onclick="closeModal(this)">&times;</button>
+
+
+    <!-- 🔹 Step 1: Form -->
+    <div id="subscriberStep1">
+      <h2>Apply for Paulie Subscriber</h2>
+      <form id="subscriberForm">
+        <input type="text" id="subFirstName" placeholder="First Name" required class="settings-input">
+        <input type="text" id="subLastName" placeholder="Last Name" required class="settings-input">
+        <select id="subReason" required class="settings-input">
+          <option value="" disabled selected>How did you hear about us?</option>
+          <option value="Friend">Friend</option>
+          <option value="Family">Family</option>
+          <option value="Other">Other</option>
+        </select>
+        <button type="submit" class="settings-submit-btn" style="margin-top: 20px;">Continue</button>
+      </form>
+    </div>
+
+    <!-- 🔹 Step 2: "Loading" -->
+    <div id="subscriberLoading" class="hidden" style="text-align: center;">
+      <p>Loading Terms...</p>
+      <div class="loading-bar" style="margin: 20px auto;"></div>
+    </div>
+
+    <!-- 🔹 Step 3: Terms & Conditions -->
+    <div id="subscriberTerms" class="hidden">
+      <h2>Terms & Conditions</h2>
+      <div id="termsBox" style="max-height: 250px; overflow-y: auto; background: #1c1c1c; padding: 10px; border-radius: 8px; font-size: 0.9rem;">
+        <p>By applying, you agree not to share subscriber-only content, respect the creator’s work, and understand access is manually reviewed. Abuse of access may result in permanent revocation without notice.</p>
+        <p>[Insert your full terms here]</p>
+        <p style="margin-bottom: 0;">End of Terms</p>
+      </div>
+      <button id="acceptTermsBtn" class="settings-submit-btn" disabled style="margin-top: 16px;">Accept</button>
+    </div>
+
+    <!-- 🔹 Step 4: Success -->
+    <div id="subscriberSuccess" class="hidden" style="text-align: center;">
+      <h2>Application Completed</h2>
+      <p>You should hear back soon!</p>
+    </div>
+  </div>
+</div>
+
 
 
     <!-- Loading Screen -->
