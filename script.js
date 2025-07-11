@@ -443,6 +443,40 @@ function resetSubscriberModal() {
 }
 
 
+document.getElementById("submitSubscriberBtn").addEventListener("click", () => {
+  document.getElementById("subscriberStep1").classList.add("hidden");
+  document.getElementById("subscriberTerms").classList.remove("hidden");
+
+  const termsBox = document.getElementById("termsBox");
+  if (termsBox) termsBox.scrollTop = 0;
+  const acceptBtn = document.getElementById("acceptTermsBtn");
+  if (acceptBtn) acceptBtn.disabled = true;
+});
+
+// Enable Accept button once scrolled
+const termsBox = document.getElementById("termsBox");
+const acceptBtn = document.getElementById("acceptTermsBtn");
+if (termsBox && acceptBtn) {
+  termsBox.addEventListener("scroll", () => {
+    const isScrolled = termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight;
+    if (isScrolled) {
+      acceptBtn.disabled = false;
+    }
+  });
+}
+
+// Handle Decline
+const declineBtn = document.getElementById("declineTermsBtn");
+if (declineBtn) {
+  declineBtn.addEventListener("click", () => {
+    // Reset to step 1 and hide modal
+    resetSubscriberModal();
+    document.getElementById("subscriberModal").classList.add("hidden");
+  });
+}
+
+
+
 function submitNewPassword() {
   const oldPassword = document.getElementById("oldPasswordInput").value;
   const newPassword = document.getElementById("newPasswordInput").value;
@@ -627,4 +661,5 @@ function openModal(title, description, videoURL) {
   const lockBox = document.getElementById("lockBox");
   if (lockBox) lockBox.remove();
 }
+
 

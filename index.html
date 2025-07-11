@@ -29,18 +29,15 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
-     
-      firebase.auth().onAuthStateChanged(user => {
+      ///firebase.auth().onAuthStateChanged(user => {
         if (user) {
-        console.log("User is signed in:", user.email);
-        window.currentUserID = user.uid;
-      } else {
-        console.log("Not signed in. Redirecting...");
-        window.location.href = "login.html";
-      }
-    });
-
-
+          console.log("User is signed in:", user.email);
+          window.currentUserID = user.uid;
+        } else {
+          console.log("Not signed in. Redirecting...");
+          window.location.href = "login.html";
+        }
+      });
     </script>
   </head>
   
@@ -241,7 +238,7 @@
           <option value="Family">Family</option>
           <option value="Other">Other</option>
         </select>
-        <button type="submit" class="settings-submit-btn" style="margin-top: 20px;">Continue</button>
+        <button type="button" id="submitSubscriberBtn" class="settings-submit-btn">Continue</button>
       </form>
     </div>
 
@@ -251,16 +248,33 @@
       <div class="loading-bar" style="margin: 20px auto;"></div>
     </div>
 
-    <!-- 🔹 Step 3: Terms & Conditions -->
-    <div id="subscriberTerms" class="hidden">
-      <h2>Terms & Conditions</h2>
-      <div id="termsBox" style="max-height: 250px; overflow-y: auto; background: #1c1c1c; padding: 10px; border-radius: 8px; font-size: 0.9rem;">
-        <p>By applying, you agree not to share subscriber-only content, respect the creator’s work, and understand access is manually reviewed. Abuse of access may result in permanent revocation without notice.</p>
-        <p>[Insert your full terms here]</p>
-        <p style="margin-bottom: 0;">End of Terms</p>
-      </div>
-      <button id="acceptTermsBtn" class="settings-submit-btn" disabled style="margin-top: 16px;">Accept</button>
-    </div>
+<!-- 🔹 Step 3: Terms & Conditions -->
+<div id="subscriberTerms" class="hidden">
+  <h2>Terms & Conditions</h2>
+  <div id="termsBox" style="max-height: 250px; overflow-y: auto; background: #1c1c1c; padding: 14px; border-radius: 8px; font-size: 0.9rem; line-height: 1.4;">
+    <p style="margin-bottom: 10px;">
+      By applying, you agree not to share subscriber-only content, respect the creator’s work, and understand access is manually reviewed. Abuse of access may result in permanent revocation without notice.
+    </p>
+
+    <p style="font-weight: bold; margin-bottom: 8px;">Subscriber Rules</p>
+
+    <ul style="padding-left: 18px; margin: 0;">
+      <li>Do not share subscriber-only videos, links, or access codes.</li>
+      <li>Accounts are for individual use only — no shared logins.</li>
+      <li>Screen recording or redistributing content is strictly forbidden.</li>
+      <li>All applications are manually reviewed and may be denied without explanation.</li>
+      <li>Violations may result in permanent loss of access with no warning.</li>
+    </ul>
+
+    <p style="font-weight: bold; margin-top: 14px;">Privacy & Security</p>
+  </div>
+
+  <div style="margin-top: 18px; display: flex; justify-content: space-between; gap: 10px;">
+    <button id="declineTermsBtn" class="settings-submit-btn" style="background-color: #444;">Decline</button>
+    <button id="acceptTermsBtn" class="settings-submit-btn" disabled style="background-color: #28a745;">Accept</button>
+  </div>
+</div>
+
 
     <!-- 🔹 Step 4: Success -->
     <div id="subscriberSuccess" class="hidden" style="text-align: center;">
