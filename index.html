@@ -29,15 +29,18 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
+     
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          console.log("User is signed in:", user.email);
-          window.currentUserID = user.uid;
-        } else {
-          console.log("Not signed in. Redirecting...");
-          window.location.href = "login.html";
-        }
-      });
+        console.log("User is signed in:", user.email);
+        window.currentUserID = user.uid;
+      } else {
+        console.log("Not signed in. Redirecting...");
+        window.location.href = "login.html";
+      }
+    });
+
+
     </script>
   </head>
   

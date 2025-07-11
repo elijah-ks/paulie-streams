@@ -443,55 +443,6 @@ function resetSubscriberModal() {
 }
 
 
-// 🌐 EmailJS Init
-emailjs.init("YOUR_USER_ID"); // Replace
-
-document.getElementById("subscriberForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const firstName = document.getElementById("subFirstName").value.trim();
-  const lastName = document.getElementById("subLastName").value.trim();
-  const reason = document.getElementById("subReason").value;
-
-  window.subAppData = { firstName, lastName, reason };
-
-  document.getElementById("subscriberStep1").classList.add("hidden");
-  document.getElementById("subscriberLoading").classList.remove("hidden");
-
-  setTimeout(() => {
-    document.getElementById("subscriberLoading").classList.add("hidden");
-    document.getElementById("subscriberTerms").classList.remove("hidden");
-  }, 1500); // Simulated load time
-});
-
-// ⬇ Unlock Accept button only after scroll to bottom
-document.getElementById("termsBox").addEventListener("scroll", function () {
-  const box = this;
-  if (box.scrollTop + box.clientHeight >= box.scrollHeight - 10) {
-    document.getElementById("acceptTermsBtn").disabled = false;
-  }
-});
-
-document.getElementById("acceptTermsBtn").addEventListener("click", function () {
-  const { firstName, lastName, reason } = window.subAppData || {};
-
-  const templateParams = {
-    from_name: `${firstName} ${lastName}`,
-    reason: reason,
-    message: `New subscriber application:\n\nName: ${firstName} ${lastName}\nReason: ${reason}`
-  };
-
-  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-    .then(() => {
-      document.getElementById("subscriberTerms").classList.add("hidden");
-      document.getElementById("subscriberSuccess").classList.remove("hidden");
-    })
-    .catch(err => {
-      alert("Error submitting application. Please try again.");
-      console.error("EmailJS Error:", err);
-    });
-});
-
-
 function submitNewPassword() {
   const oldPassword = document.getElementById("oldPasswordInput").value;
   const newPassword = document.getElementById("newPasswordInput").value;
