@@ -230,9 +230,9 @@
     <div id="subscriberStep1">
       <h2>Apply for Paulie Subscriber</h2>
       <form id="subscriberForm">
-        <input type="text" id="subFirstName" placeholder="First Name" required class="settings-input">
-        <input type="text" id="subLastName" placeholder="Last Name" required class="settings-input">
-        <select id="subReason" required class="settings-input">
+        <input type="text" id="subFirstName" name="firstName" placeholder="First Name" required class="settings-input">
+        <input type="text" id="subLastName" name="lastName" placeholder="Last Name" required class="settings-input">
+        <select id="subReason" name="heardFrom" required class="settings-input">
           <option value="" disabled selected>How did you hear about us?</option>
           <option value="Friend">Friend</option>
           <option value="Family">Family</option>
@@ -271,7 +271,7 @@
 
   <div style="margin-top: 18px; display: flex; justify-content: space-between; gap: 10px;">
     <button id="declineTermsBtn" class="settings-submit-btn" style="background-color: #444;">Decline</button>
-    <button id="acceptTermsBtn" class="settings-submit-btn" disabled style="background-color: #28a745;">Accept</button>
+    <button id="subscriberAcceptBtn" class="settings-submit-btn" disabled style="background-color: #28a745;">Accept</button>
   </div>
 </div>
 
@@ -460,6 +460,12 @@
   }
     </script>
     
+    <!-- ✅ EmailJS SDK -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  emailjs.init("-pjmITdDl3v6ahQYu"); // Your public key
+</script>
+
 
 </body>
 </html>

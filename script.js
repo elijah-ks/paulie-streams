@@ -438,8 +438,11 @@ function resetSubscriberModal() {
   ['subscriberStep1', 'subscriberLoading', 'subscriberTerms', 'subscriberSuccess']
     .forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('subscriberStep1').classList.remove('hidden');
-  document.getElementById('acceptTermsBtn').disabled = true;
-  document.getElementById('subscriberForm').reset();
+  const acceptBtn = document.getElementById('acceptTermsBtn');
+  if (acceptBtn) acceptBtn.disabled = true;
+
+  const form = document.getElementById('subscriberForm');
+  if (form) form.reset();
 }
 
 
@@ -464,6 +467,40 @@ if (termsBox && acceptBtn) {
     }
   });
 }
+
+document.getElementById("subscriberAcceptBtn").addEventListener("click", () => {
+  // Hide Terms, Show Loading
+  document.getElementById("subscriberTerms").classList.add("hidden");
+  document.getElementById("subscriberLoading").classList.remove("hidden");
+
+  const form = document.getElementById("subscriberForm");
+  const formData = new FormData(form);
+
+  const user = firebase.auth().currentUser;
+
+  const submissionData = {
+    first_name: formData.get("firstName") || "N/A",
+    last_name: formData.get("lastName") || "N/A",
+    heard_from: formData.get("heardFrom") || "N/A",
+    email: user?.email || "Not signed in",
+    uid: user?.uid || "No UID",
+    submitted_at: new Date().toLocaleString()
+  };
+
+  emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
+    .then(() => {
+      document.getElementById("subscriberLoading").classList.add("hidden");
+      document.getElementById("subscriberSuccess").classList.remove("hidden");
+    })
+    .catch((error) => {
+      console.error("❌ EmailJS Error:", error);
+      alert("There was an issue submitting your application. Please try again.");
+      resetSubscriberModal();
+      document.getElementById("subscriberModal").classList.add("hidden");
+    });
+});
+
+
 
 // Handle Decline
 const declineBtn = document.getElementById("declineTermsBtn");
