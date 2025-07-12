@@ -700,3 +700,11 @@ function openModal(title, description, videoURL) {
 }
 
 
+// Neutralize the login/register Accept button
+const basicTermsBtn = document.getElementById("acceptTerms");
+if (basicTermsBtn) {
+  basicTermsBtn.addEventListener("click", () => {
+    document.getElementById("termsModal").style.display = "none";
+    document.getElementById("auth-status").textContent = "Please log in or register to continue.";
+  });
+}
