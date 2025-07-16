@@ -462,13 +462,12 @@
     
     <!-- ✅ EmailJS SDK -->
 
-<!-- ✅ Modern EmailJS SDK v3+ -->
-<script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-  emailjs.init("-pjmITdDl3v6ahQYu"); // Your actual public key
-  window.emailjs = emailjs; // Expose globally for script.js access
+<!-- ✅ Modern EmailJS SDK (no import required) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("-pjmITdDl3v6ahQYu");
 </script>
+
 
 
 
