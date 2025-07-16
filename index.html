@@ -462,11 +462,16 @@
     
     <!-- ✅ EmailJS SDK -->
 
-<!-- ✅ Modern EmailJS SDK (no import required) -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("-pjmITdDl3v6ahQYu");
+<!-- ✅ Correct EmailJS v4 SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function () {
+    emailjs.init({
+      publicKey: "-pjmITdDl3v6ahQYu"
+    });
+  })();
 </script>
+
 
 
 
