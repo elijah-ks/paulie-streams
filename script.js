@@ -438,7 +438,7 @@ function resetSubscriberModal() {
   ['subscriberStep1', 'subscriberLoading', 'subscriberTerms', 'subscriberSuccess']
     .forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('subscriberStep1').classList.remove('hidden');
-  const acceptBtn = document.getElementById('acceptTermsBtn');
+  const acceptBtn = document.getElementById("subscriberAcceptBtn");
   if (acceptBtn) acceptBtn.disabled = true;
 
   const form = document.getElementById('subscriberForm');
@@ -452,13 +452,13 @@ document.getElementById("submitSubscriberBtn").addEventListener("click", () => {
 
   const termsBox = document.getElementById("termsBox");
   if (termsBox) termsBox.scrollTop = 0;
-  const acceptBtn = document.getElementById("acceptTermsBtn");
+  const acceptBtn = document.getElementById("subscriberAcceptBtn");
   if (acceptBtn) acceptBtn.disabled = true;
 });
 
 // Enable Accept button once scrolled
 const termsBox = document.getElementById("termsBox");
-const acceptBtn = document.getElementById("acceptTermsBtn");
+const acceptBtn = document.getElementById("subscriberAcceptBtn");
 if (termsBox && acceptBtn) {
   termsBox.addEventListener("scroll", () => {
     const isScrolled = termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight;
