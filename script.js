@@ -468,45 +468,6 @@ if (termsBox && acceptBtn) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  setupSubscriberAcceptLogic();
-});
-
-function setupSubscriberAcceptLogic() {
-  const acceptBtn = document.getElementById("subscriberAcceptBtn");
-
-  if (!acceptBtn) return;
-
-  acceptBtn.addEventListener("click", () => {
-    document.getElementById("subscriberTerms").classList.add("hidden");
-    document.getElementById("subscriberLoading").classList.remove("hidden");
-
-    const form = document.getElementById("subscriberForm");
-    const formData = new FormData(form);
-    const user = firebase.auth().currentUser;
-
-    const submissionData = {
-      first_name: formData.get("firstName") || "N/A",
-      last_name: formData.get("lastName") || "N/A",
-      heard_from: formData.get("heardFrom") || "N/A",
-      email: user?.email || "Not signed in",
-      uid: user?.uid || "No UID",
-      submitted_at: new Date().toLocaleString()
-    };
-
-    emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
-      .then(() => {
-        document.getElementById("subscriberLoading").classList.add("hidden");
-        document.getElementById("subscriberSuccess").classList.remove("hidden");
-      })
-      .catch((error) => {
-        console.error("❌ EmailJS Error:", error);
-        alert("There was an issue submitting your application. Please try again.");
-        document.getElementById("subscriberModal").classList.add("hidden");
-      });
-  });
-}
-
 // Handle Decline
 const declineBtn = document.getElementById("declineTermsBtn");
 if (declineBtn) {
@@ -715,3 +676,49 @@ if (basicTermsBtn) {
 }
 
 
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ DOM fully loaded");
+
+  const acceptBtn = document.getElementById("subscriberAcceptBtn");
+
+  if (!acceptBtn) {
+    console.error("❌ Accept button not found in DOM");
+    return;
+  }
+
+  console.log("✅ Accept button found");
+
+  acceptBtn.addEventListener("click", () => {
+    console.log("✅ Accept button was clicked");
+
+    document.getElementById("subscriberTerms").classList.add("hidden");
+    document.getElementById("subscriberLoading").classList.remove("hidden");
+
+    const form = document.getElementById("subscriberForm");
+    const formData = new FormData(form);
+    const user = firebase.auth().currentUser;
+
+    const submissionData = {
+      first_name: formData.get("firstName") || "N/A",
+      last_name: formData.get("lastName") || "N/A",
+      heard_from: formData.get("heardFrom") || "N/A",
+      email: user?.email || "Not signed in",
+      uid: user?.uid || "No UID",
+      submitted_at: new Date().toLocaleString()
+    };
+
+    console.log("📤 Sending submission:", submissionData);
+
+    emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
+      .then(() => {
+        console.log("✅ Email sent");
+        document.getElementById("subscriberLoading").classList.add("hidden");
+        document.getElementById("subscriberSuccess").classList.remove("hidden");
+      })
+      .catch((error) => {
+        console.error("❌ EmailJS Error:", error);
+        alert("There was an issue submitting your application. Please try again.");
+        document.getElementById("subscriberModal").classList.add("hidden");
+      });
+  });
+});
