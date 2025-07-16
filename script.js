@@ -432,7 +432,49 @@ function openSubscriberApplication() {
   document.getElementById("settingsDropdown").classList.add("hidden");
   resetSubscriberModal();
   document.getElementById("subscriberModal").classList.remove("hidden");
+
+  // ✅ Attach click listener *now*, while it's visible
+  const acceptBtn = document.getElementById("subscriberAcceptBtn");
+  if (acceptBtn && !acceptBtn.dataset.listenerAttached) {
+    acceptBtn.addEventListener("click", () => {
+      console.log("✅ Accept button was clicked");
+
+      document.getElementById("subscriberTerms").classList.add("hidden");
+      document.getElementById("subscriberLoading").classList.remove("hidden");
+
+      const form = document.getElementById("subscriberForm");
+      const formData = new FormData(form);
+      const user = firebase.auth().currentUser;
+
+      const submissionData = {
+        first_name: formData.get("firstName") || "N/A",
+        last_name: formData.get("lastName") || "N/A",
+        heard_from: formData.get("heardFrom") || "N/A",
+        email: user?.email || "Not signed in",
+        uid: user?.uid || "No UID",
+        submitted_at: new Date().toLocaleString()
+      };
+
+      console.log("📤 Sending submission:", submissionData);
+
+      emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
+        .then(() => {
+          console.log("✅ Email sent");
+          document.getElementById("subscriberLoading").classList.add("hidden");
+          document.getElementById("subscriberSuccess").classList.remove("hidden");
+        })
+        .catch((error) => {
+          console.error("❌ EmailJS Error:", error);
+          alert("There was an issue submitting your application. Please try again.");
+          document.getElementById("subscriberModal").classList.add("hidden");
+        });
+    });
+
+    // ✅ Prevent duplicate listeners
+    acceptBtn.dataset.listenerAttached = "true";
+  }
 }
+
 
 function resetSubscriberModal() {
   ['subscriberStep1', 'subscriberLoading', 'subscriberTerms', 'subscriberSuccess']
