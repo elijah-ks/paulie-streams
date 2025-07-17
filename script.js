@@ -431,49 +431,60 @@ function goBackToAccountOptions() {
 function openSubscriberApplication() {
   document.getElementById("settingsDropdown").classList.add("hidden");
   resetSubscriberModal();
-  document.getElementById("subscriberModal").classList.remove("hidden");
 
-  // ✅ Attach click listener *now*, while it's visible
-  const acceptBtn = document.getElementById("subscriberAcceptBtn");
-  if (acceptBtn && !acceptBtn.dataset.listenerAttached) {
-    acceptBtn.addEventListener("click", () => {
-      console.log("✅ Accept button was clicked");
+  const user = firebase.auth().currentUser;
+  if (!user) return;
 
-      document.getElementById("subscriberTerms").classList.add("hidden");
-      document.getElementById("subscriberLoading").classList.remove("hidden");
+  const docRef = db.collection("subscriberApplications").doc(user.uid);
+  docRef.get().then(doc => {
+    if (doc.exists) {
+      alert("You've already submitted an application.");
+      return;
+    }
 
-      const form = document.getElementById("subscriberForm");
-      const formData = new FormData(form);
-      const user = firebase.auth().currentUser;
+    // ✅ Only show modal if not already submitted
+    document.getElementById("subscriberModal").classList.remove("hidden");
 
-      const submissionData = {
-        first_name: formData.get("firstName") || "N/A",
-        last_name: formData.get("lastName") || "N/A",
-        heard_from: formData.get("heardFrom") || "N/A",
-        email: user?.email || "Not signed in",
-        uid: user?.uid || "No UID",
-        submitted_at: new Date().toLocaleString()
-      };
+    // ✅ Attach Accept listener *only once*
+    const acceptBtn = document.getElementById("subscriberAcceptBtn");
+    if (acceptBtn && !acceptBtn.dataset.listenerAttached) {
+      acceptBtn.addEventListener("click", () => {
+        document.getElementById("subscriberTerms").classList.add("hidden");
+        document.getElementById("subscriberLoading").classList.remove("hidden");
 
-      console.log("📤 Sending submission:", submissionData);
+        const form = document.getElementById("subscriberForm");
+        const formData = new FormData(form);
 
-      emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
-        .then(() => {
-          console.log("✅ Email sent");
-          document.getElementById("subscriberLoading").classList.add("hidden");
-          document.getElementById("subscriberSuccess").classList.remove("hidden");
-        })
-        .catch((error) => {
-          console.error("❌ EmailJS Error:", error);
-          alert("There was an issue submitting your application. Please try again.");
-          document.getElementById("subscriberModal").classList.add("hidden");
-        });
-    });
+        const submissionData = {
+          first_name: formData.get("firstName") || "N/A",
+          last_name: formData.get("lastName") || "N/A",
+          heard_from: formData.get("heardFrom") || "N/A",
+          email: user?.email || "Not signed in",
+          uid: user?.uid || "No UID",
+          submitted_at: new Date().toLocaleString()
+        };
 
-    // ✅ Prevent duplicate listeners
-    acceptBtn.dataset.listenerAttached = "true";
-  }
+        emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
+          .then(() => {
+            db.collection("subscriberApplications").doc(user.uid).set(submissionData)
+              .then(() => console.log("📦 Firestore saved"))
+              .catch(err => console.error("⚠️ Firestore error:", err));
+
+            document.getElementById("subscriberLoading").classList.add("hidden");
+            document.getElementById("subscriberSuccess").classList.remove("hidden");
+          })
+          .catch((error) => {
+            console.error("❌ EmailJS Error:", error);
+            alert("There was an issue submitting your application. Please try again.");
+            document.getElementById("subscriberModal").classList.add("hidden");
+          });
+      });
+
+      acceptBtn.dataset.listenerAttached = "true";
+    }
+  });
 }
+
 
 
 function resetSubscriberModal() {
@@ -716,51 +727,3 @@ if (basicTermsBtn) {
     document.getElementById("auth-status").textContent = "Please log in or register to continue.";
   });
 }
-
-
-window.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ DOM fully loaded");
-
-  const acceptBtn = document.getElementById("subscriberAcceptBtn");
-
-  if (!acceptBtn) {
-    console.error("❌ Accept button not found in DOM");
-    return;
-  }
-
-  console.log("✅ Accept button found");
-
-  acceptBtn.addEventListener("click", () => {
-    console.log("✅ Accept button was clicked");
-
-    document.getElementById("subscriberTerms").classList.add("hidden");
-    document.getElementById("subscriberLoading").classList.remove("hidden");
-
-    const form = document.getElementById("subscriberForm");
-    const formData = new FormData(form);
-    const user = firebase.auth().currentUser;
-
-    const submissionData = {
-      first_name: formData.get("firstName") || "N/A",
-      last_name: formData.get("lastName") || "N/A",
-      heard_from: formData.get("heardFrom") || "N/A",
-      email: user?.email || "Not signed in",
-      uid: user?.uid || "No UID",
-      submitted_at: new Date().toLocaleString()
-    };
-
-    console.log("📤 Sending submission:", submissionData);
-
-    emailjs.send("service_si7weeo", "template_2ty7k9l", submissionData)
-      .then(() => {
-        console.log("✅ Email sent");
-        document.getElementById("subscriberLoading").classList.add("hidden");
-        document.getElementById("subscriberSuccess").classList.remove("hidden");
-      })
-      .catch((error) => {
-        console.error("❌ EmailJS Error:", error);
-        alert("There was an issue submitting your application. Please try again.");
-        document.getElementById("subscriberModal").classList.add("hidden");
-      });
-  });
-});
