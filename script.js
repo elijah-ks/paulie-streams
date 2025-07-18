@@ -438,9 +438,11 @@ function openSubscriberApplication() {
   const docRef = db.collection("subscriberApplications").doc(user.uid);
   docRef.get().then(doc => {
     if (doc.exists) {
-      alert("You've already submitted an application.");
+      document.getElementById("alreadyAppliedModal").classList.remove("hidden");
       return;
     }
+
+
 
     // ✅ Only show modal if not already submitted
     document.getElementById("subscriberModal").classList.remove("hidden");
