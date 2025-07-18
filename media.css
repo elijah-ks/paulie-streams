@@ -374,15 +374,17 @@
 
 #settingsDropdown {
   position: fixed;
-  top: 70px; /* Push it down below the nav bar */
+  top: 70px; /* ← bump this up higher if needed */
   left: 0;
   width: 100%;
   z-index: 999;
-  border-radius: 0 0 12px 12px;
   background: #111;
+  border-radius: 0 0 12px 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   padding-bottom: 20px;
+  padding-top: 12px; /* Add this if top item feels cramped */
 }
+
 
 
 }
