@@ -226,21 +226,33 @@
     <button class="close" onclick="closeModal(this)">&times;</button>
 
 
-    <!-- 🔹 Step 1: Form -->
-    <div id="subscriberStep1">
-      <h2>Apply for Paulie Subscriber</h2>
-      <form id="subscriberForm">
-        <input type="text" id="subFirstName" name="firstName" placeholder="First Name" required class="settings-input">
-        <input type="text" id="subLastName" name="lastName" placeholder="Last Name" required class="settings-input">
-        <select id="subReason" name="heardFrom" required class="settings-input">
-          <option value="" disabled selected>How did you hear about us?</option>
-          <option value="Friend">Friend</option>
-          <option value="Family">Family</option>
-          <option value="Other">Other</option>
-        </select>
-        <button type="button" id="submitSubscriberBtn" class="settings-submit-btn">Continue</button>
-      </form>
-    </div>
+<!-- 🔹 Step 1: Form -->
+<div id="subscriberStep1">
+  <!-- ❌ Exit Button -->
+  <div style="text-align: right;">
+    <button class="close" onclick="closeModal(this)" style="font-size: 22px;">&times;</button>
+  </div>
+
+ 
+  <div class="modal-logo-centered" style="text-align: center; margin-bottom: 12px;">
+    <img src="assets/transparent.png" alt="Paulie Streams Logo" style="width: 100px;">
+  </div>
+
+  <h2 style="text-align: center;">Apply for Paulie Subscriber</h2>
+
+  <form id="subscriberForm">
+    <input type="text" id="subFirstName" name="firstName" placeholder="First Name" required class="settings-input">
+    <input type="text" id="subLastName" name="lastName" placeholder="Last Name" required class="settings-input">
+    <select id="subReason" name="heardFrom" required class="settings-input">
+      <option value="" disabled selected>How did you hear about us?</option>
+      <option value="Friend">Friend</option>
+      <option value="Family">Family</option>
+      <option value="Other">Other</option>
+    </select>
+    <button type="button" id="submitSubscriberBtn" class="settings-submit-btn">Continue</button>
+  </form>
+</div>
+
 
     <!-- 🔹 Step 2: "Loading" -->
     <div id="subscriberLoading" class="hidden" style="text-align: center;">
@@ -253,20 +265,30 @@
   <h2>Terms & Conditions</h2>
   <div id="termsBox" style="max-height: 250px; overflow-y: auto; background: #1c1c1c; padding: 14px; border-radius: 8px; font-size: 0.9rem; line-height: 1.4;">
     <p style="margin-bottom: 10px;">
-      By applying, you agree not to share subscriber-only content, respect the creator’s work, and understand access is manually reviewed. Abuse of access may result in permanent revocation without notice.
-    </p>
+  By applying, you agree to the following rules, terms, and expectations. You acknowledge that subscriber access is manually reviewed, not guaranteed, and may be revoked at any time for violating these rules.
+  </p>
 
-    <p style="font-weight: bold; margin-bottom: 8px;">Subscriber Rules</p>
+  <p style="font-weight: bold; margin-bottom: 8px;">📜 Subscriber Rules</p>
+  <ul style="padding-left: 20px; margin: 0; line-height: 1.5;">
+    <li>Do not share subscriber-only videos, links, download URLs, or access codes with anyone.</li>
+    <li>Accounts are for individual use only — do not share logins with friends or family.</li>
+    <li>Screen recording, downloading, or redistributing any content is strictly forbidden.</li>
+    <li>Applications are reviewed manually and may be approved or denied without explanation.</li>
+    <li>Any abuse, tampering, or misconduct may result in a permanent ban.</li>
+    <li>Subscribers must respect the creators, content, and fellow viewers at all times.</li>
+  </ul>
 
-    <ul style="padding-left: 18px; margin: 0;">
-      <li>Do not share subscriber-only videos, links, or access codes.</li>
-      <li>Accounts are for individual use only — no shared logins.</li>
-      <li>Screen recording or redistributing content is strictly forbidden.</li>
-      <li>All applications are manually reviewed and may be denied without explanation.</li>
-      <li>Violations may result in permanent loss of access with no warning.</li>
-    </ul>
+  <p style="font-weight: bold; margin-top: 16px;">🔒 Privacy & Security</p>
+    <ul style="padding-left: 20px; margin: 0; line-height: 1.5;">
+    <li>Your information will only be used for account-related purposes and subscriber communication.</li>
+    <li>All content is protected under copyright and may not be re-used without permission.</li>
+    <li>We reserve the right to update these terms at any time with or without prior notice.</li>
+  </ul>
 
-    <p style="font-weight: bold; margin-top: 14px;">Privacy & Security</p>
+  <p style="margin-top: 16px;">
+    Abuse of access may result in permanent revocation without notice. By clicking "Accept", you confirm that you understand and agree to these terms.
+  </p>
+
   </div>
 
   <div style="margin-top: 18px; display: flex; justify-content: space-between; gap: 10px;">

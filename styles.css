@@ -918,7 +918,7 @@ body.no-scroll {
   border-radius: 16px;
   max-width: 400px;
   width: 90%;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 0 40px rgba(0,0,0,0.8);
   animation: fadeInModal 0.3s ease-out;
 }
