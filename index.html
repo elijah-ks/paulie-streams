@@ -29,7 +29,7 @@
       const db = firebase.firestore();
   
       // ✅ Check login state after Firebase is ready
-      firebase.auth().onAuthStateChanged(user => {
+      //firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log("User is signed in:", user.email);
           window.currentUserID = user.uid;
@@ -104,8 +104,6 @@
 
 </div>
 
-<!-- End of Settings Dropdown Modal -->
-</div> <!-- this closes #settingsDropdown -->
 
 <!-- 📄 Version History Modal should go here -->
 <div id="versionModal" class="modal hidden">
@@ -298,6 +296,7 @@
 
     <!-- 🔹 Step 4: Success -->
     <div id="subscriberSuccess" class="hidden" style="text-align: center;">
+      <button class="close" onclick="closeModal(this)" style="font-size: 22px;">&times;</button>
       <h2>Application Completed</h2>
       <p>You should hear back soon!</p>
     </div>
@@ -393,6 +392,7 @@
 
 
 
+
 </section>
 
   
@@ -418,12 +418,15 @@
       <p>Matrix Attack 2</p>
     </div>
 
+
 <div class="video-card" 
      data-title="May 27th" 
      data-description="The story and the lead up to May 27th, the day Jacob and Isaac were set to fight in the ring." 
      data-videourl="https://drive.google.com/file/d/17alHaPOqg0Y21PNXbXRxrUpkl1L9D6mJ/preview">
   <img src="assets/may-27th.jpg" alt="May 27th Thumbnail">
   <p>May 27th: The Story</p>
+</div>
+
 </div>
 
 </section>
@@ -434,7 +437,6 @@
     </div>
 
 
-    </section>
     
     <section class="row">
       <h2 class="row-title">Games & Extras</h2>
@@ -449,6 +451,7 @@
       </div>
     </section>
     
+    </div>
 
     <script src="role.js" defer></script>
     <script src="script.js" defer></script>
