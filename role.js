@@ -58,5 +58,8 @@ function showSubscriberLockModal(title, description) {
   lockBox.id = "lockBox";
 
   video.parentNode.insertBefore(lockBox, video.nextSibling);
+
+  updateLikeButtonState(title, description, ""); // URL is blank since it’s restricted
+
 }
 

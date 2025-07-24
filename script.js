@@ -651,12 +651,15 @@ function handleVideoClick(title, description, videoURL) {
   const lockBox = document.getElementById("lockBox");
   if (lockBox) lockBox.remove();
 
-  // ✅ Replace like button logic
+  updateLikeButtonState(title, description, videoURL);
+
+}
+
+function updateLikeButtonState(title, description, videoURL) {
   const likeBtn = document.getElementById("likeBtn");
   const newLikeBtn = likeBtn.cloneNode(true);
   likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
 
-  // ✅ Update like status
   firebase.auth().onAuthStateChanged(user => {
     if (!user) return;
 
@@ -665,6 +668,17 @@ function handleVideoClick(title, description, videoURL) {
     const thumbnail = getThumbnailForTitle(title);
 
     likeRef.get().then(doc => {
+      const isViewer = window.userRole === "viewer";
+      const isLocked = !videoURL || videoURL === "";
+
+      // 🔒 Viewer looking at a locked video — force unliked display, no click
+      if (isViewer && isLocked) {
+        newLikeBtn.classList.remove("liked");
+        newLikeBtn.innerText = "♡";
+        return;
+      }
+
+      // Normal behavior
       if (doc.exists) {
         newLikeBtn.classList.add("liked");
         newLikeBtn.innerText = "❤️";
@@ -705,6 +719,8 @@ function handleVideoClick(title, description, videoURL) {
     });
   });
 }
+
+
 
 function openModal(title, description, videoURL) {
   const modal = document.getElementById("videoModal");
