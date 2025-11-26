@@ -442,7 +442,8 @@ function openSubscriberApplication() {
       return;
     }
 
-
+    window.openSubscriberApplication = openSubscriberApplication;
+    
 
     // ✅ Only show modal if not already submitted
     document.getElementById("subscriberModal").classList.remove("hidden");

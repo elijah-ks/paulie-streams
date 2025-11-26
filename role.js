@@ -1,3 +1,6 @@
+import { openSubscriberApplication } from "./script.js";
+
+
 firebase.auth().onAuthStateChanged(user => {
   if (!user) return;
 
@@ -54,14 +57,18 @@ function showSubscriberLockModal(title, description) {
 
   const lockBox = document.createElement("div");
   lockBox.className = "locked-overlay subscriber-lock-box";
-lockBox.innerHTML = `
-  🔒<br>
-  <span style="color: red;">Paulie Subscribers Only</span>
-  <br><br>
-  <p class="settings-option" onclick="openSubscriberApplication()">
-    📬 Apply for Paulie Subscriber
-  </p>
-`;
+  lockBox.innerHTML = `
+    🔒<br>
+    <span style="color: red;">Paulie Subscribers Only</span>
+    <br><br>
+    <p id="applyButton" class="settings-option">
+      📬 Apply for Paulie Subscriber
+    </p>
+  `;
+
+  document.getElementById("applyButton")
+    .addEventListener("click", openSubscriberApplication);
+
 
   lockBox.id = "lockBox";
 
