@@ -55,6 +55,7 @@ function showSubscriberLockModal(title, description) {
   const lockBox = document.createElement("div");
   lockBox.className = "locked-overlay subscriber-lock-box";
   lockBox.innerHTML = `🔒<br><span style="color: red;">Paulie Subscribers Only</span>`;
+  lockBox.innerHTML = `<br><p class="settings-option" onclick="openSubscriberApplication()">📬 Apply for Paulie Subscriber</p>`;
   lockBox.id = "lockBox";
 
   video.parentNode.insertBefore(lockBox, video.nextSibling);
